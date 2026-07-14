@@ -1,20 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import { ReactLenis } from "lenis/react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import {
   ArrowDown,
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   BookOpen,
-  Compass,
   Globe2,
   MessageCircle,
   Podcast,
@@ -100,9 +93,6 @@ function SectionHeading({
 export function LandingPage() {
   const reduceMotion = useReducedMotion();
   const levelsRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll();
-  const heroY = useTransform(scrollYProgress, [0, 0.28], [0, 96]);
-  const haloRotate = useTransform(scrollYProgress, [0, 1], [0, 54]);
 
   function scrollLevels(direction: -1 | 1) {
     const container = levelsRef.current;
@@ -128,10 +118,127 @@ export function LandingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <style>{`
+        /* motto-card embedded styles: keeps the revised opening self-contained for GitHub Pages deploys */
+        .motto-card {
+          position: relative;
+          display: grid;
+          min-height: min(88vw, 31rem);
+          place-items: center;
+          overflow: hidden;
+          padding: clamp(1.6rem, 4vw, 2.4rem);
+          border: 1px solid rgba(225, 195, 132, 0.32);
+          border-radius: 1.7rem;
+          background:
+            radial-gradient(circle at 50% 0%, rgba(255, 246, 225, 0.24), transparent 12rem),
+            linear-gradient(145deg, #d9c8aa, #b49b78 58%, #8a755c);
+          box-shadow:
+            0 28px 90px rgba(0, 0, 0, 0.34),
+            inset 0 0 0 1px rgba(255, 250, 238, 0.2);
+          color: #11100e;
+          text-align: center;
+        }
+
+        .motto-card::before {
+          position: absolute;
+          inset: 0.85rem;
+          border: 1px solid rgba(17, 16, 14, 0.14);
+          border-radius: 1.15rem;
+          content: "";
+          pointer-events: none;
+        }
+
+        .motto-card::after {
+          position: absolute;
+          inset: -20%;
+          background:
+            radial-gradient(circle at 18% 10%, rgba(255, 255, 255, 0.34), transparent 11rem),
+            radial-gradient(circle at 80% 86%, rgba(38, 26, 14, 0.18), transparent 13rem);
+          content: "";
+          mix-blend-mode: soft-light;
+          pointer-events: none;
+        }
+
+        .motto-card > * {
+          position: relative;
+          z-index: 1;
+        }
+
+        .motto-line,
+        .motto-transliteration,
+        .motto-declaration {
+          font-family: var(--font-cormorant), Georgia, serif;
+          font-weight: 700;
+        }
+
+        .motto-line {
+          font-size: clamp(1.65rem, 4.7vw, 2.45rem);
+          line-height: 1.04;
+        }
+
+        .motto-everyday {
+          margin-top: 0.3rem;
+        }
+
+        .motto-hebrew {
+          margin: clamp(1.15rem, 4vw, 1.75rem) 0 0.85rem;
+          font-family: var(--font-cormorant), Georgia, serif;
+          font-size: clamp(3.2rem, 12vw, 5.3rem);
+          font-weight: 700;
+          line-height: 0.95;
+        }
+
+        .motto-transliteration {
+          font-size: clamp(1.75rem, 5.4vw, 2.65rem);
+          line-height: 1;
+        }
+
+        .motto-declaration {
+          max-width: 11ch;
+          margin-top: 0.65rem;
+          font-size: clamp(2rem, 7.4vw, 3.65rem);
+          line-height: 0.94;
+        }
+
+        .intro-kicker {
+          color: var(--gold-bright);
+          font-size: 0.67rem;
+          font-weight: 800;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+        }
+
+        .intro-motto {
+          max-width: 38rem;
+          margin-top: 2rem;
+          padding: clamp(1.35rem, 3vw, 1.85rem);
+          border: 1px solid rgba(225, 195, 132, 0.24);
+          border-radius: 1.35rem;
+          background:
+            radial-gradient(circle at 12% 18%, rgba(225, 195, 132, 0.12), transparent 15rem),
+            rgba(12, 20, 31, 0.72);
+          box-shadow: 0 22px 68px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro-motto h2 {
+          color: var(--cream);
+          font-size: clamp(2.15rem, 4.8vw, 4.4rem);
+          line-height: 0.96;
+          letter-spacing: -0.04em;
+          text-wrap: balance;
+        }
+
+        .intro-motto p {
+          max-width: 32rem;
+          margin-top: 1.1rem;
+          color: var(--muted);
+          font-size: 0.96rem;
+          line-height: 1.78;
+        }
+      `}</style>{" "}
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
-
       <header className="site-header" aria-label="Primary navigation">
         <a className="brand" href="#top" aria-label="Bitachon For Real home">
           <span className="brand-mark" aria-hidden="true">
@@ -150,7 +257,6 @@ export function LandingPage() {
           <ArrowDown size={15} aria-hidden="true" />
         </a>
       </header>
-
       <main id="main-content">
         <section
           className="section opening-intro"
@@ -159,135 +265,40 @@ export function LandingPage() {
         >
           <div className="section-shell opening-shell">
             <Reveal className="opening-image-wrap">
-              <figure className="opening-image-frame">
-                <Image
-                  src={`${siteConfig.basePath}/ein-od-milvado.png`}
-                  alt="A typographic reminder that says: Sing It. Laugh It. Cry It. All Day! Every day! Ein Od Milvado - There is nothing but Him (G-d)."
-                  width={512}
-                  height={512}
-                  sizes="(max-width: 920px) 90vw, 38vw"
-                  priority
-                />
-                <figcaption>
-                  One line to return to, all day. Every day.
-                </figcaption>
-              </figure>
+              <div
+                className="motto-card"
+                role="img"
+                aria-label="Sing It. Laugh It. Cry It. All Day! Every day! Ein Od Milvado. There is nothing but Him."
+              >
+                <p className="motto-line">Sing It. Laugh It. Cry It.</p>
+                <p className="motto-line motto-everyday">All Day! Every day!</p>
+                <p className="motto-hebrew" lang="he" dir="rtl">
+                  אין עוד מלבדו!
+                </p>
+                <p className="motto-transliteration">Ein Od Milvado!</p>
+                <p className="motto-declaration">THERE IS NOTHING BUT HIM!</p>
+              </div>
             </Reveal>
 
             <Reveal className="opening-copy" delay={0.08}>
+              <p className="intro-kicker">Bitachon For Real</p>
               <h1 id="opening-title">
-                Sing It. Laugh It. Cry It.
-                <span>All Day! Every day!</span>
+                Bitachon
+                <span>For Real</span>
               </h1>
-              <p className="opening-hebrew" lang="he" dir="rtl">
-                אין עוד מלבדו!
-              </p>
-              <p className="opening-transliteration">
-                <em>Ein Od Milvado!</em> THERE IS NOTHING BUT HIM(G-D)!
-              </p>
-              <p className="opening-body">
-                Bitachon is a way of bringing that reminder into the ordinary
-                moments: the work, the waiting, the laughter, and the tears.
-              </p>
+              <p className="opening-body">{siteConfig.description}</p>
+              <div className="intro-motto">
+                <h2>
+                  Disconnect from your emotional attachment to the outcome.
+                </h2>
+                <p>
+                  Do your part with a steady heart, then let the result rest
+                  where it belongs.
+                </p>
+              </div>
             </Reveal>
           </div>
         </section>
-
-        <section className="section self-improvement" aria-labelledby="self-improvement-title">
-          <div className="section-shell self-improvement-shell">
-            <Reveal>
-              <p className="eyebrow">Self-improvement note</p>
-              <h2 id="self-improvement-title">
-                Disconnect from your emotional attachment to the outcome.
-              </h2>
-              <p className="section-lede self-improvement-copy">
-                That does not mean caring less. It means doing your part with a steadier heart,
-                then letting the result rest where it belongs.
-              </p>
-            </Reveal>
-          </div>
-        </section>
-
-        <section className="hero" id="hero" aria-labelledby="hero-title">
-          <motion.div
-            className="hero-media"
-            style={reduceMotion ? undefined : { y: heroY }}
-          >
-            <Image
-              src={`${siteConfig.basePath}/hero-sunrise.webp`}
-              alt="A quiet mountain path overlooking water at first light"
-              fill
-              priority
-              sizes="100vw"
-            />
-          </motion.div>
-          <div className="hero-scrim" aria-hidden="true" />
-          <div className="grain" aria-hidden="true" />
-          <motion.div
-            className="hero-halo"
-            aria-hidden="true"
-            style={reduceMotion ? undefined : { rotate: haloRotate }}
-          />
-          <div className="particles" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-
-          <div className="hero-content">
-            <motion.p
-              className="eyebrow hero-eyebrow"
-              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-            >
-              A quieter way forward
-            </motion.p>
-            <motion.h1
-              id="hero-title"
-              initial={reduceMotion ? false : { opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.95,
-                delay: 0.25,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              Bitachon
-              <span>For Real</span>
-            </motion.h1>
-            <motion.p
-              className="hero-copy"
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.42 }}
-            >
-              {siteConfig.description}
-            </motion.p>
-            <motion.div
-              className="hero-actions"
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.56 }}
-            >
-              <a className="button button-primary" href="#resources">
-                Explore resources
-                <Compass size={18} aria-hidden="true" />
-              </a>
-            </motion.div>
-          </div>
-
-          <a
-            className="scroll-cue"
-            href="#understand"
-            aria-label="Continue to What is Bitachon"
-          >
-            <span>Begin</span>
-            <span className="scroll-line" aria-hidden="true" />
-          </a>
-        </section>
-
         <section className="section understand" id="understand">
           <div className="section-shell">
             <SectionHeading
@@ -463,7 +474,6 @@ export function LandingPage() {
           </div>
         </section>
       </main>
-
       <footer className="site-footer">
         <div className="footer-inner">
           <div>
