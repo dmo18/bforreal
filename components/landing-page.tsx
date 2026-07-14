@@ -241,6 +241,51 @@ export function LandingPage() {
           </a>
         </section>
 
+        <section
+          className="section opening-intro"
+          id="opening"
+          aria-labelledby="opening-title"
+        >
+          <div className="section-shell opening-shell">
+            <Reveal className="opening-image-wrap">
+              <figure className="opening-image-frame">
+                <Image
+                  src={`${siteConfig.basePath}/ein-od-milvado.png`}
+                  alt="A typographic reminder that says: Sing It. Laugh It. Cry It. All Day! Every day! Ein Od Milvado — There is nothing but Him (G-d)."
+                  width={512}
+                  height={512}
+                  sizes="(max-width: 920px) 90vw, 38vw"
+                />
+                <figcaption>
+                  One line to return to, all day. Every day.
+                </figcaption>
+              </figure>
+            </Reveal>
+
+            <Reveal className="opening-copy" delay={0.08}>
+              <p className="eyebrow">The opening reminder</p>
+              <h2 id="opening-title">
+                Sing It. Laugh It. Cry It.
+                <span>All Day! Every day!</span>
+              </h2>
+              <p className="opening-hebrew" lang="he" dir="rtl">
+                אין עוד מלבדו!
+              </p>
+              <p className="opening-transliteration">
+                <em>Ein Od Milvado!</em> THERE IS NOTHING BUT HIM(G-D)!
+              </p>
+              <p className="opening-body">
+                Bitachon is a way of bringing that reminder into the ordinary
+                moments: the work, the waiting, the laughter, and the tears.
+              </p>
+              <a className="text-link" href="#understand">
+                Begin with the foundations
+                <ArrowDown size={16} aria-hidden="true" />
+              </a>
+            </Reveal>
+          </div>
+        </section>
+
         <section className="section understand" id="understand">
           <div className="section-shell">
             <SectionHeading
