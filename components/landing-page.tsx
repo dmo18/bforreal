@@ -192,6 +192,22 @@ export function LandingPage() {
             </Reveal>
           </div>
         </section>
+
+        <section className="section self-improvement" aria-labelledby="self-improvement-title">
+          <div className="section-shell self-improvement-shell">
+            <Reveal>
+              <p className="eyebrow">Self-improvement note</p>
+              <h2 id="self-improvement-title">
+                Disconnect from your emotional attachment to the outcome.
+              </h2>
+              <p className="section-lede self-improvement-copy">
+                That does not mean caring less. It means doing your part with a steadier heart,
+                then letting the result rest where it belongs.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
         <section className="hero" id="hero" aria-labelledby="hero-title">
           <motion.div
             className="hero-media"
