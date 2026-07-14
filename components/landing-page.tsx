@@ -175,7 +175,6 @@ export function LandingPage() {
             </Reveal>
 
             <Reveal className="opening-copy" delay={0.08}>
-              <p className="eyebrow">The opening reminder</p>
               <h1 id="opening-title">
                 Sing It. Laugh It. Cry It.
                 <span>All Day! Every day!</span>
@@ -190,10 +189,6 @@ export function LandingPage() {
                 Bitachon is a way of bringing that reminder into the ordinary
                 moments: the work, the waiting, the laughter, and the tears.
               </p>
-              <a className="text-link" href="#hero">
-                Enter Bitachon For Real
-                <ArrowDown size={16} aria-hidden="true" />
-              </a>
             </Reveal>
           </div>
         </section>
@@ -263,15 +258,6 @@ export function LandingPage() {
               <a className="button button-primary" href="#resources">
                 Explore resources
                 <Compass size={18} aria-hidden="true" />
-              </a>
-              <a
-                className="button button-secondary"
-                href={siteConfig.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer external"
-              >
-                Join WhatsApp group
-                <ArrowUpRight size={17} aria-hidden="true" />
               </a>
             </motion.div>
           </div>
