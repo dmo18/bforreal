@@ -1,7 +1,12 @@
 "use client";
 
 import { ReactLenis } from "lenis/react";
-import { motion, useReducedMotion } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 import {
   ArrowDown,
   ArrowLeft,
@@ -72,6 +77,32 @@ function Reveal({
   );
 }
 
+function ParallaxBackdrop() {
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const slowY = useTransform(scrollYProgress, [0, 1], [0, -180]);
+  const midY = useTransform(scrollYProgress, [0, 1], [0, -320]);
+  const glowY = useTransform(scrollYProgress, [0, 1], [0, -110]);
+  const driftX = useTransform(scrollYProgress, [0, 1], [0, 64]);
+
+  return (
+    <div className="parallax-backdrop" aria-hidden="true">
+      <motion.div
+        className="parallax-layer parallax-sky"
+        style={reduceMotion ? undefined : { y: slowY }}
+      />
+      <motion.div
+        className="parallax-layer parallax-path"
+        style={reduceMotion ? undefined : { y: midY }}
+      />
+      <motion.div
+        className="parallax-layer parallax-glow"
+        style={reduceMotion ? undefined : { y: glowY, x: driftX }}
+      />
+      <div className="parallax-grain" />
+    </div>
+  );
+}
 function SectionHeading({
   eyebrow,
   title,
@@ -118,7 +149,107 @@ export function LandingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <ParallaxBackdrop />
       <style>{`
+        .parallax-backdrop {
+          position: fixed;
+          z-index: 0;
+          inset: 0;
+          overflow: hidden;
+          background:
+            radial-gradient(circle at 50% -10%, rgba(225, 195, 132, 0.16), transparent 28rem),
+            linear-gradient(180deg, #060a11 0%, #0a111c 44%, #070b12 100%);
+          pointer-events: none;
+        }
+
+        .parallax-layer {
+          position: absolute;
+          inset: -18% -12%;
+          will-change: transform;
+        }
+
+        .parallax-sky {
+          background:
+            radial-gradient(circle at 24% 18%, rgba(225, 195, 132, 0.18), transparent 18rem),
+            radial-gradient(circle at 78% 10%, rgba(92, 125, 160, 0.2), transparent 26rem),
+            linear-gradient(165deg, rgba(15, 27, 44, 0.92), rgba(7, 11, 18, 0.15) 60%);
+          filter: saturate(1.1);
+        }
+
+        .parallax-path {
+          top: 16%;
+          background:
+            linear-gradient(115deg, transparent 0 38%, rgba(225, 195, 132, 0.1) 46%, transparent 58%),
+            radial-gradient(ellipse at 50% 82%, rgba(225, 195, 132, 0.12), transparent 30rem),
+            repeating-linear-gradient(112deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 72px);
+          opacity: 0.72;
+          mask-image: linear-gradient(to bottom, transparent, black 18%, black 78%, transparent);
+        }
+
+        .parallax-glow {
+          inset: 0;
+          background:
+            radial-gradient(circle at 72% 28%, rgba(225, 195, 132, 0.16), transparent 18rem),
+            radial-gradient(circle at 18% 74%, rgba(71, 99, 132, 0.18), transparent 22rem);
+          mix-blend-mode: screen;
+          opacity: 0.72;
+        }
+
+        .parallax-grain {
+          position: absolute;
+          inset: 0;
+          opacity: 0.13;
+          background-image: radial-gradient(rgba(255,255,255,0.42) 0.45px, transparent 0.45px);
+          background-size: 4px 4px;
+          mix-blend-mode: soft-light;
+        }
+
+        .site-header,
+        main,
+        .site-footer {
+          position: relative;
+          z-index: 1;
+        }
+
+        .opening-intro {
+          background:
+            radial-gradient(circle at 14% 38%, rgba(200, 167, 106, 0.12), transparent 27rem),
+            radial-gradient(circle at 82% 20%, rgba(52, 71, 98, 0.14), transparent 29rem),
+            linear-gradient(180deg, rgba(7, 11, 18, 0.42), rgba(11, 19, 30, 0.64) 55%, rgba(7, 11, 18, 0.46));
+        }
+
+        .understand,
+        .resources,
+        .inspiration,
+        .levels,
+        .site-footer {
+          background-color: transparent;
+        }
+
+        .understand {
+          background:
+            radial-gradient(circle at 18% 32%, rgba(42, 65, 95, 0.18), transparent 26rem),
+            linear-gradient(180deg, rgba(7, 11, 18, 0.62), rgba(10, 16, 25, 0.68) 60%, rgba(7, 11, 18, 0.56));
+        }
+
+        .levels {
+          background:
+            linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px),
+            linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+            rgba(8, 13, 21, 0.56);
+          background-size: 6rem 6rem;
+        }
+
+        .resources {
+          background:
+            radial-gradient(circle at 80% 45%, rgba(48, 69, 96, 0.15), transparent 27rem),
+            rgba(7, 11, 18, 0.5);
+        }
+
+        .inspiration,
+        .site-footer {
+          background: rgba(9, 16, 26, 0.68);
+        }
         /* motto-card embedded styles: keeps the revised opening self-contained for GitHub Pages deploys */
         .motto-card {
           position: relative;
