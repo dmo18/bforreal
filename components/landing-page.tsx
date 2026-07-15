@@ -288,6 +288,33 @@ export function LandingPage() {
           background: rgba(9, 16, 26, 0.54);
         }
 
+        .section {
+          padding: clamp(4.25rem, 7vw, 7rem) 0;
+        }
+
+        .opening-intro {
+          padding-bottom: clamp(3rem, 5vw, 4.75rem);
+        }
+
+        .understand {
+          padding-bottom: clamp(3.25rem, 5vw, 4.75rem);
+        }
+
+        .levels,
+        .resources {
+          padding-top: clamp(3.25rem, 5vw, 4.75rem);
+        }
+
+        .foundation-grid,
+        .levels-grid,
+        .resource-grid {
+          margin-top: clamp(2.5rem, 4vw, 3.5rem);
+        }
+
+        .inspiration {
+          padding-top: clamp(2.5rem, 4vw, 4rem);
+        }
+
         .foundation-card,
         .level-card,
         .resource-card,
