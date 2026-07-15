@@ -108,6 +108,7 @@ function ParallaxBackdrop() {
     </div>
   );
 }
+
 function SectionHeading({
   eyebrow,
   title,
@@ -230,10 +231,15 @@ export function LandingPage() {
         }
 
         .opening-intro {
+          padding-bottom: clamp(3rem, 5vw, 4.75rem);
           background:
             radial-gradient(circle at 14% 36%, rgba(255, 204, 116, 0.2), transparent 28rem),
             radial-gradient(circle at 82% 20%, rgba(91, 132, 176, 0.17), transparent 30rem),
             linear-gradient(180deg, rgba(9, 15, 25, 0.1), rgba(16, 28, 45, 0.35) 55%, rgba(7, 11, 18, 0.28));
+        }
+
+        .section {
+          padding: clamp(4.25rem, 7vw, 7rem) 0;
         }
 
         .understand,
@@ -245,12 +251,14 @@ export function LandingPage() {
         }
 
         .understand {
+          padding-bottom: clamp(3.25rem, 5vw, 4.75rem);
           background:
             radial-gradient(circle at 18% 32%, rgba(78, 113, 152, 0.16), transparent 26rem),
             linear-gradient(180deg, rgba(7, 11, 18, 0.46), rgba(10, 16, 25, 0.54) 60%, rgba(7, 11, 18, 0.42));
         }
 
         .levels {
+          padding-top: clamp(3.25rem, 5vw, 4.75rem);
           background:
             linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px),
             linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
@@ -259,9 +267,20 @@ export function LandingPage() {
         }
 
         .resources {
+          padding-top: clamp(3.25rem, 5vw, 4.75rem);
           background:
             radial-gradient(circle at 80% 45%, rgba(94, 132, 171, 0.17), transparent 27rem),
             rgba(7, 11, 18, 0.36);
+        }
+
+        .foundation-grid,
+        .levels-grid,
+        .resource-grid {
+          margin-top: clamp(2.5rem, 4vw, 3.5rem);
+        }
+
+        .inspiration {
+          padding-top: clamp(2.5rem, 4vw, 4rem);
         }
 
         .inspiration,
@@ -438,7 +457,6 @@ export function LandingPage() {
             </Reveal>
 
             <Reveal className="opening-copy" delay={0.08}>
-              <p className="intro-kicker">Bitachon For Real</p>
               <h1 id="opening-title">
                 Bitachon
                 <span>For Real</span>
@@ -512,7 +530,6 @@ export function LandingPage() {
               tabIndex={0}
               role="region"
               aria-label="Seven Levels of Bitachon cards"
-              data-lenis-prevent
             >
               {levels.map((level, index) => (
                 <Reveal
