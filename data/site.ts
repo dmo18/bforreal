@@ -20,6 +20,14 @@ export interface Level {
   practice: string;
 }
 
+export interface InspirationGraphic {
+  id: string;
+  title: string;
+  file: string;
+  width: number;
+  height: number;
+}
+
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://dmo18.github.io/bforreal/";
@@ -33,7 +41,7 @@ export const siteConfig = {
   futureDomain: "bitachonforreal.com",
   repository: "https://github.com/dmo18/bforreal",
   whatsapp: "https://chat.whatsapp.com/CkrFDf12DwdHEoRhFxoyB7",
-  version: "1.0.0",
+  version: "1.0.1",
 };
 
 export const foundations = [
@@ -155,5 +163,92 @@ export const resources: Resource[] = [
     href: "https://www.amazon.com/Shaar-HaBitachon-Chovos-Halevavos-Family/dp/B09WTZPCR2",
     icon: "book-open",
     affiliate: true,
+  },
+];
+
+export const inspirationGraphics: InspirationGraphic[] = [
+  {
+    id: "7-levels-mountain",
+    title: "7 Levels of Bitachon",
+    file: "7-levels-mountain.svg",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    id: "bitachon-operating-system",
+    title: "Bitachon Operating System",
+    file: "bitachon-operating-system.svg",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    id: "bitachon-dashboard",
+    title: "Bitachon Dashboard",
+    file: "bitachon-dashboard.svg",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    id: "train-bitachon",
+    title: "Train Bitachon",
+    file: "train-bitachon.svg",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    id: "bitachon-route",
+    title: "The Bitachon Route",
+    file: "bitachon-route.svg",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    id: "architecture-of-bitachon",
+    title: "The Architecture of Bitachon",
+    file: "architecture-of-bitachon.svg",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    id: "bitachon-compass",
+    title: "Bitachon Compass",
+    file: "bitachon-compass.svg",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    id: "bitachon-field-guide",
+    title: "Bitachon Field Guide",
+    file: "bitachon-field-guide.svg",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    id: "build-bitachon",
+    title: "Build Bitachon",
+    file: "build-bitachon.svg",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    id: "hierarchy-of-bitachon",
+    title: "Hierarchy of Bitachon",
+    file: "hierarchy-of-bitachon.svg",
+    width: 1122,
+    height: 1402,
+  },
+  {
+    id: "7-levels-2026",
+    title: "7 Levels of Bitachon 2026",
+    file: "7-levels-2026.svg",
+    width: 1024,
+    height: 1536,
+  },
+  {
+    id: "bitachon-map",
+    title: "Bitachon Map",
+    file: "bitachon-map.svg",
+    width: 1122,
+    height: 1402,
   },
 ];

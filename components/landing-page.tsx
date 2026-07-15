@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ReactLenis } from "lenis/react";
 import {
   motion,
@@ -16,15 +17,17 @@ import {
   Globe2,
   MessageCircle,
   Podcast,
-  Sparkles,
+  Share2,
   type LucideIcon,
 } from "lucide-react";
 import { type PropsWithChildren, useRef } from "react";
 import {
   foundations,
+  inspirationGraphics,
   levels,
   resources,
   siteConfig,
+  type InspirationGraphic,
   type ResourceIcon,
 } from "@/data/site";
 
@@ -141,6 +144,25 @@ export function LandingPage() {
     });
   }
 
+  async function shareGraphic(graphic: InspirationGraphic) {
+    const url = new URL(
+      `${siteConfig.basePath}/inspiration/${graphic.file}`,
+      window.location.origin,
+    ).toString();
+
+    const shareData = {
+      title: `${graphic.title} · ${siteConfig.title}`,
+      text: "Share this Bitachon For Real graphic.",
+      url,
+    };
+
+    if (navigator.share) {
+      await navigator.share(shareData);
+      return;
+    }
+
+    await navigator.clipboard?.writeText(url);
+  }
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -313,6 +335,115 @@ export function LandingPage() {
 
         .inspiration {
           padding-top: clamp(2.5rem, 4vw, 4rem);
+        }
+
+        .inspiration-gallery-heading {
+          max-width: 52rem;
+        }
+
+        .inspiration-gallery-heading h2 {
+          margin-top: 0.9rem;
+          font-size: clamp(3rem, 6.3vw, 5.9rem);
+          line-height: 0.94;
+          letter-spacing: -0.047em;
+          text-wrap: balance;
+        }
+
+        .inspiration-gallery-heading p:not(.eyebrow) {
+          max-width: 42rem;
+          margin-top: 1.5rem;
+          color: var(--muted);
+          font-size: 1rem;
+          line-height: 1.8;
+        }
+
+        .inspiration-gallery {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: clamp(1rem, 2vw, 1.35rem);
+          margin-top: clamp(2.5rem, 4vw, 3.5rem);
+        }
+
+        .inspiration-graphic-card {
+          overflow: hidden;
+          border: 1px solid var(--line);
+          border-radius: 1.35rem;
+          background: rgba(10, 17, 27, 0.72);
+          box-shadow: var(--shadow);
+          backdrop-filter: blur(16px) saturate(128%);
+        }
+
+        .inspiration-image-link {
+          display: block;
+          overflow: hidden;
+          background: rgba(7, 11, 18, 0.54);
+        }
+
+        .inspiration-image-link img {
+          display: block;
+          width: 100%;
+          height: auto;
+          transition: transform 260ms ease, filter 260ms ease;
+        }
+
+        .inspiration-graphic-card:hover img {
+          transform: scale(1.018);
+          filter: brightness(1.05);
+        }
+
+        .inspiration-graphic-actions {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          padding: 1rem;
+        }
+
+        .inspiration-graphic-actions h3 {
+          font-family: var(--font-inter), Arial, sans-serif;
+          font-size: 0.72rem;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .inspiration-graphic-actions button {
+          display: inline-flex;
+          min-height: 2.35rem;
+          align-items: center;
+          gap: 0.45rem;
+          padding: 0 0.8rem;
+          border: 1px solid rgba(225, 195, 132, 0.34);
+          border-radius: 999px;
+          background: rgba(225, 195, 132, 0.12);
+          color: var(--cream);
+          cursor: pointer;
+          font-size: 0.66rem;
+          font-weight: 800;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+        }
+
+        .inspiration-graphic-actions button:hover {
+          background: rgba(225, 195, 132, 0.2);
+          color: var(--gold-bright);
+        }
+
+        @media (max-width: 1100px) {
+          .inspiration-gallery {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        @media (max-width: 700px) {
+          .inspiration-gallery {
+            grid-template-columns: 1fr;
+          }
+
+          .inspiration-graphic-actions {
+            align-items: flex-start;
+            flex-direction: column;
+          }
         }
 
         .foundation-card,
@@ -647,31 +778,53 @@ export function LandingPage() {
 
         <section className="section inspiration" id="inspiration">
           <div className="section-shell">
-            <Reveal className="inspiration-panel">
-              <div className="inspiration-copy">
-                <p className="eyebrow">Share inspiration</p>
-                <h2>Words worth carrying with you.</h2>
-                <p>
-                  A future collection of quiet reminders, phone wallpapers, and
-                  shareable graphics for everyday practice.
-                </p>
-                <span className="coming-soon">
-                  <Sparkles size={15} aria-hidden="true" />
-                  Coming soon
-                </span>
-              </div>
-              <div className="inspiration-tiles" aria-hidden="true">
-                <div className="inspiration-tile tile-one">
-                  <span>Practice trust.</span>
-                </div>
-                <div className="inspiration-tile tile-two">
-                  <span>Take the next step.</span>
-                </div>
-                <div className="inspiration-tile tile-three">
-                  <span>Return to calm.</span>
-                </div>
-              </div>
+            <Reveal className="inspiration-gallery-heading">
+              <p className="eyebrow">Share inspiration</p>
+              <h2>Graphics worth sending onward.</h2>
+              <p>
+                Save or share these Bitachon For Real reminders directly from
+                the page.
+              </p>
             </Reveal>
+            <div className="inspiration-gallery">
+              {inspirationGraphics.map((graphic, index) => (
+                <Reveal
+                  key={graphic.id}
+                  className="inspiration-graphic-reveal"
+                  delay={index * 0.035}
+                >
+                  <article className="inspiration-graphic-card">
+                    <a
+                      className="inspiration-image-link"
+                      href={`${siteConfig.basePath}/inspiration/${graphic.file}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open ${graphic.title} graphic`}
+                    >
+                      <Image
+                        src={`${siteConfig.basePath}/inspiration/${graphic.file}`}
+                        alt={`${graphic.title} share graphic`}
+                        width={graphic.width}
+                        height={graphic.height}
+                        sizes="(max-width: 700px) 88vw, (max-width: 1100px) 42vw, 28vw"
+                        loading="lazy"
+                      />
+                    </a>
+                    <div className="inspiration-graphic-actions">
+                      <h3>{graphic.title}</h3>
+                      <button
+                        type="button"
+                        onClick={() => void shareGraphic(graphic)}
+                        aria-label={`Share ${graphic.title}`}
+                      >
+                        <Share2 size={16} aria-hidden="true" />
+                        Share
+                      </button>
+                    </div>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
       </main>
