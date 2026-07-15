@@ -80,13 +80,18 @@ function Reveal({
 function ParallaxBackdrop() {
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
-  const slowY = useTransform(scrollYProgress, [0, 1], [0, -180]);
-  const midY = useTransform(scrollYProgress, [0, 1], [0, -320]);
-  const glowY = useTransform(scrollYProgress, [0, 1], [0, -110]);
-  const driftX = useTransform(scrollYProgress, [0, 1], [0, 64]);
+  const photoY = useTransform(scrollYProgress, [0, 1], [0, -260]);
+  const slowY = useTransform(scrollYProgress, [0, 1], [0, -170]);
+  const midY = useTransform(scrollYProgress, [0, 1], [0, -360]);
+  const glowY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const driftX = useTransform(scrollYProgress, [0, 1], [0, 84]);
 
   return (
     <div className="parallax-backdrop" aria-hidden="true">
+      <motion.div
+        className="parallax-layer parallax-photo"
+        style={reduceMotion ? undefined : { y: photoY }}
+      />
       <motion.div
         className="parallax-layer parallax-sky"
         style={reduceMotion ? undefined : { y: slowY }}
@@ -157,48 +162,61 @@ export function LandingPage() {
           inset: 0;
           overflow: hidden;
           background:
-            radial-gradient(circle at 50% -10%, rgba(225, 195, 132, 0.16), transparent 28rem),
-            linear-gradient(180deg, #060a11 0%, #0a111c 44%, #070b12 100%);
+            radial-gradient(circle at 52% -8%, rgba(255, 214, 137, 0.42), transparent 30rem),
+            linear-gradient(180deg, #16243a 0%, #172943 34%, #111c2f 64%, #090d16 100%);
           pointer-events: none;
         }
 
         .parallax-layer {
           position: absolute;
-          inset: -18% -12%;
+          inset: -22% -14%;
           will-change: transform;
+        }
+
+        .parallax-photo {
+          inset: -16% -10% -24%;
+          background:
+            linear-gradient(180deg, rgba(255, 190, 96, 0.22), rgba(7, 11, 18, 0.28) 45%, rgba(7, 11, 18, 0.72) 100%),
+            url("${siteConfig.basePath}/hero-sunrise.webp") center 34% / cover no-repeat;
+          filter: saturate(1.28) contrast(0.98) brightness(1.08) blur(1px);
+          opacity: 0.78;
+          transform: scale(1.08);
         }
 
         .parallax-sky {
           background:
-            radial-gradient(circle at 24% 18%, rgba(225, 195, 132, 0.18), transparent 18rem),
-            radial-gradient(circle at 78% 10%, rgba(92, 125, 160, 0.2), transparent 26rem),
-            linear-gradient(165deg, rgba(15, 27, 44, 0.92), rgba(7, 11, 18, 0.15) 60%);
-          filter: saturate(1.1);
+            radial-gradient(circle at 20% 20%, rgba(255, 210, 132, 0.34), transparent 19rem),
+            radial-gradient(circle at 76% 10%, rgba(126, 172, 212, 0.34), transparent 28rem),
+            linear-gradient(165deg, rgba(52, 78, 116, 0.62), rgba(13, 21, 35, 0.04) 62%);
+          filter: saturate(1.22);
+          mix-blend-mode: screen;
+          opacity: 0.74;
         }
 
         .parallax-path {
-          top: 16%;
+          top: 10%;
           background:
-            linear-gradient(115deg, transparent 0 38%, rgba(225, 195, 132, 0.1) 46%, transparent 58%),
-            radial-gradient(ellipse at 50% 82%, rgba(225, 195, 132, 0.12), transparent 30rem),
-            repeating-linear-gradient(112deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 72px);
-          opacity: 0.72;
-          mask-image: linear-gradient(to bottom, transparent, black 18%, black 78%, transparent);
+            linear-gradient(115deg, transparent 0 36%, rgba(255, 214, 139, 0.22) 46%, transparent 60%),
+            radial-gradient(ellipse at 50% 86%, rgba(255, 204, 116, 0.24), transparent 32rem),
+            repeating-linear-gradient(112deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 64px);
+          opacity: 0.86;
+          mask-image: linear-gradient(to bottom, transparent, black 12%, black 82%, transparent);
         }
 
         .parallax-glow {
-          inset: 0;
+          inset: -8%;
           background:
-            radial-gradient(circle at 72% 28%, rgba(225, 195, 132, 0.16), transparent 18rem),
-            radial-gradient(circle at 18% 74%, rgba(71, 99, 132, 0.18), transparent 22rem);
+            radial-gradient(circle at 68% 26%, rgba(255, 205, 116, 0.36), transparent 20rem),
+            radial-gradient(circle at 20% 72%, rgba(92, 137, 179, 0.25), transparent 24rem),
+            linear-gradient(90deg, rgba(255, 181, 88, 0.08), transparent 42%, rgba(91, 132, 176, 0.08));
           mix-blend-mode: screen;
-          opacity: 0.72;
+          opacity: 0.9;
         }
 
         .parallax-grain {
           position: absolute;
           inset: 0;
-          opacity: 0.13;
+          opacity: 0.09;
           background-image: radial-gradient(rgba(255,255,255,0.42) 0.45px, transparent 0.45px);
           background-size: 4px 4px;
           mix-blend-mode: soft-light;
@@ -213,9 +231,9 @@ export function LandingPage() {
 
         .opening-intro {
           background:
-            radial-gradient(circle at 14% 38%, rgba(200, 167, 106, 0.12), transparent 27rem),
-            radial-gradient(circle at 82% 20%, rgba(52, 71, 98, 0.14), transparent 29rem),
-            linear-gradient(180deg, rgba(7, 11, 18, 0.42), rgba(11, 19, 30, 0.64) 55%, rgba(7, 11, 18, 0.46));
+            radial-gradient(circle at 14% 36%, rgba(255, 204, 116, 0.2), transparent 28rem),
+            radial-gradient(circle at 82% 20%, rgba(91, 132, 176, 0.17), transparent 30rem),
+            linear-gradient(180deg, rgba(9, 15, 25, 0.1), rgba(16, 28, 45, 0.35) 55%, rgba(7, 11, 18, 0.28));
         }
 
         .understand,
@@ -228,27 +246,35 @@ export function LandingPage() {
 
         .understand {
           background:
-            radial-gradient(circle at 18% 32%, rgba(42, 65, 95, 0.18), transparent 26rem),
-            linear-gradient(180deg, rgba(7, 11, 18, 0.62), rgba(10, 16, 25, 0.68) 60%, rgba(7, 11, 18, 0.56));
+            radial-gradient(circle at 18% 32%, rgba(78, 113, 152, 0.16), transparent 26rem),
+            linear-gradient(180deg, rgba(7, 11, 18, 0.46), rgba(10, 16, 25, 0.54) 60%, rgba(7, 11, 18, 0.42));
         }
 
         .levels {
           background:
-            linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px),
-            linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-            rgba(8, 13, 21, 0.56);
+            linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px),
+            linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+            rgba(9, 15, 24, 0.42);
           background-size: 6rem 6rem;
         }
 
         .resources {
           background:
-            radial-gradient(circle at 80% 45%, rgba(48, 69, 96, 0.15), transparent 27rem),
-            rgba(7, 11, 18, 0.5);
+            radial-gradient(circle at 80% 45%, rgba(94, 132, 171, 0.17), transparent 27rem),
+            rgba(7, 11, 18, 0.36);
         }
 
         .inspiration,
         .site-footer {
-          background: rgba(9, 16, 26, 0.68);
+          background: rgba(9, 16, 26, 0.54);
+        }
+
+        .foundation-card,
+        .level-card,
+        .resource-card,
+        .inspiration-panel,
+        .intro-motto {
+          backdrop-filter: blur(16px) saturate(128%);
         }
         /* motto-card embedded styles: keeps the revised opening self-contained for GitHub Pages deploys */
         .motto-card {
