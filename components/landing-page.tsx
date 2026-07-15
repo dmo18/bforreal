@@ -150,18 +150,37 @@ export function LandingPage() {
       window.location.origin,
     ).toString();
 
-    const shareData = {
-      title: `${graphic.title} · ${siteConfig.title}`,
-      text: "Share this Bitachon For Real graphic.",
-      url,
-    };
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const file = new File([blob], graphic.file, {
+      type: blob.type || "image/svg+xml",
+    });
 
-    if (navigator.share) {
-      await navigator.share(shareData);
+    if (navigator.share && navigator.canShare?.({ files: [file] })) {
+      await navigator.share({
+        title: `${graphic.title} · ${siteConfig.title}`,
+        text: "Share this Bitachon For Real graphic.",
+        files: [file],
+      });
       return;
     }
 
-    await navigator.clipboard?.writeText(url);
+    if (navigator.clipboard?.write && "ClipboardItem" in window) {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          [file.type || "image/svg+xml"]: blob,
+        }),
+      ]);
+      return;
+    }
+
+    const fallbackUrl = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = fallbackUrl;
+    anchor.download = graphic.file;
+    anchor.rel = "noopener";
+    anchor.click();
+    window.setTimeout(() => URL.revokeObjectURL(fallbackUrl), 0);
   }
   const jsonLd = {
     "@context": "https://schema.org",
