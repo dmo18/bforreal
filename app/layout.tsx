@@ -3,8 +3,10 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 import "./footer-overrides.css";
+import { DailyBitachonFeature } from "./daily-bitachon-feature";
 import { GalleryEnhancements } from "./gallery-enhancements";
 import { PodcastFeature } from "./podcast-feature";
+import { VersionSync } from "./version-sync";
 import { siteConfig } from "@/data/site";
 
 const inter = Inter({
@@ -65,7 +67,9 @@ export default function RootLayout({
       <body className={`${inter.variable} ${cormorant.variable}`}>
         {children}
         <PodcastFeature />
+        <DailyBitachonFeature />
         <GalleryEnhancements />
+        <VersionSync />
       </body>
     </html>
   );
