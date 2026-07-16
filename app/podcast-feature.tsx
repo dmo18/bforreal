@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
+const BUILD_VERSION = "1.0.8";
 const featureImage =
   "https://images.squarespace-cdn.com/content/v1/654e78f5a48aae5e62c92022/b5893395-d3b1-4406-ba6d-26162786312e/Gate%2Bof%2BTrust%2BPodcast%2BCovers.png";
 
@@ -19,6 +20,26 @@ export function PodcastFeature() {
     setTarget(mount);
 
     return () => mount.remove();
+  }, []);
+
+  useEffect(() => {
+    const syncVersion = () => {
+      const footerVersion = Array.from(
+        document.querySelectorAll<HTMLElement>(".footer-meta span"),
+      ).find((node) => node.textContent?.startsWith("Version "));
+
+      if (footerVersion && footerVersion.textContent !== `Version ${BUILD_VERSION}`) {
+        footerVersion.textContent = `Version ${BUILD_VERSION}`;
+      }
+    };
+
+    const frame = window.requestAnimationFrame(syncVersion);
+    const timer = window.setTimeout(syncVersion, 50);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
+    };
   }, []);
 
   if (!target) return null;
@@ -158,6 +179,7 @@ export function PodcastFeature() {
       `}</style>
       <article className="podcast-feature" aria-labelledby="podcast-feature-title">
         <div className="podcast-feature-media">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`${featureImage}?format=1500w`}
             alt="Reb Yirmi Ginsberg and Bitachon For Real podcast artwork"
