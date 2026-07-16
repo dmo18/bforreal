@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-const BUILD_VERSION = "1.0.9";
+const BUILD_VERSION = "1.0.10";
 const featureImage =
   "https://images.squarespace-cdn.com/content/v1/654e78f5a48aae5e62c92022/b5893395-d3b1-4406-ba6d-26162786312e/Gate%2Bof%2BTrust%2BPodcast%2BCovers.png";
 const bookUrl =
   "https://www.amazon.com/Shaar-HaBitachon-Chovos-Halevavos-Family/dp/B09WTZPCR2";
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(/\/$/, "");
+const bookCover = `${basePath}/shaar-habitachon-jaffa.svg?v=${BUILD_VERSION}`;
 
 const topicHighlights = [
   "Hishtadlus, effort, and leaving the outcome to Hashem",
@@ -15,6 +17,54 @@ const topicHighlights = [
   "Relationships, shidduchim, and ordinary life pressure",
   "Releasing control and working through real situations",
 ];
+
+function ApplePodcastsIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="9" r="2.2" fill="currentColor" />
+      <path
+        d="M9.4 19.4 10.2 13a1.8 1.8 0 0 1 3.6 0l.8 6.4a2.6 2.6 0 0 1-5.2 0Z"
+        fill="currentColor"
+      />
+      <path
+        d="M7.1 14.8a7 7 0 1 1 9.8 0M5 17.1a10 10 0 1 1 14 0"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
+function SpotifyIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" fill="currentColor" />
+      <path
+        d="M6.8 9.2c3.8-1.1 8.4-.8 11.6.9M7.5 12.5c3.1-.8 7-.6 9.8.8M8.2 15.6c2.6-.6 5.6-.4 8 .6"
+        fill="none"
+        stroke="#0d1723"
+        strokeLinecap="round"
+        strokeWidth="1.55"
+      />
+    </svg>
+  );
+}
+
+function BookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M4.5 5.4c2.8-.8 5.3-.4 7.5 1.2v12c-2.2-1.6-4.7-2-7.5-1.2Zm15 0c-2.8-.8-5.3-.4-7.5 1.2v12c2.2-1.6 4.7-2 7.5-1.2Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinejoin="round"
+        strokeWidth="1.6"
+      />
+    </svg>
+  );
+}
 
 export function PodcastFeature() {
   const [target, setTarget] = useState<HTMLElement | null>(null);
@@ -115,14 +165,6 @@ export function PodcastFeature() {
           line-height: .94;
           letter-spacing: -.045em;
         }
-        .podcast-feature-name {
-          margin-top: 1.1rem;
-          color: var(--gold-bright);
-          font-size: .82rem;
-          font-weight: 800;
-          letter-spacing: .1em;
-          text-transform: uppercase;
-        }
         .podcast-feature-bio {
           max-width: 46rem;
           margin-top: 1.2rem;
@@ -191,24 +233,17 @@ export function PodcastFeature() {
           align-items: center;
           gap: 1rem;
           margin-top: 1.35rem;
-          padding: 1rem;
+          padding: .9rem 1rem .9rem .85rem;
           border: 1px solid rgba(225, 195, 132, .24);
           border-radius: 1.2rem;
           background: linear-gradient(135deg, rgba(225, 195, 132, .12), rgba(225, 195, 132, .035));
         }
-        .podcast-book-mark {
-          display: grid;
-          width: 3rem;
-          height: 3.7rem;
-          place-items: center;
-          border: 1px solid rgba(255, 226, 167, .42);
-          border-radius: .45rem .75rem .75rem .45rem;
-          background: linear-gradient(145deg, #d8b665, #8a672b);
-          box-shadow: inset -.35rem 0 rgba(0, 0, 0, .18), 0 .75rem 1.5rem rgba(0, 0, 0, .2);
-          color: #101826;
-          font-family: var(--font-cormorant), Georgia, serif;
-          font-size: 1.4rem;
-          font-weight: 700;
+        .podcast-book-cover {
+          display: block;
+          width: 3.8rem;
+          height: auto;
+          border-radius: .22rem;
+          filter: drop-shadow(0 .65rem .85rem rgba(0, 0, 0, .36));
         }
         .podcast-book-copy strong {
           display: block;
@@ -241,6 +276,7 @@ export function PodcastFeature() {
           min-height: 2.85rem;
           align-items: center;
           justify-content: center;
+          gap: .55rem;
           padding: 0 1.1rem;
           border: 1px solid rgba(225, 195, 132, .34);
           border-radius: 999px;
@@ -258,6 +294,25 @@ export function PodcastFeature() {
           border-color: rgba(255, 226, 167, .72);
           background: rgba(225, 195, 132, .18);
           transform: translateY(-2px);
+        }
+        .podcast-feature-links svg,
+        .podcast-book-link svg {
+          width: 1.08rem;
+          height: 1.08rem;
+          flex: 0 0 auto;
+        }
+        .podcast-feature-links .spotify-icon {
+          color: #1ed760;
+        }
+        .podcast-feature-links .apple-icon {
+          color: #d9b6ff;
+        }
+        .podcast-feature-links .gate-icon {
+          width: 1.12rem;
+          height: 1.12rem;
+          flex: 0 0 auto;
+          border-radius: .24rem;
+          object-fit: contain;
         }
         .podcast-book-link {
           white-space: nowrap;
@@ -287,6 +342,9 @@ export function PodcastFeature() {
           .podcast-book-callout {
             grid-template-columns: auto minmax(0, 1fr);
           }
+          .podcast-book-cover {
+            width: 4.35rem;
+          }
           .podcast-book-link {
             grid-column: 1 / -1;
             width: 100%;
@@ -308,12 +366,10 @@ export function PodcastFeature() {
         <div className="podcast-feature-copy">
           <p className="podcast-feature-kicker">The podcast that inspired this site</p>
           <h3 id="podcast-feature-title">Bitachon For Real</h3>
-          <p className="podcast-feature-name">Reb Yirmi Ginsberg</p>
           <p className="podcast-feature-bio">
             Reb Yirmi Ginsberg leads chaburos at Congregation Aish Kodesh and teaches
             Bitachon as something to practice, not only study. The weekly series follows
-            Shaar HaBitachon in the Jaffa Family Edition of
-            {" "}
+            Shaar HaBitachon in the Jaffa Family Edition of{" "}
             <a href={bookUrl} target="_blank" rel="noopener noreferrer sponsored external">
               Shaar HaBitachon of Chovos Halevavos
             </a>
@@ -343,7 +399,13 @@ export function PodcastFeature() {
           </ul>
 
           <div className="podcast-book-callout">
-            <span className="podcast-book-mark" aria-hidden="true">B</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="podcast-book-cover"
+              src={bookCover}
+              alt="Shaar HaBitachon of Chovos Halevavos, Jaffa Family Edition book cover"
+              loading="lazy"
+            />
             <div className="podcast-book-copy">
               <strong>The text used throughout the series</strong>
               <span>Jaffa Family Edition, with English translation and commentary.</span>
@@ -354,6 +416,7 @@ export function PodcastFeature() {
               target="_blank"
               rel="noopener noreferrer sponsored external"
             >
+              <BookIcon />
               View the book
             </a>
           </div>
@@ -370,6 +433,7 @@ export function PodcastFeature() {
               target="_blank"
               rel="noopener noreferrer external"
             >
+              <span className="apple-icon"><ApplePodcastsIcon /></span>
               Apple Podcasts
             </a>
             <a
@@ -377,6 +441,7 @@ export function PodcastFeature() {
               target="_blank"
               rel="noopener noreferrer external"
             >
+              <span className="spotify-icon"><SpotifyIcon /></span>
               Spotify
             </a>
             <a
@@ -384,6 +449,13 @@ export function PodcastFeature() {
               target="_blank"
               rel="noopener noreferrer external"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="gate-icon"
+                src="https://www.gateoftrust.org/favicon.ico"
+                alt=""
+                aria-hidden="true"
+              />
               Gate of Trust
             </a>
           </div>
