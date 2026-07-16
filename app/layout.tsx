@@ -6,6 +6,7 @@ import "./footer-overrides.css";
 import { DailyBitachonFeature } from "./daily-bitachon-feature";
 import { GalleryEnhancements } from "./gallery-enhancements";
 import { PodcastFeature } from "./podcast-feature";
+import { ResourceFeatureStabilizer } from "./resource-feature-stabilizer";
 import { VersionSync } from "./version-sync";
 import { siteConfig } from "@/data/site";
 
@@ -68,6 +69,7 @@ export default function RootLayout({
         {children}
         <PodcastFeature />
         <DailyBitachonFeature />
+        <ResourceFeatureStabilizer />
         <GalleryEnhancements />
         <VersionSync />
       </body>
