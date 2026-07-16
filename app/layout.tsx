@@ -4,6 +4,7 @@ import "lenis/dist/lenis.css";
 import "./globals.css";
 import "./footer-overrides.css";
 import { GalleryEnhancements } from "./gallery-enhancements";
+import { PodcastFeature } from "./podcast-feature";
 import { siteConfig } from "@/data/site";
 
 const inter = Inter({
@@ -63,6 +64,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${cormorant.variable}`}>
         {children}
+        <PodcastFeature />
         <GalleryEnhancements />
       </body>
     </html>
