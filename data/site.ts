@@ -41,7 +41,7 @@ export const siteConfig = {
   futureDomain: "bitachonforreal.com",
   repository: "https://github.com/dmo18/bforreal",
   whatsapp: "https://chat.whatsapp.com/CkrFDf12DwdHEoRhFxoyB7",
-  version: "1.0.2",
+  version: "1.0.3",
 };
 
 export const foundations = [
@@ -168,13 +168,6 @@ export const resources: Resource[] = [
 
 export const inspirationGraphics: InspirationGraphic[] = [
   {
-    id: "7-levels-mountain",
-    title: "7 Levels of Bitachon",
-    file: "7-levels-mountain.svg",
-    width: 1122,
-    height: 1402,
-  },
-  {
     id: "bitachon-operating-system",
     title: "Bitachon Operating System",
     file: "bitachon-operating-system.svg",
@@ -234,20 +227,6 @@ export const inspirationGraphics: InspirationGraphic[] = [
     id: "hierarchy-of-bitachon",
     title: "Hierarchy of Bitachon",
     file: "hierarchy-of-bitachon.svg",
-    width: 1122,
-    height: 1402,
-  },
-  {
-    id: "7-levels-2026",
-    title: "7 Levels of Bitachon 2026",
-    file: "7-levels-2026.svg",
-    width: 1024,
-    height: 1536,
-  },
-  {
-    id: "bitachon-map",
-    title: "Bitachon Map",
-    file: "bitachon-map.svg",
     width: 1122,
     height: 1402,
   },
