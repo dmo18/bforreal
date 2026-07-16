@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "lenis/dist/lenis.css";
 import "./globals.css";
+import "./footer-overrides.css";
 import { siteConfig } from "@/data/site";
 
 const inter = Inter({
