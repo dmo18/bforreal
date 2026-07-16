@@ -36,9 +36,17 @@ export function GalleryEnhancements() {
   const triggerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    const gallery = document.querySelector<HTMLElement>(".inspiration-gallery");
+    if (!gallery) return;
+
+    const shell = gallery.parentElement;
     const links = Array.from(
-      document.querySelectorAll<HTMLAnchorElement>(".inspiration-image-link"),
+      gallery.querySelectorAll<HTMLAnchorElement>(".inspiration-image-link"),
     );
+
+    gallery.setAttribute("role", "region");
+    gallery.setAttribute("aria-label", "Bitachon inspiration graphics");
+    gallery.setAttribute("tabindex", "0");
 
     for (const link of links) {
       const image = link.querySelector<HTMLImageElement>("img");
@@ -60,6 +68,65 @@ export function GalleryEnhancements() {
       link.setAttribute("tabindex", "0");
       link.setAttribute("aria-haspopup", "dialog");
     }
+
+    const tools = document.createElement("div");
+    tools.className = "inspiration-carousel-tools";
+    tools.innerHTML = `
+      <p class="inspiration-carousel-hint">Swipe or use the arrows to explore</p>
+      <div class="inspiration-carousel-actions">
+        <button type="button" class="inspiration-carousel-arrow" data-direction="previous" aria-label="Previous graphics">&#8592;</button>
+        <div class="inspiration-carousel-progress" aria-hidden="true"><span></span></div>
+        <button type="button" class="inspiration-carousel-arrow" data-direction="next" aria-label="Next graphics">&#8594;</button>
+      </div>
+    `;
+
+    shell?.insertBefore(tools, gallery);
+
+    const previousButton = tools.querySelector<HTMLButtonElement>(
+      '[data-direction="previous"]',
+    );
+    const nextButton = tools.querySelector<HTMLButtonElement>(
+      '[data-direction="next"]',
+    );
+    const progress = tools.querySelector<HTMLElement>(
+      ".inspiration-carousel-progress span",
+    );
+
+    const scrollByCard = (direction: -1 | 1) => {
+      const card = gallery.querySelector<HTMLElement>(
+        ".inspiration-graphic-reveal",
+      );
+      const gap = Number.parseFloat(getComputedStyle(gallery).columnGap || "0");
+      const distance = card ? card.offsetWidth + gap : gallery.clientWidth * 0.8;
+
+      gallery.scrollBy({
+        left: direction * distance,
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+    };
+
+    const updateControls = () => {
+      const maxScroll = Math.max(0, gallery.scrollWidth - gallery.clientWidth);
+      const ratio = maxScroll === 0 ? 1 : gallery.scrollLeft / maxScroll;
+      const progressWidth = maxScroll === 0 ? 100 : 18 + ratio * 82;
+
+      if (progress) progress.style.width = `${progressWidth}%`;
+      if (previousButton) previousButton.disabled = gallery.scrollLeft <= 2;
+      if (nextButton) nextButton.disabled = gallery.scrollLeft >= maxScroll - 2;
+    };
+
+    const handlePrevious = () => scrollByCard(-1);
+    const handleNext = () => scrollByCard(1);
+
+    previousButton?.addEventListener("click", handlePrevious);
+    nextButton?.addEventListener("click", handleNext);
+    gallery.addEventListener("scroll", updateControls, { passive: true });
+
+    const resizeObserver = new ResizeObserver(updateControls);
+    resizeObserver.observe(gallery);
+    updateControls();
 
     function openFromTarget(target: EventTarget | null) {
       if (!(target instanceof Element)) return;
@@ -100,6 +167,11 @@ export function GalleryEnhancements() {
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      previousButton?.removeEventListener("click", handlePrevious);
+      nextButton?.removeEventListener("click", handleNext);
+      gallery.removeEventListener("scroll", updateControls);
+      resizeObserver.disconnect();
+      tools.remove();
       document.removeEventListener("click", handleClick);
       document.removeEventListener("keydown", handleKeyDown);
     };
@@ -126,23 +198,98 @@ export function GalleryEnhancements() {
           grid-auto-flow: column !important;
           grid-template-columns: none !important;
           grid-template-rows: auto !important;
-          grid-auto-columns: clamp(14rem, 19vw, 18rem) !important;
+          grid-auto-columns: clamp(16rem, 23vw, 20rem) !important;
           align-items: start !important;
-          gap: clamp(0.75rem, 1.15vw, 1.15rem) !important;
+          gap: clamp(0.9rem, 1.4vw, 1.35rem) !important;
           overflow-x: auto !important;
           overflow-y: hidden !important;
-          padding: 0 0 1rem !important;
-          scroll-padding-inline: 0.15rem;
-          scroll-snap-type: x proximity;
+          padding: 0.4rem 0 1.2rem !important;
+          scroll-padding-inline: 0.25rem;
+          scroll-snap-type: x mandatory;
           overscroll-behavior-inline: contain;
-          scrollbar-width: thin;
+          scrollbar-width: none;
+          touch-action: pan-x pinch-zoom;
           -webkit-overflow-scrolling: touch;
+          -ms-overflow-style: none;
+          mask-image: linear-gradient(to right, transparent 0, black 1rem, black calc(100% - 1rem), transparent 100%);
+        }
+
+        .inspiration-gallery::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+
+        .inspiration-carousel-tools {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1.25rem;
+          margin-top: clamp(2rem, 3.5vw, 3rem);
+          margin-bottom: 0.7rem;
+        }
+
+        .inspiration-carousel-hint {
+          color: color-mix(in srgb, var(--muted) 88%, transparent);
+          font-size: 0.75rem;
+          letter-spacing: 0.04em;
+        }
+
+        .inspiration-carousel-actions {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+        }
+
+        .inspiration-carousel-arrow {
+          display: grid;
+          width: 2.7rem;
+          height: 2.7rem;
+          place-items: center;
+          border: 1px solid rgba(225, 195, 132, 0.28);
+          border-radius: 999px;
+          background: rgba(12, 20, 31, 0.7);
+          box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+          color: var(--cream);
+          cursor: pointer;
+          font-size: 1.15rem;
+          transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, opacity 180ms ease;
+          backdrop-filter: blur(16px) saturate(130%);
+        }
+
+        .inspiration-carousel-arrow:hover:not(:disabled) {
+          border-color: rgba(225, 195, 132, 0.58);
+          background: rgba(225, 195, 132, 0.14);
+          transform: translateY(-2px);
+        }
+
+        .inspiration-carousel-arrow:disabled {
+          cursor: default;
+          opacity: 0.28;
+        }
+
+        .inspiration-carousel-progress {
+          width: clamp(4.5rem, 8vw, 7rem);
+          height: 2px;
+          overflow: hidden;
+          border-radius: 999px;
+          background: rgba(244, 239, 227, 0.14);
+        }
+
+        .inspiration-carousel-progress span {
+          display: block;
+          width: 18%;
+          height: 100%;
+          border-radius: inherit;
+          background: linear-gradient(90deg, rgba(225, 195, 132, 0.72), rgba(255, 226, 167, 0.96));
+          transition: width 160ms ease-out;
         }
 
         .inspiration-graphic-reveal {
           min-width: 0;
           align-self: start;
           scroll-snap-align: start;
+          scroll-snap-stop: normal;
         }
 
         .inspiration-graphic-card {
@@ -151,6 +298,15 @@ export function GalleryEnhancements() {
           height: auto !important;
           min-height: 0 !important;
           flex-direction: column;
+          border-color: rgba(225, 195, 132, 0.18) !important;
+          box-shadow: 0 22px 58px rgba(0, 0, 0, 0.24) !important;
+          transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+        }
+
+        .inspiration-graphic-card:hover {
+          border-color: rgba(225, 195, 132, 0.36) !important;
+          box-shadow: 0 28px 78px rgba(0, 0, 0, 0.32) !important;
+          transform: translateY(-4px);
         }
 
         .inspiration-image-link {
@@ -173,11 +329,11 @@ export function GalleryEnhancements() {
         .inspiration-graphic-actions {
           display: grid !important;
           grid-template-columns: minmax(0, 1fr) auto;
-          min-height: 4.15rem;
+          min-height: 4.2rem;
           align-items: center !important;
-          gap: 0.7rem !important;
+          gap: 0.8rem !important;
           margin-top: 0 !important;
-          padding: 0.72rem !important;
+          padding: 0.8rem 0.85rem !important;
         }
 
         .inspiration-graphic-actions h3 {
@@ -185,8 +341,9 @@ export function GalleryEnhancements() {
           min-width: 0;
           margin: 0;
           overflow: hidden;
-          font-size: clamp(0.58rem, 0.72vw, 0.72rem) !important;
+          font-size: 0.68rem !important;
           line-height: 1.3;
+          letter-spacing: 0.06em !important;
           overflow-wrap: normal !important;
           word-break: normal !important;
           white-space: normal;
@@ -195,26 +352,12 @@ export function GalleryEnhancements() {
         }
 
         .inspiration-graphic-actions button {
-          min-height: 2.25rem !important;
+          min-height: 2.35rem !important;
           flex: 0 0 auto;
-          gap: 0.38rem !important;
-          padding: 0 0.72rem !important;
+          gap: 0.4rem !important;
+          padding: 0 0.78rem !important;
           font-size: 0.62rem !important;
           white-space: nowrap;
-        }
-
-        .inspiration-graphic-actions button svg {
-          width: 0.95rem;
-          height: 0.95rem;
-        }
-
-        .inspiration-gallery::-webkit-scrollbar {
-          height: 0.42rem;
-        }
-
-        .inspiration-gallery::-webkit-scrollbar-thumb {
-          border-radius: 999px;
-          background: rgba(225, 195, 132, 0.42);
         }
 
         .graphic-lightbox {
@@ -225,7 +368,7 @@ export function GalleryEnhancements() {
           place-items: center;
           padding: clamp(0.75rem, 3vw, 2rem);
           background: rgba(3, 7, 12, 0.94);
-          backdrop-filter: blur(18px);
+          backdrop-filter: blur(20px);
         }
 
         .graphic-lightbox-media {
@@ -266,19 +409,35 @@ export function GalleryEnhancements() {
           text-align: center;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 700px) {
+          .inspiration-carousel-tools {
+            align-items: flex-end;
+            margin-top: 1.75rem;
+          }
+
+          .inspiration-carousel-hint {
+            max-width: 15rem;
+            font-size: 0.72rem;
+          }
+
+          .inspiration-carousel-arrow {
+            display: none;
+          }
+
+          .inspiration-carousel-progress {
+            width: 4.5rem;
+          }
+
           .inspiration-gallery {
-            grid-auto-columns: min(78vw, 19rem) !important;
-            scroll-snap-type: x mandatory;
+            grid-auto-columns: min(84vw, 20rem) !important;
+            gap: 0.9rem !important;
+            margin-inline: -0.35rem;
+            padding-inline: 0.35rem !important;
+            mask-image: linear-gradient(to right, transparent 0, black 0.45rem, black calc(100% - 0.45rem), transparent 100%);
           }
 
-          .inspiration-graphic-actions {
-            min-height: 4rem;
-            padding: 0.7rem !important;
-          }
-
-          .inspiration-graphic-actions h3 {
-            font-size: 0.68rem !important;
+          .inspiration-graphic-card:hover {
+            transform: none;
           }
 
           .graphic-lightbox {
