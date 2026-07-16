@@ -2,9 +2,6 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.12";
-const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(/\/$/, "");
-
 export function ResourceFeatureStabilizer() {
   useEffect(() => {
     let frame = 0;
@@ -13,7 +10,9 @@ export function ResourceFeatureStabilizer() {
     const organize = () => {
       const resourceGrid = document.querySelector<HTMLElement>(".resource-grid");
       const podcast = document.querySelector<HTMLElement>(".podcast-feature-mount");
-      const daily = document.querySelector<HTMLElement>(".daily-bitachon-feature-mount");
+      const daily = document.querySelector<HTMLElement>(
+        ".daily-bitachon-feature-mount",
+      );
       const parent = resourceGrid?.parentElement;
 
       if (!resourceGrid || !podcast || !daily || !parent) {
@@ -36,17 +35,6 @@ export function ResourceFeatureStabilizer() {
 
       podcast.style.marginTop = "clamp(2.4rem, 4vw, 3.6rem)";
       daily.style.marginTop = "clamp(1.25rem, 2.6vw, 2rem)";
-
-      const portrait = daily.querySelector<HTMLImageElement>(
-        'img[alt="Mr. Michael Safdie"]',
-      );
-      const portraitUrl = `${basePath}/michael-safdie.svg?v=${BUILD_VERSION}`;
-
-      if (portrait && portrait.getAttribute("src") !== portraitUrl) {
-        portrait.src = portraitUrl;
-        portrait.loading = "eager";
-        portrait.decoding = "async";
-      }
     };
 
     frame = window.requestAnimationFrame(organize);

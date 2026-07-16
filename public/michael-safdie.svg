@@ -1,5 +1,113 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 808 1130" role="img" aria-labelledby="title desc">
   <title id="title">Mr. Michael Safdie</title>
-  <desc id="desc">Portrait of Mr. Michael Safdie.</desc>
-  <image width="180" height="180" preserveAspectRatio="xMidYMid slice" href="data:image/jpeg;base64,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" />
+  <desc id="desc">A refined vector portrait of businessman Michael Safdie outside Madison Time.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6dfd0"/>
+      <stop offset=".55" stop-color="#cfc6b5"/>
+      <stop offset="1" stop-color="#aaa394"/>
+    </linearGradient>
+    <linearGradient id="door" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07131d"/>
+      <stop offset="1" stop-color="#111c25"/>
+    </linearGradient>
+    <linearGradient id="suit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#18263d"/>
+      <stop offset=".5" stop-color="#0c182b"/>
+      <stop offset="1" stop-color="#050c18"/>
+    </linearGradient>
+    <linearGradient id="tie" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#24375a"/>
+      <stop offset="1" stop-color="#09142a"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c58a68"/>
+      <stop offset=".52" stop-color="#a9684f"/>
+      <stop offset="1" stop-color="#7d4637"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe4a1"/>
+      <stop offset="1" stop-color="#a87831"/>
+    </linearGradient>
+    <pattern id="pinstripe" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)">
+      <path d="M4 0v28" stroke="#b7c7dc" stroke-opacity=".08" stroke-width="2"/>
+    </pattern>
+    <clipPath id="frame"><rect width="808" height="1130" rx="42"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <rect width="808" height="1130" fill="url(#wall)"/>
+    <path d="M0 0h320v1130H0z" fill="url(#door)"/>
+    <path d="M0 0h320v1130H0z" fill="none" stroke="#7dcfb4" stroke-opacity=".1" stroke-width="3"/>
+
+    <g opacity=".42" stroke="#8f8778" stroke-width="2">
+      <path d="M320 0v1130M572 0v1130M0 260h808M0 570h808M0 870h808"/>
+      <path d="M330 120c65 40 112 22 178 72M558 46c-34 80-20 126 22 195M350 665c92-48 135-30 205 30M610 650c30 84 80 122 168 138" fill="none" stroke-opacity=".35"/>
+    </g>
+
+    <g transform="translate(455 145)">
+      <rect width="286" height="248" rx="8" fill="#ddd6c8" stroke="#494d4d" stroke-width="4"/>
+      <rect x="18" y="18" width="250" height="212" rx="2" fill="none" stroke="#6f706d" stroke-width="2"/>
+      <text x="143" y="104" text-anchor="middle" fill="#1a2026" font-family="Georgia,serif" font-size="37" letter-spacing="2">MADISON TIME</text>
+      <text x="143" y="143" text-anchor="middle" fill="#273039" font-family="Georgia,serif" font-size="17">IMPORTANT COLLECTIBLE</text>
+      <text x="143" y="166" text-anchor="middle" fill="#273039" font-family="Georgia,serif" font-size="17">WATCHES</text>
+      <path d="M126 50c15 10 21 31 12 49" fill="none" stroke="url(#gold)" stroke-width="5" stroke-linecap="round" opacity=".75"/>
+    </g>
+
+    <g opacity=".45" fill="#f7d67d">
+      <circle cx="38" cy="75" r="9"/><circle cx="70" cy="112" r="7"/><circle cx="112" cy="86" r="6"/>
+      <circle cx="58" cy="188" r="7"/><circle cx="98" cy="220" r="5"/>
+    </g>
+
+    <g transform="translate(36 38)">
+      <path d="M75 1092c5-210 18-422 57-598 32-146 95-233 188-252 89-18 163 24 206 129 55 135 73 366 82 721Z" fill="url(#suit)"/>
+      <path d="M75 1092c5-210 18-422 57-598 32-146 95-233 188-252 89-18 163 24 206 129 55 135 73 366 82 721Z" fill="url(#pinstripe)"/>
+
+      <path d="M197 349 318 462 425 348l-48-85-132 1Z" fill="#eef3f8"/>
+      <path d="M298 346 332 350 374 559 327 615 279 558Z" fill="url(#tie)"/>
+      <path d="M195 357 289 527 216 615 137 455Z" fill="#12213a"/>
+      <path d="M426 356 340 527 421 614 502 449Z" fill="#0a1528"/>
+      <path d="M199 349 288 522M424 351 340 522" stroke="#9aabc3" stroke-opacity=".22" stroke-width="3"/>
+
+      <path d="M169 135c17-75 75-118 155-113 82 5 138 58 145 137l-9 105c-8 70-62 128-135 132-80 4-141-48-151-124Z" fill="url(#skin)"/>
+      <path d="M183 151c19-72 68-108 140-107 69 1 118 37 135 97-33-25-61-39-92-43-60-8-116 7-183 53Z" fill="#2c2726"/>
+      <path d="M191 151c25-58 70-89 132-89 53 0 95 19 124 58-24-71-76-108-151-108-69 0-118 44-105 139Z" fill="#1b1919"/>
+      <path d="M194 181c-15 25-19 57-12 94" fill="none" stroke="#714537" stroke-width="8" stroke-linecap="round"/>
+      <path d="M449 181c14 24 17 56 10 91" fill="none" stroke="#714537" stroke-width="8" stroke-linecap="round"/>
+
+      <path d="M215 207c34-23 68-22 102-4M342 203c31-19 61-18 89 2" fill="none" stroke="#322323" stroke-width="7" stroke-linecap="round"/>
+      <ellipse cx="270" cy="223" rx="11" ry="8" fill="#251a19"/>
+      <ellipse cx="389" cy="221" rx="11" ry="8" fill="#251a19"/>
+      <path d="M326 214c-5 40-7 70 7 89 7 7 18 8 30 4" fill="none" stroke="#824d3b" stroke-width="7" stroke-linecap="round"/>
+      <path d="M266 325c37 28 78 29 121 1" fill="none" stroke="#6a302d" stroke-width="8" stroke-linecap="round"/>
+      <path d="M277 332c29 13 60 13 91 0" fill="none" stroke="#e7b9a3" stroke-opacity=".55" stroke-width="3"/>
+      <path d="M210 286c21 78 70 116 139 111 66-5 111-46 124-118-21 54-61 84-121 90-67 7-113-21-142-83Z" fill="#2d2422" fill-opacity=".78"/>
+      <path d="M238 306c9 33 26 57 51 71M420 300c-10 35-28 59-54 77" fill="none" stroke="#51403a" stroke-width="7" stroke-linecap="round"/>
+
+      <g fill="none" stroke="#2a313b" stroke-width="8">
+        <rect x="211" y="194" width="108" height="69" rx="24"/>
+        <rect x="338" y="192" width="103" height="68" rx="24"/>
+        <path d="M319 219h20M209 214l-23-7M441 211l24-8"/>
+      </g>
+      <path d="M223 205c28-12 60-13 87-3M351 203c28-10 54-9 80 1" fill="none" stroke="#e8f5ff" stroke-opacity=".45" stroke-width="3"/>
+
+      <path d="M168 661c86 27 145 75 178 143 30 62 41 141 34 237H117c0-135 15-257 51-380Z" fill="#101d32"/>
+      <path d="M493 662c-80 26-137 75-170 144-29 61-40 140-34 235h258c1-137-15-258-54-379Z" fill="#091528"/>
+      <path d="M135 666c70 28 124 70 162 125M515 666c-74 28-130 72-168 130" fill="none" stroke="#a4b6cf" stroke-opacity=".16" stroke-width="4"/>
+
+      <path d="M232 792c46-26 92-25 138 1l42 158-75 70-132-45Z" fill="#d19a77"/>
+      <path d="M365 795c49-16 93-4 130 34l-18 150-142 41-36-142Z" fill="#b87658"/>
+      <path d="M213 845c27 17 62 28 105 31M364 849c31 12 65 15 103 10" fill="none" stroke="#8b5644" stroke-width="5" stroke-linecap="round"/>
+      <path d="M250 805c-3 27 2 49 14 68M286 798c-4 31 1 56 15 77M403 802c6 29 4 54-8 76M440 814c6 25 4 46-7 65" fill="none" stroke="#f0c2a8" stroke-opacity=".48" stroke-width="4" stroke-linecap="round"/>
+
+      <g transform="translate(379 870)">
+        <ellipse cx="0" cy="0" rx="42" ry="32" fill="#d9dde2" stroke="#747f8b" stroke-width="6"/>
+        <ellipse cx="0" cy="0" rx="27" ry="23" fill="#132239" stroke="url(#gold)" stroke-width="4"/>
+        <path d="M0-16v8M0 8v8M-16 0h8M8 0h8" stroke="#f2d38a" stroke-width="2"/>
+        <path d="M-42-6h-28M42 6h27" stroke="#aab4c0" stroke-width="15" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <rect width="808" height="1130" fill="none" stroke="#9ce5cf" stroke-opacity=".16" stroke-width="3"/>
+  </g>
 </svg>

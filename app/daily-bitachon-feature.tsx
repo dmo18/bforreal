@@ -3,13 +3,18 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-const BUILD_VERSION = "1.0.11";
-const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(/\/$/, "");
+const BUILD_VERSION = "1.0.13";
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
+  /\/$/,
+  "",
+);
 const portrait = `${basePath}/michael-safdie.svg?v=${BUILD_VERSION}`;
 const bookCover = `${basePath}/shaar-habitachon-jaffa.svg?v=${BUILD_VERSION}`;
 const bookUrl =
   "https://www.amazon.com/Shaar-HaBitachon-Chovos-Halevavos-Family/dp/B09WTZPCR2";
+const websiteUrl = "https://dailybitachon.com/";
 const whatsappUrl = "https://dailybitachon.com/whatsapp/";
+const phoneUrl = "tel:+17189571805";
 
 function WhatsAppIcon() {
   return (
@@ -24,6 +29,41 @@ function WhatsAppIcon() {
       <path
         d="M8.4 7.9c.3-.3.7-.2.9.2l.8 1.7c.1.3.1.5-.1.7l-.6.7c.8 1.5 1.9 2.6 3.5 3.3l.7-.7c.2-.2.5-.2.7-.1l1.7.8c.4.2.5.6.2.9-.6.8-1.5 1.2-2.4 1-3.8-.8-6.3-3.2-7.1-7-.2-.9.2-1.8 1-2.5Z"
         fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function GlobeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+      />
+      <path
+        d="M3.5 12h17M12 3c2.5 2.4 3.8 5.4 3.8 9S14.5 18.6 12 21c-2.5-2.4-3.8-5.4-3.8-9S9.5 5.4 12 3Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.55"
+      />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M7.2 3.8 9.6 8l-1.8 1.7c1.2 2.8 3.3 4.9 6.1 6.1l1.7-1.8 4.2 2.4c.5.3.7.9.5 1.4-.6 1.4-1.8 2.4-3.4 2.4C10 20.2 3.8 14 3.8 7.1c0-1.6 1-2.8 2.4-3.4.4-.2.8-.1 1 .1Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinejoin="round"
+        strokeWidth="1.65"
       />
     </svg>
   );
@@ -63,13 +103,11 @@ export function DailyBitachonFeature() {
   return createPortal(
     <>
       <style>{`
-        .daily-bitachon-feature-mount {
-          margin-top: clamp(1.25rem, 2.6vw, 2rem);
-        }
+        .daily-bitachon-feature-mount { margin-top: clamp(1.25rem, 2.6vw, 2rem); }
         .daily-bitachon-feature {
           position: relative;
           display: grid;
-          grid-template-columns: minmax(15rem, .7fr) minmax(0, 1.3fr);
+          grid-template-columns: minmax(15rem, .72fr) minmax(0, 1.28fr);
           overflow: hidden;
           border: 1px solid rgba(114, 205, 175, .2);
           border-radius: clamp(1.35rem, 2.5vw, 2rem);
@@ -81,7 +119,7 @@ export function DailyBitachonFeature() {
         }
         .daily-bitachon-media {
           position: relative;
-          min-height: clamp(27rem, 46vw, 38rem);
+          min-height: clamp(31rem, 49vw, 42rem);
           overflow: hidden;
           background: #102029;
         }
@@ -89,18 +127,17 @@ export function DailyBitachonFeature() {
           position: absolute;
           inset: 0;
           background:
-            linear-gradient(90deg, transparent 58%, rgba(8, 16, 26, .98)),
-            linear-gradient(180deg, transparent 68%, rgba(8, 16, 26, .5));
+            linear-gradient(90deg, transparent 63%, rgba(8, 16, 26, .98)),
+            linear-gradient(180deg, transparent 72%, rgba(8, 16, 26, .34));
           content: "";
           pointer-events: none;
         }
         .daily-bitachon-media img {
+          display: block;
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
-          filter: saturate(.84) contrast(1.04);
-          transform: scale(1.015);
         }
         .daily-bitachon-copy {
           display: flex;
@@ -126,7 +163,7 @@ export function DailyBitachonFeature() {
           letter-spacing: -.045em;
         }
         .daily-bitachon-bio {
-          max-width: 46rem;
+          max-width: 47rem;
           margin-top: 1.25rem;
           color: var(--cream-soft);
           font-size: clamp(.96rem, 1.2vw, 1.07rem);
@@ -161,32 +198,33 @@ export function DailyBitachonFeature() {
           font-size: .72rem;
           line-height: 1.45;
         }
-        .daily-bitachon-yoyo {
+        .daily-bitachon-signature {
           display: flex;
+          width: 3.9rem;
           align-items: center;
-          gap: .8rem;
-          margin-top: 1.25rem;
-          padding: .85rem 1rem;
-          border-left: 2px solid rgba(129, 216, 187, .65);
-          color: var(--cream-soft);
-          font-size: .8rem;
-          line-height: 1.55;
+          gap: .32rem;
+          margin: 1.05rem 0 .15rem;
+          opacity: .62;
         }
-        .daily-bitachon-yoyo strong {
-          flex: 0 0 auto;
-          color: #9de4cc;
-          font-family: var(--font-cormorant), Georgia, serif;
-          font-size: 1.4rem;
-          font-style: italic;
-          font-weight: 600;
-          letter-spacing: .02em;
+        .daily-bitachon-signature::before,
+        .daily-bitachon-signature::after {
+          width: .48rem;
+          height: .48rem;
+          border: 1px solid rgba(157, 228, 204, .78);
+          border-radius: 999px;
+          content: "";
+        }
+        .daily-bitachon-signature span {
+          width: 1.75rem;
+          height: 1px;
+          background: linear-gradient(90deg, rgba(157, 228, 204, .2), rgba(157, 228, 204, .85), rgba(157, 228, 204, .2));
         }
         .daily-bitachon-book {
           display: grid;
           grid-template-columns: auto minmax(0, 1fr) auto;
           align-items: center;
           gap: 1rem;
-          margin-top: 1.3rem;
+          margin-top: 1.15rem;
           padding: .9rem 1rem .9rem .85rem;
           border: 1px solid rgba(225, 195, 132, .22);
           border-radius: 1.2rem;
@@ -253,18 +291,11 @@ export function DailyBitachonFeature() {
           color: #09221d !important;
           border-color: transparent !important;
         }
-        .daily-bitachon-note {
-          max-width: 45rem;
-          margin-top: 1rem;
-          color: var(--muted);
-          font-size: .75rem;
-          line-height: 1.55;
-        }
         @media (max-width: 920px) {
           .daily-bitachon-feature { grid-template-columns: 1fr; }
-          .daily-bitachon-media { min-height: min(86vw, 32rem); }
+          .daily-bitachon-media { min-height: min(112vw, 38rem); }
           .daily-bitachon-media::after {
-            background: linear-gradient(180deg, transparent 58%, rgba(8, 16, 26, .99));
+            background: linear-gradient(180deg, transparent 65%, rgba(8, 16, 26, .96));
           }
         }
         @media (max-width: 620px) {
@@ -278,47 +309,71 @@ export function DailyBitachonFeature() {
         }
       `}</style>
 
-      <article className="daily-bitachon-feature" aria-labelledby="daily-bitachon-title">
+      <article
+        className="daily-bitachon-feature"
+        aria-labelledby="daily-bitachon-title"
+      >
         <div className="daily-bitachon-media">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={portrait} alt="Mr. Michael Safdie" loading="lazy" />
+          <img
+            src={portrait}
+            alt="Vector portrait of Mr. Michael Safdie outside Madison Time"
+            loading="eager"
+          />
         </div>
         <div className="daily-bitachon-copy">
-          <p className="daily-bitachon-kicker">A daily voice note for real life</p>
+          <p className="daily-bitachon-kicker">
+            A daily voice note for real life
+          </p>
           <h3 id="daily-bitachon-title">Daily Bitachon</h3>
           <p className="daily-bitachon-bio">
-            Mr. Michael Safdie sends a short daily WhatsApp recording that brings the ideas
-            of Bitachon into the middle of an ordinary day. In roughly fifteen focused
-            minutes, he works from the Jaffa Family Edition of{" "}
-            <a href={bookUrl} target="_blank" rel="noopener noreferrer sponsored external">
+            Michael Safdie is a New York businessman and the president of
+            Madison Time, a specialist in important collectible watches. He
+            approaches Bitachon as a serious learner and working businessman,
+            not from a rabbinic title. That perspective is the point: he speaks
+            in the language of decisions, pressure, uncertainty, responsibility,
+            and getting through an ordinary day with more trust and less noise.
+            His roughly fifteen-minute Daily Bitachon recordings draw from the
+            Jaffa Family Edition of{" "}
+            <a
+              href={bookUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored external"
+            >
               Shaar HaBitachon of Chovos Halevavos
             </a>
-            , translating its principles into direct, energetic encouragement about worry,
-            effort, perspective, gratitude, and trusting Hashem through whatever is happening
-            now.
+            , turning the text into direct, energetic, practical encouragement.
           </p>
 
-          <div className="daily-bitachon-facts" aria-label="Daily Bitachon format">
+          <div
+            className="daily-bitachon-facts"
+            aria-label="Daily Bitachon format"
+          >
             <div className="daily-bitachon-fact">
               <strong>Delivered on WhatsApp</strong>
-              <span>A simple daily recording that arrives where people already listen.</span>
+              <span>
+                A short daily recording that arrives where people already
+                listen.
+              </span>
             </div>
             <div className="daily-bitachon-fact">
               <strong>About 15 minutes</strong>
-              <span>Brief enough for the day, substantial enough to change its direction.</span>
+              <span>
+                Focused enough for the day, substantial enough to shift its
+                direction.
+              </span>
             </div>
             <div className="daily-bitachon-fact">
-              <strong>Practical and personal</strong>
-              <span>Classical Bitachon applied to pressure, decisions, and daily emotions.</span>
+              <strong>Listen by phone</strong>
+              <span>
+                The official site also offers a US call-in line for the
+                recordings.
+              </span>
             </div>
           </div>
 
-          <div className="daily-bitachon-yoyo">
-            <strong>“Yo-yo”</strong>
-            <span>
-              A small, affectionate nod to the phrase listeners know: the moment the teaching
-              gets especially passionate, warm, and direct.
-            </span>
+          <div className="daily-bitachon-signature" aria-hidden="true">
+            <span />
           </div>
 
           <div className="daily-bitachon-book">
@@ -331,7 +386,9 @@ export function DailyBitachonFeature() {
             />
             <div className="daily-bitachon-book-copy">
               <strong>The text behind the daily lessons</strong>
-              <span>Jaffa Family Edition, with English translation and commentary.</span>
+              <span>
+                Jaffa Family Edition, with English translation and commentary.
+              </span>
             </div>
             <a
               className="daily-bitachon-book-link"
@@ -352,14 +409,21 @@ export function DailyBitachonFeature() {
               rel="noopener noreferrer external"
             >
               <WhatsAppIcon />
-              Join Daily Bitachon
+              Join on WhatsApp
+            </a>
+            <a
+              href={websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer external"
+            >
+              <GlobeIcon />
+              Daily Bitachon website
+            </a>
+            <a href={phoneUrl}>
+              <PhoneIcon />
+              Call 718-957-1805
             </a>
           </div>
-
-          <p className="daily-bitachon-note">
-            The older podcast feed is archival and is not presented here as the current way to
-            receive the lessons. The Amazon book link is an affiliate link.
-          </p>
         </div>
       </article>
     </>,
