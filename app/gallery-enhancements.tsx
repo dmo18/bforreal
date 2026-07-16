@@ -2,10 +2,17 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { siteConfig } from "@/data/site";
 
 interface ActiveGraphic {
   src: string;
   alt: string;
+}
+
+function addCacheVersion(source: string) {
+  const url = new URL(source, window.location.href);
+  url.searchParams.set("v", siteConfig.version);
+  return `${url.pathname}${url.search}${url.hash}`;
 }
 
 function getGraphic(link: HTMLElement): ActiveGraphic | null {
@@ -26,6 +33,7 @@ function getGraphic(link: HTMLElement): ActiveGraphic | null {
 export function GalleryEnhancements() {
   const [activeGraphic, setActiveGraphic] = useState<ActiveGraphic | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const links = Array.from(
@@ -33,7 +41,18 @@ export function GalleryEnhancements() {
     );
 
     for (const link of links) {
-      link.dataset.fullscreenSrc = link.href;
+      const image = link.querySelector<HTMLImageElement>("img");
+      const source = link.getAttribute("href") || image?.getAttribute("src");
+      if (!source) continue;
+
+      const versionedSource = addCacheVersion(source);
+      link.dataset.fullscreenSrc = versionedSource;
+
+      if (image) {
+        image.removeAttribute("srcset");
+        image.src = versionedSource;
+      }
+
       link.removeAttribute("href");
       link.removeAttribute("target");
       link.removeAttribute("rel");
@@ -49,7 +68,10 @@ export function GalleryEnhancements() {
       if (!link) return;
 
       const graphic = getGraphic(link);
-      if (graphic) setActiveGraphic(graphic);
+      if (!graphic) return;
+
+      triggerRef.current = link;
+      setActiveGraphic(graphic);
     }
 
     function handleClick(event: MouseEvent) {
@@ -92,6 +114,7 @@ export function GalleryEnhancements() {
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      window.requestAnimationFrame(() => triggerRef.current?.focus());
     };
   }, [activeGraphic]);
 
@@ -102,21 +125,31 @@ export function GalleryEnhancements() {
           display: grid !important;
           grid-auto-flow: column !important;
           grid-template-columns: none !important;
-          grid-template-rows: minmax(0, 1fr) !important;
-          grid-auto-columns: minmax(0, 1fr) !important;
-          align-items: stretch !important;
-          gap: clamp(0.45rem, 0.9vw, 1rem) !important;
-          overflow-x: visible !important;
+          grid-template-rows: auto !important;
+          grid-auto-columns: clamp(14rem, 19vw, 18rem) !important;
+          align-items: start !important;
+          gap: clamp(0.75rem, 1.15vw, 1.15rem) !important;
+          overflow-x: auto !important;
+          overflow-y: hidden !important;
+          padding: 0 0 1rem !important;
+          scroll-padding-inline: 0.15rem;
+          scroll-snap-type: x proximity;
+          overscroll-behavior-inline: contain;
+          scrollbar-width: thin;
+          -webkit-overflow-scrolling: touch;
         }
 
-        .inspiration-graphic-reveal,
-        .inspiration-graphic-card {
+        .inspiration-graphic-reveal {
           min-width: 0;
-          height: 100%;
+          align-self: start;
+          scroll-snap-align: start;
         }
 
         .inspiration-graphic-card {
           display: flex;
+          min-width: 0;
+          height: auto !important;
+          min-height: 0 !important;
           flex-direction: column;
         }
 
@@ -130,35 +163,58 @@ export function GalleryEnhancements() {
         }
 
         .inspiration-image-link img {
+          display: block;
+          width: 100%;
+          height: auto !important;
           aspect-ratio: 1122 / 1402;
           object-fit: cover;
         }
 
         .inspiration-graphic-actions {
-          min-height: clamp(2.65rem, 4.3vw, 4rem);
-          margin-top: auto;
-          gap: clamp(0.3rem, 0.65vw, 0.75rem) !important;
-          padding: clamp(0.42rem, 0.8vw, 0.9rem) !important;
+          display: grid !important;
+          grid-template-columns: minmax(0, 1fr) auto;
+          min-height: 4.15rem;
+          align-items: center !important;
+          gap: 0.7rem !important;
+          margin-top: 0 !important;
+          padding: 0.72rem !important;
         }
 
         .inspiration-graphic-actions h3 {
+          display: -webkit-box;
           min-width: 0;
-          font-size: clamp(0.46rem, 0.57vw, 0.72rem) !important;
-          line-height: 1.25;
-          overflow-wrap: anywhere;
+          margin: 0;
+          overflow: hidden;
+          font-size: clamp(0.58rem, 0.72vw, 0.72rem) !important;
+          line-height: 1.3;
+          overflow-wrap: normal !important;
+          word-break: normal !important;
+          white-space: normal;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
         }
 
         .inspiration-graphic-actions button {
-          min-height: clamp(1.75rem, 2.4vw, 2.35rem) !important;
+          min-height: 2.25rem !important;
           flex: 0 0 auto;
-          gap: clamp(0.2rem, 0.35vw, 0.45rem) !important;
-          padding: 0 clamp(0.38rem, 0.62vw, 0.8rem) !important;
-          font-size: clamp(0.47rem, 0.52vw, 0.66rem) !important;
+          gap: 0.38rem !important;
+          padding: 0 0.72rem !important;
+          font-size: 0.62rem !important;
+          white-space: nowrap;
         }
 
         .inspiration-graphic-actions button svg {
-          width: clamp(0.72rem, 1vw, 1rem);
-          height: clamp(0.72rem, 1vw, 1rem);
+          width: 0.95rem;
+          height: 0.95rem;
+        }
+
+        .inspiration-gallery::-webkit-scrollbar {
+          height: 0.42rem;
+        }
+
+        .inspiration-gallery::-webkit-scrollbar-thumb {
+          border-radius: 999px;
+          background: rgba(225, 195, 132, 0.42);
         }
 
         .graphic-lightbox {
@@ -212,44 +268,17 @@ export function GalleryEnhancements() {
 
         @media (max-width: 900px) {
           .inspiration-gallery {
-            grid-auto-columns: min(74vw, 19rem) !important;
-            overflow-x: auto !important;
-            padding: 0 0 1rem !important;
-            scroll-padding-inline: 0.15rem;
+            grid-auto-columns: min(78vw, 19rem) !important;
             scroll-snap-type: x mandatory;
-            overscroll-behavior-inline: contain;
-            scrollbar-width: thin;
-            -webkit-overflow-scrolling: touch;
-          }
-
-          .inspiration-graphic-reveal {
-            scroll-snap-align: start;
           }
 
           .inspiration-graphic-actions {
-            min-height: 3.6rem;
-            align-items: center !important;
-            flex-direction: row !important;
-            padding: 0.75rem !important;
+            min-height: 4rem;
+            padding: 0.7rem !important;
           }
 
           .inspiration-graphic-actions h3 {
             font-size: 0.68rem !important;
-          }
-
-          .inspiration-graphic-actions button {
-            min-height: 2.25rem !important;
-            padding: 0 0.72rem !important;
-            font-size: 0.62rem !important;
-          }
-
-          .inspiration-gallery::-webkit-scrollbar {
-            height: 0.4rem;
-          }
-
-          .inspiration-gallery::-webkit-scrollbar-thumb {
-            border-radius: 999px;
-            background: rgba(225, 195, 132, 0.42);
           }
 
           .graphic-lightbox {
