@@ -10,4 +10,9 @@ These rules apply to all automated and agent-authored changes in this repository
 
 ## Change workflow
 
-- Create a focused branch for
+- Create a focused branch for each requested change.
+- Commit all completed changes without waiting for a separate confirmation.
+- Open a pull request automatically.
+- Merge the pull request automatically when the requested scope is complete and no known validation failure or merge conflict exists.
+- Do not auto-merge destructive, security-sensitive, billing-related, or ambiguous changes without explicit confirmation.
+- Report the final version, merge result, and any validation limitation after completion.
