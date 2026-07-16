@@ -41,7 +41,7 @@ export const siteConfig = {
   futureDomain: "bitachonforreal.com",
   repository: "https://github.com/dmo18/bforreal",
   whatsapp: "https://chat.whatsapp.com/CkrFDf12DwdHEoRhFxoyB7",
-  version: "1.0.6",
+  version: "1.0.8",
 };
 
 export const foundations = [
@@ -151,7 +151,7 @@ export const resources: Resource[] = [
     description: "Listen to Bitachon For Real on Spotify.",
     category: "podcast",
     platform: "Spotify",
-    href: "https://open.spotify.com/show/1O3Uv5eRHpFZZVSF5IPhg",
+    href: "https://open.spotify.com/show/1O3Uv5QeRHpFZZVSF5IPhg",
     icon: "podcast",
   },
   {
