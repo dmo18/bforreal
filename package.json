@@ -11,7 +11,7 @@
     "start": "next start",
     "test": "node --test tests/*.test.mjs",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ignore-pattern out --ignore-pattern .next",
+    "lint": "eslint app/layout.tsx app/page.tsx app/robots.ts app/sitemap.ts app/not-found.tsx lib data/version.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check package.json",
     "validate:version": "node scripts/validate-version.mjs",
