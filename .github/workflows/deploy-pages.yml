@@ -17,8 +17,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate-motto-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Decode motto source
+        run: node scripts/materialize-motto-asset.mjs
+      - name: Inspect generated image
+        run: file public/motto-reference.jpg && wc -c public/motto-reference.jpg
+
   build:
     runs-on: ubuntu-latest
+    needs: validate-motto-source
     steps:
       - name: Checkout
         uses: actions/checkout@v4
