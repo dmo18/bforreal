@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.19";
+const BUILD_VERSION = "1.0.20";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -45,6 +45,10 @@ export function DailyBitachonPolish() {
         style = document.createElement("style");
         style.dataset.dailyBitachonPhoto = "true";
         style.textContent = `
+          .podcast-feature-media img,
+          .daily-bitachon-media img {
+            object-position: left center !important;
+          }
           .daily-bitachon-feature {
             display: grid !important;
             grid-template-columns: minmax(15rem, .72fr) minmax(0, 1.28fr) !important;
@@ -82,7 +86,6 @@ export function DailyBitachonPolish() {
             height: 100% !important;
             max-width: none !important;
             object-fit: cover !important;
-            object-position: center !important;
             filter: saturate(.9) contrast(1.04) !important;
             transform: none !important;
           }
@@ -103,11 +106,15 @@ export function DailyBitachonPolish() {
           }
           .daily-bitachon-actions {
             justify-content: flex-start !important;
-            margin-top: 1.45rem !important;
+            margin-top: 1.15rem !important;
           }
           @media (max-width: 920px) {
             .daily-bitachon-feature {
               grid-template-columns: 1fr !important;
+            }
+            .podcast-feature-media img,
+            .daily-bitachon-media img {
+              object-position: left center !important;
             }
             .daily-bitachon-media {
               min-height: min(86vw, 32rem) !important;
@@ -117,6 +124,30 @@ export function DailyBitachonPolish() {
             }
             .daily-bitachon-copy {
               padding: 1.6rem 1.2rem 1.8rem !important;
+            }
+            .daily-bitachon-actions {
+              display: flex !important;
+              flex-wrap: nowrap !important;
+              gap: .45rem !important;
+              overflow-x: auto !important;
+              padding-bottom: .2rem !important;
+              scrollbar-width: none !important;
+            }
+            .daily-bitachon-actions::-webkit-scrollbar {
+              display: none !important;
+            }
+            .daily-bitachon-actions a {
+              min-height: 2.45rem !important;
+              flex: 0 0 auto !important;
+              padding: 0 .72rem !important;
+              font-size: .58rem !important;
+              letter-spacing: .035em !important;
+              white-space: nowrap !important;
+            }
+            .daily-bitachon-actions svg,
+            .daily-bitachon-actions img {
+              width: .9rem !important;
+              height: .9rem !important;
             }
           }
         `;
