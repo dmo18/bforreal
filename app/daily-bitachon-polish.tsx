@@ -8,12 +8,32 @@ const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   "",
 );
 
+function replaceLinkLabel(link: HTMLAnchorElement | undefined, label: string) {
+  if (!link) return;
+  link.setAttribute("aria-label", link.textContent?.trim() || label);
+  const textNode = Array.from(link.childNodes).find(
+    (node) => node.nodeType === Node.TEXT_NODE && node.textContent?.trim(),
+  );
+  if (textNode) textNode.textContent = ` ${label}`;
+}
+
 export function DailyBitachonPolish() {
   useEffect(() => {
     const apply = () => {
       document
         .querySelector<HTMLElement>(".podcast-feature-note")
         ?.remove();
+
+      const resources = document.querySelector<HTMLElement>(".resources");
+      const understand = document.querySelector<HTMLElement>(".understand");
+      if (
+        resources &&
+        understand &&
+        resources.parentElement === understand.parentElement &&
+        resources.compareDocumentPosition(understand) & Node.DOCUMENT_POSITION_PRECEDING
+      ) {
+        understand.parentElement?.insertBefore(resources, understand);
+      }
 
       const feature = document.querySelector<HTMLElement>(
         ".daily-bitachon-feature",
@@ -126,28 +146,25 @@ export function DailyBitachonPolish() {
               padding: 1.6rem 1.2rem 1.8rem !important;
             }
             .daily-bitachon-actions {
-              display: flex !important;
-              flex-wrap: nowrap !important;
+              display: grid !important;
+              grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
               gap: .45rem !important;
-              overflow-x: auto !important;
-              padding-bottom: .2rem !important;
-              scrollbar-width: none !important;
-            }
-            .daily-bitachon-actions::-webkit-scrollbar {
-              display: none !important;
+              width: 100% !important;
+              overflow: visible !important;
             }
             .daily-bitachon-actions a {
-              min-height: 2.45rem !important;
-              flex: 0 0 auto !important;
-              padding: 0 .72rem !important;
-              font-size: .58rem !important;
-              letter-spacing: .035em !important;
+              width: 100% !important;
+              min-width: 0 !important;
+              min-height: 2.35rem !important;
+              padding: 0 .45rem !important;
+              font-size: .56rem !important;
+              letter-spacing: .025em !important;
               white-space: nowrap !important;
             }
             .daily-bitachon-actions svg,
             .daily-bitachon-actions img {
-              width: .9rem !important;
-              height: .9rem !important;
+              width: .82rem !important;
+              height: .82rem !important;
             }
           }
         `;
@@ -167,9 +184,20 @@ export function DailyBitachonPolish() {
         .querySelector<HTMLElement>(".daily-bitachon-signature")
         ?.remove();
 
-      const websiteLink = Array.from(
-        feature.querySelectorAll<HTMLAnchorElement>("a"),
-      ).find((link) => link.href === "https://dailybitachon.com/");
+      const links = Array.from(
+        feature.querySelectorAll<HTMLAnchorElement>(".daily-bitachon-actions a"),
+      );
+      const whatsappLink = links.find((link) =>
+        link.href.includes("dailybitachon.com/whatsapp"),
+      );
+      const websiteLink = links.find(
+        (link) => link.href === "https://dailybitachon.com/",
+      );
+      const phoneLink = links.find((link) => link.href.startsWith("tel:"));
+
+      replaceLinkLabel(whatsappLink, "WhatsApp");
+      replaceLinkLabel(websiteLink, "Website");
+      replaceLinkLabel(phoneLink, "Call");
 
       if (websiteLink) {
         websiteLink.querySelector("svg")?.remove();
