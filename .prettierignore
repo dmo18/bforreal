@@ -1,0 +1,9 @@
+.next
+out
+node_modules
+app/globals.css
+components/icons.tsx
+components/inspiration-gallery.tsx
+components/landing-page.tsx
+data/site.ts
+public/*.svg
