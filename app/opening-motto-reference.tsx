@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.35";
+const BUILD_VERSION = "1.0.36";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(/\/$/, "");
 
 export function OpeningMottoReference() {
@@ -30,7 +30,7 @@ export function OpeningMottoReference() {
     <style>{`
       .motto-card {
         min-height: 0;
-        aspect-ratio: 512 / 420;
+        aspect-ratio: 256 / 210;
         padding: clamp(0.45rem, 1vw, 0.7rem);
         overflow: hidden;
         border: 1px solid rgba(225, 195, 132, 0.34);
