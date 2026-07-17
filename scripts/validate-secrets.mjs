@@ -2,8 +2,18 @@ import { readFile, readdir } from "node:fs/promises";
 import { extname, join, relative } from "node:path";
 
 const root = process.cwd();
-const scanRoots = ["app", "components", "data", "lib", ".github"];
-const extensions = new Set([".ts", ".tsx", ".js", ".mjs", ".yml", ".yaml", ".json", ".md", ".css"]);
+const scanRoots = ["app", "components", "data", "lib", "scripts", ".github"];
+const extensions = new Set([
+  ".ts",
+  ".tsx",
+  ".js",
+  ".mjs",
+  ".yml",
+  ".yaml",
+  ".json",
+  ".md",
+  ".css",
+]);
 const patterns = [
   ["private key", /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/],
   ["GitHub token", /\bgh[oprsu]_[A-Za-z0-9_]{30,}\b/],
@@ -23,11 +33,16 @@ async function walk(directory) {
     if (!extensions.has(extname(path))) continue;
     const content = await readFile(path, "utf8");
     for (const [label, pattern] of patterns) {
-      if (pattern.test(content)) findings.push(`${relative(root, path)}: possible ${label}`);
+      if (pattern.test(content))
+        findings.push(`${relative(root, path)}: possible ${label}`);
     }
   }
 }
 
 for (const directory of scanRoots) await walk(join(root, directory));
-if (findings.length > 0) throw new Error(`Secret-pattern validation failed:\n${findings.join("\n")}`);
+
+if (findings.length > 0) {
+  throw new Error(`Secret-pattern validation failed:\n${findings.join("\n")}`);
+}
+
 console.log("Validated common accidental secret patterns.");
