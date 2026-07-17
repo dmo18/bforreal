@@ -74,6 +74,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@d6db90192df42c6f7c76e44b5e50c37441a8876e # v4.0.5
-
-# Deployment retrigger: no site content or visual changes.
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
