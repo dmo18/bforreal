@@ -7,6 +7,7 @@ import { DailyBitachonFeature } from "./daily-bitachon-feature";
 import { DailyBitachonPolish } from "./daily-bitachon-polish";
 import { FeatureButtonPolish } from "./feature-button-polish";
 import { GalleryEnhancements } from "./gallery-enhancements";
+import { HideLegacyResourceGrid } from "./hide-legacy-resource-grid";
 import { LivingYoshFeature } from "./living-yosh-feature";
 import { LivingYoshImageSource } from "./living-yosh-image-source";
 import { PodcastFeature } from "./podcast-feature";
@@ -78,6 +79,7 @@ export default function RootLayout({
         <DailyBitachonPolish />
         <FeatureButtonPolish />
         <ResourceFeatureStabilizer />
+        <HideLegacyResourceGrid />
         <GalleryEnhancements />
         <VersionSync />
       </body>
