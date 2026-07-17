@@ -7,14 +7,14 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/validate-motto-asset.mjs",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ignore-pattern out --ignore-pattern .next",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "validate:assets": "node scripts/validate-motto-asset.mjs",
-    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run build && pnpm run validate:assets"
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run build"
   },
   "dependencies": {
     "lenis": "1.3.23",
