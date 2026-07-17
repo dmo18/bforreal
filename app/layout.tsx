@@ -11,6 +11,7 @@ import { HideLegacyResourceGrid } from "./hide-legacy-resource-grid";
 import { LivingYoshFeature } from "./living-yosh-feature";
 import { LivingYoshImageSource } from "./living-yosh-image-source";
 import { OpeningDensityPolish } from "./opening-density-polish";
+import { OpeningMottoReference } from "./opening-motto-reference";
 import { PodcastFeature } from "./podcast-feature";
 import { ResourceFeatureStabilizer } from "./resource-feature-stabilizer";
 import { VersionSync } from "./version-sync";
@@ -42,49 +43,3 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: siteConfig.siteUrl,
-    siteName: siteConfig.title,
-    title: siteConfig.title,
-    description: siteConfig.description,
-    images: [
-      {
-        url: `${siteConfig.siteUrl}og.jpg`,
-        width: 1200,
-        height: 630,
-        alt: "Bitachon For Real over a quiet mountain path at sunrise",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.title,
-    description: siteConfig.description,
-    images: [`${siteConfig.siteUrl}og.jpg`],
-  },
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} ${cormorant.variable}`}>
-        {children}
-        <PodcastFeature />
-        <DailyBitachonFeature />
-        <LivingYoshFeature />
-        <LivingYoshImageSource />
-        <DailyBitachonPolish />
-        <FeatureButtonPolish />
-        <ResourceFeatureStabilizer />
-        <HideLegacyResourceGrid />
-        <OpeningDensityPolish />
-        <GalleryEnhancements />
-        <VersionSync />
-      </body>
-    </html>
-  );
-}
