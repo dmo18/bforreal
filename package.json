@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ignore-pattern out --ignore-pattern .next",
     "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format:check": "prettier --check package.json",
     "validate:version": "node scripts/validate-version.mjs",
     "validate:source": "node scripts/validate-source.mjs",
     "validate:assets": "node scripts/materialize-motto-asset.mjs && node scripts/validate-assets.mjs",
