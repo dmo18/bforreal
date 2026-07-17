@@ -13,7 +13,8 @@ for (const target of targets) {
   }
 
   const bytes = await readFile(target);
-  const hasJpegStart = bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+  const hasJpegStart =
+    bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
   const hasJpegEnd = bytes.at(-2) === 0xff && bytes.at(-1) === 0xd9;
 
   if (!hasJpegStart || !hasJpegEnd) {
