@@ -8,6 +8,8 @@ export function ResourceFeatureStabilizer() {
     let attempts = 0;
 
     const organize = () => {
+      const resourceSection = document.querySelector<HTMLElement>("section.resources");
+      const understandSection = document.querySelector<HTMLElement>("section.understand");
       const resourceGrid = document.querySelector<HTMLElement>(".resource-grid");
       const podcast = document.querySelector<HTMLElement>(".podcast-feature-mount");
       const daily = document.querySelector<HTMLElement>(
@@ -15,12 +17,26 @@ export function ResourceFeatureStabilizer() {
       );
       const parent = resourceGrid?.parentElement;
 
-      if (!resourceGrid || !podcast || !daily || !parent) {
+      if (
+        !resourceSection ||
+        !understandSection ||
+        !resourceGrid ||
+        !podcast ||
+        !daily ||
+        !parent
+      ) {
         if (attempts < 180) {
           attempts += 1;
           frame = window.requestAnimationFrame(organize);
         }
         return;
+      }
+
+      if (resourceSection.nextElementSibling !== understandSection) {
+        understandSection.parentElement?.insertBefore(
+          resourceSection,
+          understandSection,
+        );
       }
 
       const children = Array.from(parent.children);

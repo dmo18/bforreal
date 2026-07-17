@@ -2,11 +2,20 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.19";
+const BUILD_VERSION = "1.0.20";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
 );
+
+function replaceLinkLabel(link: HTMLAnchorElement | undefined, label: string) {
+  if (!link) return;
+  link.setAttribute("aria-label", link.textContent?.trim() || label);
+  const textNode = Array.from(link.childNodes).find(
+    (node) => node.nodeType === Node.TEXT_NODE && node.textContent?.trim(),
+  );
+  if (textNode) textNode.textContent = ` ${label}`;
+}
 
 export function DailyBitachonPolish() {
   useEffect(() => {
@@ -14,6 +23,31 @@ export function DailyBitachonPolish() {
       document
         .querySelector<HTMLElement>(".podcast-feature-note")
         ?.remove();
+
+      const resources = document.querySelector<HTMLElement>(".resources");
+      const understand = document.querySelector<HTMLElement>(".understand");
+      if (
+        resources &&
+        understand &&
+        resources.parentElement === understand.parentElement &&
+        resources.compareDocumentPosition(understand) &
+          Node.DOCUMENT_POSITION_PRECEDING
+      ) {
+        understand.parentElement?.insertBefore(resources, understand);
+      }
+
+      const nav = document.querySelector<HTMLElement>(".nav-links");
+      const resourceNav = nav?.querySelector<HTMLAnchorElement>('a[href="#resources"]');
+      const understandNav = nav?.querySelector<HTMLAnchorElement>('a[href="#understand"]');
+      if (
+        nav &&
+        resourceNav &&
+        understandNav &&
+        resourceNav.compareDocumentPosition(understandNav) &
+          Node.DOCUMENT_POSITION_PRECEDING
+      ) {
+        nav.insertBefore(resourceNav, understandNav);
+      }
 
       const feature = document.querySelector<HTMLElement>(
         ".daily-bitachon-feature",
@@ -45,6 +79,10 @@ export function DailyBitachonPolish() {
         style = document.createElement("style");
         style.dataset.dailyBitachonPhoto = "true";
         style.textContent = `
+          .podcast-feature-media img,
+          .daily-bitachon-media img {
+            object-position: left center !important;
+          }
           .daily-bitachon-feature {
             display: grid !important;
             grid-template-columns: minmax(15rem, .72fr) minmax(0, 1.28fr) !important;
@@ -82,7 +120,6 @@ export function DailyBitachonPolish() {
             height: 100% !important;
             max-width: none !important;
             object-fit: cover !important;
-            object-position: center !important;
             filter: saturate(.9) contrast(1.04) !important;
             transform: none !important;
           }
@@ -103,20 +140,59 @@ export function DailyBitachonPolish() {
           }
           .daily-bitachon-actions {
             justify-content: flex-start !important;
-            margin-top: 1.45rem !important;
+            margin-top: 1.15rem !important;
           }
-          @media (max-width: 920px) {
+          @media (max-width: 1180px) {
+            .podcast-feature,
             .daily-bitachon-feature {
               grid-template-columns: 1fr !important;
             }
+            .podcast-feature-media,
             .daily-bitachon-media {
               min-height: min(86vw, 32rem) !important;
             }
+            .podcast-feature-media::after,
             .daily-bitachon-media::after {
               background: linear-gradient(180deg, transparent 60%, rgba(8, 16, 26, .99)) !important;
             }
+            .podcast-feature-copy,
             .daily-bitachon-copy {
               padding: 1.6rem 1.2rem 1.8rem !important;
+            }
+            .podcast-feature-media img,
+            .daily-bitachon-media img {
+              object-position: left center !important;
+            }
+            .daily-bitachon-actions {
+              display: grid !important;
+              grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+              gap: .45rem !important;
+              width: 100% !important;
+              overflow: visible !important;
+            }
+            .daily-bitachon-actions a {
+              width: 100% !important;
+              min-width: 0 !important;
+              min-height: 2.35rem !important;
+              padding: 0 .45rem !important;
+              font-size: .56rem !important;
+              letter-spacing: .025em !important;
+              white-space: nowrap !important;
+            }
+            .daily-bitachon-actions svg,
+            .daily-bitachon-actions img {
+              width: .82rem !important;
+              height: .82rem !important;
+            }
+          }
+          @media (max-width: 480px) {
+            .podcast-feature-media,
+            .daily-bitachon-media {
+              min-height: 78vw !important;
+            }
+            .daily-bitachon-actions a {
+              padding: 0 .35rem !important;
+              font-size: .54rem !important;
             }
           }
         `;
@@ -136,9 +212,22 @@ export function DailyBitachonPolish() {
         .querySelector<HTMLElement>(".daily-bitachon-signature")
         ?.remove();
 
-      const websiteLink = Array.from(
-        feature.querySelectorAll<HTMLAnchorElement>("a"),
-      ).find((link) => link.href === "https://dailybitachon.com/");
+      const links = Array.from(
+        feature.querySelectorAll<HTMLAnchorElement>(
+          ".daily-bitachon-actions a",
+        ),
+      );
+      const whatsappLink = links.find((link) =>
+        link.href.includes("dailybitachon.com/whatsapp"),
+      );
+      const websiteLink = links.find(
+        (link) => link.href === "https://dailybitachon.com/",
+      );
+      const phoneLink = links.find((link) => link.href.startsWith("tel:"));
+
+      replaceLinkLabel(whatsappLink, "WhatsApp");
+      replaceLinkLabel(websiteLink, "Website");
+      replaceLinkLabel(phoneLink, "Call");
 
       if (websiteLink) {
         websiteLink.querySelector("svg")?.remove();
@@ -171,7 +260,9 @@ export function DailyBitachonPolish() {
       window.clearTimeout(timer);
       observer.disconnect();
       document
-        .querySelector<HTMLStyleElement>("style[data-daily-bitachon-photo]")
+        .querySelector<HTMLStyleElement>(
+          "style[data-daily-bitachon-photo]",
+        )
         ?.remove();
     };
   }, []);
