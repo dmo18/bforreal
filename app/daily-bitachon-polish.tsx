@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.16";
+const BUILD_VERSION = "1.0.17";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -24,15 +24,27 @@ export function DailyBitachonPolish() {
         style.dataset.dailyBitachonPhoto = "true";
         style.textContent = `
           .daily-bitachon-feature {
-            grid-template-columns: minmax(20rem, .9fr) minmax(0, 1.1fr) !important;
+            display: grid !important;
+            grid-template-columns: minmax(21rem, .84fr) minmax(0, 1.16fr) !important;
+            grid-template-rows: auto auto auto auto auto auto !important;
+            column-gap: clamp(2rem, 4vw, 4.5rem) !important;
+            row-gap: 0 !important;
+            align-items: start !important;
+            padding: clamp(1.25rem, 2vw, 2rem) !important;
+          }
+          .daily-bitachon-copy {
+            display: contents !important;
           }
           .daily-bitachon-media {
+            grid-column: 1 !important;
+            grid-row: 1 / span 3 !important;
             display: grid !important;
+            width: 100% !important;
             min-height: 0 !important;
             aspect-ratio: 3 / 2 !important;
             align-self: center !important;
             place-items: center !important;
-            margin: clamp(1rem, 2.4vw, 2rem) !important;
+            margin: 0 !important;
             overflow: hidden !important;
             border: 1px solid rgba(157, 228, 204, .16) !important;
             border-radius: clamp(1rem, 1.8vw, 1.45rem) !important;
@@ -47,19 +59,74 @@ export function DailyBitachonPolish() {
             width: 100% !important;
             height: 100% !important;
             max-width: none !important;
-            object-fit: contain !important;
-            object-position: center !important;
+            object-fit: cover !important;
+            object-position: center 42% !important;
             filter: none !important;
             transform: none !important;
+          }
+          .daily-bitachon-kicker {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            margin: clamp(.5rem, 1vw, 1rem) 0 0 !important;
+          }
+          .daily-bitachon-feature h3 {
+            grid-column: 2 !important;
+            grid-row: 2 !important;
+          }
+          .daily-bitachon-bio {
+            grid-column: 2 !important;
+            grid-row: 3 !important;
+            margin-bottom: 0 !important;
+          }
+          .daily-bitachon-facts {
+            grid-column: 1 / -1 !important;
+            grid-row: 4 !important;
+            gap: .75rem !important;
+            margin-top: clamp(1.7rem, 3vw, 2.5rem) !important;
+          }
+          .daily-bitachon-book {
+            grid-column: 1 / -1 !important;
+            grid-row: 5 !important;
+            margin-top: 1rem !important;
+          }
+          .daily-bitachon-actions {
+            grid-column: 1 / -1 !important;
+            grid-row: 6 !important;
+            justify-content: flex-end !important;
+            margin-top: 1.2rem !important;
           }
           @media (max-width: 920px) {
             .daily-bitachon-feature {
               grid-template-columns: 1fr !important;
+              grid-template-rows: auto !important;
+              gap: 0 !important;
+              padding: 0 !important;
+            }
+            .daily-bitachon-copy {
+              display: flex !important;
+              flex-direction: column !important;
+              padding: 1.6rem 1.2rem 1.8rem !important;
             }
             .daily-bitachon-media {
+              grid-column: auto !important;
+              grid-row: auto !important;
+              width: auto !important;
               min-height: 0 !important;
               aspect-ratio: 3 / 2 !important;
+              align-self: auto !important;
               margin: 1rem 1rem 0 !important;
+            }
+            .daily-bitachon-kicker,
+            .daily-bitachon-feature h3,
+            .daily-bitachon-bio,
+            .daily-bitachon-facts,
+            .daily-bitachon-book,
+            .daily-bitachon-actions {
+              grid-column: auto !important;
+              grid-row: auto !important;
+            }
+            .daily-bitachon-actions {
+              justify-content: stretch !important;
             }
           }
         `;
