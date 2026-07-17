@@ -2,10 +2,17 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const imagePath = resolve(process.cwd(), "public/living-yosh.jpg");
-const encoded = readFileSync(imagePath, "utf8").replace(/\s+/g, "");
+const source = readFileSync(imagePath);
+
+if (source[0] === 0xff && source[1] === 0xd8) {
+  console.log("public/living-yosh.jpg is already a binary JPEG");
+  process.exit(0);
+}
+
+const encoded = source.toString("utf8").replace(/\s+/g, "");
 
 if (!encoded.startsWith("/9j/")) {
-  throw new Error("public/living-yosh.jpg does not contain the expected JPEG Base64 data");
+  throw new Error("public/living-yosh.jpg does not contain JPEG data or JPEG Base64 data");
 }
 
 writeFileSync(imagePath, Buffer.from(encoded, "base64"));
