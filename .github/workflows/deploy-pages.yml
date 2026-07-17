@@ -34,15 +34,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Synchronize version
         run: node scripts/sync-version.mjs
-      - name: List formatting differences
-        run: pnpm exec prettier --list-different "**/*.{js,mjs,ts,tsx,json,md,yml,yaml}" | tee prettier-differences.txt
-      - name: Upload formatting diagnostics
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: prettier-differences
-          path: prettier-differences.txt
-      - name: Enforce formatting
-        run: test ! -s prettier-differences.txt
+      - name: Validate formatting
+        run: pnpm format:check
       - name: Run ESLint
         run: pnpm lint
       - name: Check TypeScript
