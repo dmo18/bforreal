@@ -38,8 +38,14 @@ jobs:
         run: pnpm typecheck
       - name: Run tests
         run: pnpm test
-      - name: Validate source and assets
-        run: pnpm validate:version && pnpm validate:source && pnpm validate:assets && pnpm validate:secrets
+      - name: Validate version
+        run: pnpm validate:version
+      - name: Validate declarative source
+        run: pnpm validate:source
+      - name: Validate local assets
+        run: pnpm validate:assets
+      - name: Validate secret patterns
+        run: pnpm validate:secrets
       - name: Build and validate static export
         run: pnpm build && pnpm validate:export
       - name: Audit production dependencies
