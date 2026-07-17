@@ -52,6 +52,8 @@ The image should be integrated into the site's frame using:
 - Use authentic photography rather than stylized illustration when a real image is available.
 - Avoid converting images into text-heavy SVG approximations.
 - Preserve faces, wording, and source composition unless an explicit crop is approved.
+- Do not assemble large image data URIs in client-side JavaScript. Prefer a repository-local asset URL that the browser can load directly.
+- Verify any embedded SVG image asset by checking that the file begins with valid SVG markup, ends with a closing `</svg>` tag, and renders through the final public path.
 
 ## Resource Hub
 
@@ -121,6 +123,8 @@ Do not merge a build with inconsistent active version references.
 - Base64 text saved under binary image extensions.
 - Build-time image downloads from third-party sites.
 - Duplicate legacy resource cards below the newer features.
+- Large client-side image data URIs assembled from JavaScript strings.
+- Claiming an image fix is complete without validating the deployed public URL.
 
 ## Current Priorities
 
