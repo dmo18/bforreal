@@ -6,6 +6,12 @@ const target = join(process.cwd(), "public", "motto-reference.jpg");
 
 const encoded = (await readFile(source, "utf8")).replace(/\s+/g, "");
 const bytes = Buffer.from(encoded, "base64");
+const signature = [...bytes.subarray(0, 3)].map((value) => value.toString(16).padStart(2, "0")).join(" ");
+const ending = [...bytes.subarray(-2)].map((value) => value.toString(16).padStart(2, "0")).join(" ");
+
+console.log(
+  `Motto source diagnostics: encoded=${encoded.length}, decoded=${bytes.length}, start=${signature}, end=${ending}`,
+);
 
 if (
   bytes.length < 5_000 ||
