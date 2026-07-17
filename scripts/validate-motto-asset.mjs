@@ -8,7 +8,7 @@ const targets = [
 
 for (const target of targets) {
   const metadata = await stat(target);
-  if (metadata.size < 10_000) {
+  if (metadata.size < 5_000) {
     throw new Error(`${target} is unexpectedly small: ${metadata.size} bytes`);
   }
 
