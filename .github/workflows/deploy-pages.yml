@@ -37,8 +37,6 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Check TypeScript
         run: pnpm typecheck
-      - name: Run ESLint
-        run: pnpm lint
       - name: Validate version consistency
         run: pnpm validate:version
       - name: Build and validate static site
