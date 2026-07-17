@@ -10,6 +10,7 @@ import { GalleryEnhancements } from "./gallery-enhancements";
 import { HideLegacyResourceGrid } from "./hide-legacy-resource-grid";
 import { LivingYoshFeature } from "./living-yosh-feature";
 import { LivingYoshImageSource } from "./living-yosh-image-source";
+import { OpeningDensityPolish } from "./opening-density-polish";
 import { PodcastFeature } from "./podcast-feature";
 import { ResourceFeatureStabilizer } from "./resource-feature-stabilizer";
 import { VersionSync } from "./version-sync";
@@ -80,6 +81,7 @@ export default function RootLayout({
         <FeatureButtonPolish />
         <ResourceFeatureStabilizer />
         <HideLegacyResourceGrid />
+        <OpeningDensityPolish />
         <GalleryEnhancements />
         <VersionSync />
       </body>
