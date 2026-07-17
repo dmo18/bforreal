@@ -5,11 +5,11 @@ import { createPortal } from "react-dom";
 
 const websiteUrl = "https://livingyosh.com/";
 const storyUrl = "https://livingyosh.com/MyJourney";
-const youtubeUrl = "https://www.youtube.com/@livingyosh";
+const exploreUrl = "https://livingyosh.com/Browse";
 const primaryImage =
-  "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flivingyosh.com%2F?w=1200";
+  "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flivingyosh.com%2FMyJourney?w=1200";
 const fallbackImage =
-  "https://image.thum.io/get/width/1200/crop/900/https://livingyosh.com/";
+  "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flivingyosh.com%2F?w=1200";
 
 function GlobeIcon() {
   return (
@@ -53,17 +53,24 @@ function StoryIcon() {
   );
 }
 
-function YouTubeIcon() {
+function ExploreIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle
+        cx="12"
+        cy="12"
+        r="8.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+      />
       <path
-        d="M20.2 7.1a2.7 2.7 0 0 0-1.9-1.9C16.7 4.8 12 4.8 12 4.8s-4.7 0-6.3.4a2.7 2.7 0 0 0-1.9 1.9A28 28 0 0 0 3.4 12a28 28 0 0 0 .4 4.9 2.7 2.7 0 0 0 1.9 1.9c1.6.4 6.3.4 6.3.4s4.7 0 6.3-.4a2.7 2.7 0 0 0 1.9-1.9 28 28 0 0 0 .4-4.9 28 28 0 0 0-.4-4.9Z"
+        d="m14.8 9.2-1.7 3.9-3.9 1.7 1.7-3.9Z"
         fill="none"
         stroke="currentColor"
         strokeLinejoin="round"
         strokeWidth="1.6"
       />
-      <path d="m10 9 5 3-5 3Z" fill="currentColor" />
     </svg>
   );
 }
@@ -214,7 +221,7 @@ export function LivingYoshFeature() {
         <div className="living-yosh-media">
           <img
             src={primaryImage}
-            alt="Yosh Markell and the LivingYosh platform"
+            alt="Yosh Markell featured on the LivingYosh My Journey page"
             loading="lazy"
             decoding="async"
             onError={(event) => {
@@ -227,17 +234,16 @@ export function LivingYoshFeature() {
           <p className="living-yosh-kicker">Faith · Resilience · Hope</p>
           <h3 id="living-yosh-title">LivingYosh</h3>
           <p className="living-yosh-bio">
-            Yosh Markell is a South Florida father, former teacher, entrepreneur,
-            and the founder of <a href={websiteUrl}>LivingYosh</a>. After enduring
-            a false accusation, jail, house arrest, and years of legal and
-            financial pressure, he turned his experience into a mission of faith,
-            resilience, gratitude, and purpose.
+            Yosh Markell is the founder of <a href={websiteUrl}>LivingYosh</a>, a
+            platform shaped by his journey through false accusation, jail, house
+            arrest, financial pressure, and rebuilding through faith, family, and
+            perseverance.
           </p>
           <p className="living-yosh-bio">
-            LivingYosh shares honest conversations, Torah perspectives, current
-            events, and stories of people overcoming adversity. The site is built
-            around a simple idea: one person&apos;s story may be exactly the hope
-            someone else needs.
+            LivingYosh shares authentic conversations about Torah, faith, personal
+            growth, resilience, current events, and overcoming life&apos;s challenges.
+            Its mission is to help people find strength in their own journeys and to
+            remind them that one person&apos;s story may be the hope someone else needs.
           </p>
           <div className="living-yosh-highlights" aria-label="LivingYosh highlights">
             <div className="living-yosh-highlight">
@@ -260,8 +266,8 @@ export function LivingYoshFeature() {
             <a href={storyUrl} target="_blank" rel="noreferrer">
               <StoryIcon /> Yosh&apos;s Story
             </a>
-            <a href={youtubeUrl} target="_blank" rel="noreferrer">
-              <YouTubeIcon /> YouTube
+            <a href={exploreUrl} target="_blank" rel="noreferrer">
+              <ExploreIcon /> Explore
             </a>
           </div>
         </div>
