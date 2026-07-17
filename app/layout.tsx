@@ -43,3 +43,50 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    locale: "en_US",
+    url: siteConfig.siteUrl,
+    siteName: siteConfig.title,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [
+      {
+        url: `${siteConfig.siteUrl}og.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "Bitachon For Real over a quiet mountain path at sunrise",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [`${siteConfig.siteUrl}og.jpg`],
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} ${cormorant.variable}`}>
+        {children}
+        <PodcastFeature />
+        <DailyBitachonFeature />
+        <LivingYoshFeature />
+        <LivingYoshImageSource />
+        <DailyBitachonPolish />
+        <FeatureButtonPolish />
+        <ResourceFeatureStabilizer />
+        <HideLegacyResourceGrid />
+        <OpeningDensityPolish />
+        <OpeningMottoReference />
+        <GalleryEnhancements />
+        <VersionSync />
+      </body>
+    </html>
+  );
+}
