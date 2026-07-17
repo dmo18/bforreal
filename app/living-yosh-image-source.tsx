@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.28";
+const BUILD_VERSION = "1.0.29";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
