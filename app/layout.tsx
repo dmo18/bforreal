@@ -6,6 +6,7 @@ import "./footer-overrides.css";
 import { DailyBitachonFeature } from "./daily-bitachon-feature";
 import { DailyBitachonPolish } from "./daily-bitachon-polish";
 import { FeatureButtonPolish } from "./feature-button-polish";
+import { FeatureLayoutPolish } from "./feature-layout-polish";
 import { GalleryEnhancements } from "./gallery-enhancements";
 import { PodcastFeature } from "./podcast-feature";
 import { ResourceFeatureStabilizer } from "./resource-feature-stabilizer";
@@ -73,6 +74,7 @@ export default function RootLayout({
         <DailyBitachonFeature />
         <DailyBitachonPolish />
         <FeatureButtonPolish />
+        <FeatureLayoutPolish />
         <ResourceFeatureStabilizer />
         <GalleryEnhancements />
         <VersionSync />
