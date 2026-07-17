@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.36";
+const BUILD_VERSION = "1.0.37";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(/\/$/, "");
 
 export function OpeningMottoReference() {
@@ -10,20 +10,30 @@ export function OpeningMottoReference() {
     const card = document.querySelector<HTMLElement>(".motto-card");
     if (!card) return;
 
-    card.setAttribute(
-      "aria-label",
-      "Sing It. Laugh It. Cry It. All Day! Every day! Ein Od Milvado. There is nothing but Him, G-D.",
-    );
-    card.replaceChildren();
-
     const image = document.createElement("img");
     image.src = `${basePath}/motto-reference.jpg?v=${BUILD_VERSION}`;
     image.alt =
       "Sing It. Laugh It. Cry It. All Day! Every day! Ein Od Milvado. There is nothing but Him, G-D.";
     image.className = "motto-reference-image";
-    image.decoding = "async";
+    image.decoding = "sync";
     image.loading = "eager";
-    card.append(image);
+
+    let cancelled = false;
+
+    image.decode().then(() => {
+      if (cancelled || image.naturalWidth !== 256 || image.naturalHeight !== 210) {
+        return;
+      }
+
+      card.setAttribute("aria-label", image.alt);
+      card.replaceChildren(image);
+    }).catch(() => {
+      // Preserve the source text card when the asset does not decode completely.
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
