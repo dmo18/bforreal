@@ -30,9 +30,23 @@ export function DailyBitachonPolish() {
         resources &&
         understand &&
         resources.parentElement === understand.parentElement &&
-        resources.compareDocumentPosition(understand) & Node.DOCUMENT_POSITION_PRECEDING
+        resources.compareDocumentPosition(understand) &
+          Node.DOCUMENT_POSITION_PRECEDING
       ) {
         understand.parentElement?.insertBefore(resources, understand);
+      }
+
+      const nav = document.querySelector<HTMLElement>(".nav-links");
+      const resourceNav = nav?.querySelector<HTMLAnchorElement>('a[href="#resources"]');
+      const understandNav = nav?.querySelector<HTMLAnchorElement>('a[href="#understand"]');
+      if (
+        nav &&
+        resourceNav &&
+        understandNav &&
+        resourceNav.compareDocumentPosition(understandNav) &
+          Node.DOCUMENT_POSITION_PRECEDING
+      ) {
+        nav.insertBefore(resourceNav, understandNav);
       }
 
       const feature = document.querySelector<HTMLElement>(
@@ -128,22 +142,26 @@ export function DailyBitachonPolish() {
             justify-content: flex-start !important;
             margin-top: 1.15rem !important;
           }
-          @media (max-width: 920px) {
+          @media (max-width: 1180px) {
+            .podcast-feature,
             .daily-bitachon-feature {
               grid-template-columns: 1fr !important;
+            }
+            .podcast-feature-media,
+            .daily-bitachon-media {
+              min-height: min(86vw, 32rem) !important;
+            }
+            .podcast-feature-media::after,
+            .daily-bitachon-media::after {
+              background: linear-gradient(180deg, transparent 60%, rgba(8, 16, 26, .99)) !important;
+            }
+            .podcast-feature-copy,
+            .daily-bitachon-copy {
+              padding: 1.6rem 1.2rem 1.8rem !important;
             }
             .podcast-feature-media img,
             .daily-bitachon-media img {
               object-position: left center !important;
-            }
-            .daily-bitachon-media {
-              min-height: min(86vw, 32rem) !important;
-            }
-            .daily-bitachon-media::after {
-              background: linear-gradient(180deg, transparent 60%, rgba(8, 16, 26, .99)) !important;
-            }
-            .daily-bitachon-copy {
-              padding: 1.6rem 1.2rem 1.8rem !important;
             }
             .daily-bitachon-actions {
               display: grid !important;
@@ -167,6 +185,16 @@ export function DailyBitachonPolish() {
               height: .82rem !important;
             }
           }
+          @media (max-width: 480px) {
+            .podcast-feature-media,
+            .daily-bitachon-media {
+              min-height: 78vw !important;
+            }
+            .daily-bitachon-actions a {
+              padding: 0 .35rem !important;
+              font-size: .54rem !important;
+            }
+          }
         `;
         document.head.appendChild(style);
       }
@@ -185,7 +213,9 @@ export function DailyBitachonPolish() {
         ?.remove();
 
       const links = Array.from(
-        feature.querySelectorAll<HTMLAnchorElement>(".daily-bitachon-actions a"),
+        feature.querySelectorAll<HTMLAnchorElement>(
+          ".daily-bitachon-actions a",
+        ),
       );
       const whatsappLink = links.find((link) =>
         link.href.includes("dailybitachon.com/whatsapp"),
@@ -230,7 +260,9 @@ export function DailyBitachonPolish() {
       window.clearTimeout(timer);
       observer.disconnect();
       document
-        .querySelector<HTMLStyleElement>("style[data-daily-bitachon-photo]")
+        .querySelector<HTMLStyleElement>(
+          "style[data-daily-bitachon-photo]",
+        )
         ?.remove();
     };
   }, []);
