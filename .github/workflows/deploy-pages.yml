@@ -35,8 +35,14 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Run full quality check and static build
-        run: pnpm check
+      - name: Check TypeScript
+        run: pnpm typecheck
+      - name: Run ESLint
+        run: pnpm lint
+      - name: Validate version consistency
+        run: pnpm validate:version
+      - name: Build and validate static site
+        run: pnpm build
       - name: Audit production dependencies
         run: pnpm audit --prod --audit-level high
       - name: Upload Pages artifact
