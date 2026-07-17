@@ -3,6 +3,8 @@ name: Deploy Bitachon For Real to Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -11,8 +13,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -34,7 +36,7 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Build static site
+      - name: Build and validate static site
         run: pnpm run build
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -42,6 +44,7 @@ jobs:
           path: ./out
 
   deploy:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
