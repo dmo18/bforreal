@@ -1,20 +1,26 @@
 {
   "name": "bitachon-for-real",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "node scripts/materialize-motto-asset.mjs && next dev",
-    "build": "node scripts/materialize-motto-asset.mjs && next build && node scripts/validate-motto-asset.mjs",
+    "dev": "node scripts/sync-version.mjs && node scripts/materialize-motto-asset.mjs && next dev",
+    "build": "node scripts/sync-version.mjs && node scripts/materialize-motto-asset.mjs && next build && node scripts/validate-motto-asset.mjs",
     "start": "next start",
+    "test": "node --test tests/*.test.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ignore-pattern out --ignore-pattern .next",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "validate:assets": "node scripts/validate-motto-asset.mjs",
-    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run build"
+    "validate:version": "node scripts/validate-version.mjs",
+    "validate:source": "node scripts/validate-source.mjs",
+    "validate:assets": "node scripts/materialize-motto-asset.mjs && node scripts/validate-assets.mjs",
+    "validate:secrets": "node scripts/validate-secrets.mjs",
+    "validate:export": "node scripts/validate-export.mjs",
+    "audit:prod": "pnpm audit --prod --audit-level high",
+    "check": "node scripts/sync-version.mjs && pnpm run format:check && pnpm run lint && pnpm run typecheck && pnpm run test && pnpm run validate:version && pnpm run validate:source && pnpm run validate:assets && pnpm run validate:secrets && pnpm run build && pnpm run validate:export"
   },
   "dependencies": {
     "lenis": "1.3.23",

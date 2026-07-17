@@ -1,34 +1,12 @@
-import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
-import "lenis/dist/lenis.css";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import "./footer-overrides.css";
-import { DailyBitachonFeature } from "./daily-bitachon-feature";
-import { DailyBitachonPolish } from "./daily-bitachon-polish";
-import { FeatureButtonPolish } from "./feature-button-polish";
-import { GalleryEnhancements } from "./gallery-enhancements";
-import { HideLegacyResourceGrid } from "./hide-legacy-resource-grid";
-import { LivingYoshFeature } from "./living-yosh-feature";
-import { LivingYoshImageSource } from "./living-yosh-image-source";
-import { OpeningDensityPolish } from "./opening-density-polish";
-import { OpeningMottoReference } from "./opening-motto-reference";
-import { PodcastFeature } from "./podcast-feature";
-import { ResourceFeatureStabilizer } from "./resource-feature-stabilizer";
-import { VersionSync } from "./version-sync";
 import { siteConfig } from "@/data/site";
+import { absoluteAssetUrl, assetPath } from "@/lib/site-paths";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600"],
-});
+export const viewport: Viewport = {
+  colorScheme: "dark",
+  themeColor: "#070b12",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
@@ -38,9 +16,8 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.title,
-  alternates: {
-    canonical: siteConfig.siteUrl,
-  },
+  alternates: { canonical: siteConfig.siteUrl },
+  icons: { icon: assetPath("/favicon.svg") },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -50,7 +27,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: `${siteConfig.siteUrl}og.jpg`,
+        url: absoluteAssetUrl("/og.jpg"),
         width: 1200,
         height: 630,
         alt: "Bitachon For Real over a quiet mountain path at sunrise",
@@ -61,32 +38,16 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [`${siteConfig.siteUrl}og.jpg`],
+    images: [absoluteAssetUrl("/og.jpg")],
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} ${cormorant.variable}`}>
-        {children}
-        <PodcastFeature />
-        <DailyBitachonFeature />
-        <LivingYoshFeature />
-        <LivingYoshImageSource />
-        <DailyBitachonPolish />
-        <FeatureButtonPolish />
-        <ResourceFeatureStabilizer />
-        <HideLegacyResourceGrid />
-        <OpeningDensityPolish />
-        <OpeningMottoReference />
-        <GalleryEnhancements />
-        <VersionSync />
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }

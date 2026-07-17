@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Bitachon For Real podcast cover</title>
+  <desc id="desc">Original navy and gold podcast artwork with a microphone, sound waves, and the words Bitachon For Real.</desc>
+  <defs><linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#172940"/><stop offset=".58" stop-color="#0d1723"/><stop offset="1" stop-color="#070b12"/></linearGradient><radialGradient id="glow" cx=".75" cy=".2" r=".75"><stop offset="0" stop-color="#e1c384" stop-opacity=".34"/><stop offset="1" stop-color="#e1c384" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1000" height="1000" rx="78" fill="url(#background)"/><rect width="1000" height="1000" rx="78" fill="url(#glow)"/>
+  <circle cx="500" cy="425" r="244" fill="none" stroke="#e1c384" stroke-opacity=".22" stroke-width="2"/><circle cx="500" cy="425" r="196" fill="#0a121e" stroke="#e1c384" stroke-opacity=".42" stroke-width="4"/>
+  <rect x="432" y="255" width="136" height="264" rx="68" fill="#f4efe3"/><path d="M374 417c0 70 56 126 126 126s126-56 126-126" fill="none" stroke="#e1c384" stroke-linecap="round" stroke-width="24"/><path d="M500 543v90M418 633h164" fill="none" stroke="#e1c384" stroke-linecap="round" stroke-width="24"/>
+  <path d="M292 352c-18 42-18 104 0 146M708 352c18 42 18 104 0 146M238 314c-34 70-34 166 0 236M762 314c34 70 34 166 0 236" fill="none" stroke="#c8a76a" stroke-linecap="round" stroke-width="12"/>
+  <text x="500" y="760" fill="#f4efe3" font-family="Georgia, serif" font-size="94" font-weight="600" text-anchor="middle">Bitachon</text><text x="500" y="844" fill="#e1c384" font-family="Georgia, serif" font-size="82" font-style="italic" text-anchor="middle">For Real</text><text x="500" y="908" fill="#aaa396" font-family="Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="7" text-anchor="middle">PRACTICAL TRUST FOR REAL LIFE</text>
+</svg>
