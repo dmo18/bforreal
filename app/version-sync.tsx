@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.14";
+const BUILD_VERSION = "1.0.15";
 
 export function VersionSync() {
   useEffect(() => {
