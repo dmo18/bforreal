@@ -3,13 +3,15 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
+const BUILD_VERSION = "1.0.25";
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
+  /\/$/,
+  "",
+);
 const websiteUrl = "https://livingyosh.com/";
 const storyUrl = "https://livingyosh.com/MyJourney";
 const exploreUrl = "https://livingyosh.com/Browse";
-const primaryImage =
-  "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flivingyosh.com%2FMyJourney?w=1200";
-const fallbackImage =
-  "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flivingyosh.com%2F?w=1200";
+const portrait = `${basePath}/living-yosh.jpg?v=${BUILD_VERSION}`;
 
 function GlobeIcon() {
   return (
@@ -220,14 +222,10 @@ export function LivingYoshFeature() {
       <article className="living-yosh-feature" aria-labelledby="living-yosh-title">
         <div className="living-yosh-media">
           <img
-            src={primaryImage}
-            alt="Yosh Markell featured on the LivingYosh My Journey page"
+            src={portrait}
+            alt="Yosh Markell with his daughter"
             loading="lazy"
             decoding="async"
-            onError={(event) => {
-              const image = event.currentTarget;
-              if (image.src !== fallbackImage) image.src = fallbackImage;
-            }}
           />
         </div>
         <div className="living-yosh-copy">
