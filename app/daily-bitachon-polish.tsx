@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.17";
+const BUILD_VERSION = "1.0.18";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -11,10 +11,32 @@ const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
 export function DailyBitachonPolish() {
   useEffect(() => {
     const apply = () => {
+      document
+        .querySelector<HTMLElement>(".podcast-feature-note")
+        ?.remove();
+
       const feature = document.querySelector<HTMLElement>(
         ".daily-bitachon-feature",
       );
       if (!feature) return;
+
+      const bio = feature.querySelector<HTMLElement>(".daily-bitachon-bio");
+      if (bio && bio.dataset.honorificApplied !== "true") {
+        const walker = document.createTreeWalker(bio, NodeFilter.SHOW_TEXT);
+        let node = walker.nextNode();
+
+        while (node) {
+          if (node.textContent?.includes("Michael Safdie is")) {
+            node.textContent = node.textContent.replace(
+              "Michael Safdie is",
+              "Mr. Michael Safdie is",
+            );
+            bio.dataset.honorificApplied = "true";
+            break;
+          }
+          node = walker.nextNode();
+        }
+      }
 
       let style = document.querySelector<HTMLStyleElement>(
         "style[data-daily-bitachon-photo]",
@@ -138,7 +160,7 @@ export function DailyBitachonPolish() {
       );
       if (portrait) {
         portrait.src = `${basePath}/michael-safdie-madison.svg?v=${BUILD_VERSION}`;
-        portrait.alt = "Michael Safdie outside Madison Time";
+        portrait.alt = "Mr. Michael Safdie outside Madison Time";
         portrait.decoding = "async";
       }
 
