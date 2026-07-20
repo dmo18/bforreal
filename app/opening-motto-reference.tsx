@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.36";
+const BUILD_VERSION = "1.0.40";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(/\/$/, "");
 
 export function OpeningMottoReference() {
@@ -17,7 +17,7 @@ export function OpeningMottoReference() {
     card.replaceChildren();
 
     const image = document.createElement("img");
-    image.src = `${basePath}/motto-reference.jpg?v=${BUILD_VERSION}`;
+    image.src = `${basePath}/motto-reference.png?v=${BUILD_VERSION}`;
     image.alt =
       "Sing It. Laugh It. Cry It. All Day! Every day! Ein Od Milvado. There is nothing but Him, G-D.";
     image.className = "motto-reference-image";
