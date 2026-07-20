@@ -731,7 +731,7 @@ export function LandingPage() {
                 </Reveal>
               </div>
             </div>
-          </div>{" "}
+          </div>
         </section>{" "}
         <section className="section resources" id="resources">
           <div className="section-shell">
@@ -1080,27 +1080,27 @@ export function LandingPage() {
       </main>
       <footer className="site-footer">
         <div className="footer-inner">
-          <div>
-            <a className="brand footer-brand" href="#top">
-              <span className="brand-mark" aria-hidden="true">
-                B
-              </span>
-              <span>Bitachon For Real</span>
-            </a>
-            <p className="footer-note">
-              An independent directory. This site is not affiliated with,
-              endorsed by, or officially connected to any resource listed here.
-            </p>
-          </div>
+          <a className="brand footer-brand" href="#top">
+            <span className="brand-mark" aria-hidden="true">
+              B
+            </span>
+            <span>Bitachon For Real</span>
+          </a>
+          <p className="footer-note">
+            Independent directory; not affiliated with or endorsed by listed
+            resources. As an Amazon Associate I earn from qualifying purchases.
+          </p>
+          <p className="footer-dedication" dir="rtl" lang="he">
+            לרפואת יעקב בן דינה · לעילוי נשמת אהרן בן יהודה ואהרן בן יוסף
+          </p>
           <div className="footer-meta">
-            <p>As an Amazon Associate I earn from qualifying purchases.</p>
-            <p>Future home: {siteConfig.futureDomain}</p>
             <a
               href={siteConfig.repository}
               target="_blank"
               rel="noopener noreferrer external"
+              aria-label="Open the GitHub repository"
             >
-              GitHub repository
+              Repository
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>
             <span>Version {siteConfig.version}</span>

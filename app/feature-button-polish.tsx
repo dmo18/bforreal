@@ -58,23 +58,24 @@ export function FeatureButtonPolish() {
       @media (max-width: 560px) {
         .podcast-feature-links,
         .daily-bitachon-actions {
-          gap: .4rem !important;
+          gap: .25rem !important;
         }
 
         .podcast-feature-links a,
         .daily-bitachon-actions a {
           min-height: 2.35rem !important;
-          padding: 0 .42rem !important;
-          font-size: .54rem !important;
-          letter-spacing: .025em !important;
+          overflow: hidden !important;
+          padding: 0 .18rem !important;
+          font-size: .46rem !important;
+          letter-spacing: 0 !important;
         }
 
         .podcast-feature-links svg,
         .podcast-feature-links img,
         .daily-bitachon-actions svg,
         .daily-bitachon-actions img {
-          width: .82rem !important;
-          height: .82rem !important;
+          width: .72rem !important;
+          height: .72rem !important;
         }
       }
     `;

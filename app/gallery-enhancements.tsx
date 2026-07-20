@@ -101,14 +101,17 @@ export function GalleryEnhancements() {
         ".inspiration-graphic-reveal",
       );
       const gap = Number.parseFloat(getComputedStyle(gallery).columnGap || "0");
-      const distance = card ? card.offsetWidth + gap : gallery.clientWidth * 0.8;
+      const distance = card
+        ? card.offsetWidth + gap
+        : gallery.clientWidth * 0.8;
       gallery.scrollBy({ left: direction * distance, behavior: "smooth" });
     };
 
     const updateControls = () => {
       const max = Math.max(0, gallery.scrollWidth - gallery.clientWidth);
       const ratio = max === 0 ? 1 : gallery.scrollLeft / max;
-      if (progress) progress.style.width = `${max === 0 ? 100 : 18 + ratio * 82}%`;
+      if (progress)
+        progress.style.width = `${max === 0 ? 100 : 18 + ratio * 82}%`;
       if (previousButton) previousButton.disabled = gallery.scrollLeft <= 2;
       if (nextButton) nextButton.disabled = gallery.scrollLeft >= max - 2;
     };
@@ -161,9 +164,9 @@ export function GalleryEnhancements() {
     document.addEventListener("click", handleClick);
     document.addEventListener("keydown", handleKeyDown);
 
-    const footerVersion = Array.from(document.querySelectorAll(".footer-meta span")).find(
-      (node) => node.textContent?.startsWith("Version "),
-    );
+    const footerVersion = Array.from(
+      document.querySelectorAll(".footer-meta span"),
+    ).find((node) => node.textContent?.startsWith("Version "));
     if (footerVersion) footerVersion.textContent = `Version ${BUILD_VERSION}`;
 
     return () => {
@@ -205,9 +208,9 @@ export function GalleryEnhancements() {
           overflow-x: auto !important;
           overflow-y: hidden !important;
           padding: .4rem 0 1.2rem !important;
-          scroll-snap-type: x mandatory;
+          scroll-snap-type: x proximity;
           scrollbar-width: none;
-          touch-action: pan-x pinch-zoom;
+          touch-action: pan-x pan-y pinch-zoom;
           -webkit-overflow-scrolling: touch;
           -ms-overflow-style: none;
           mask-image: linear-gradient(to right, transparent 0, black 1rem, black calc(100% - 1rem), transparent 100%);

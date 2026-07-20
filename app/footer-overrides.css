@@ -1,4 +1,66 @@
-.footer-meta > p:nth-child(2),
-.footer-meta > a[href="https://github.com/dmo18/bforreal"] {
-  display: none;
+.site-footer {
+  padding: 1.35rem 0;
+  background: rgba(7, 13, 22, 0.96);
+}
+
+.footer-inner {
+  display: grid;
+  width: min(calc(100% - 2rem), 78rem);
+  grid-template-columns: auto minmax(12rem, 1fr) auto auto;
+  align-items: center;
+  gap: clamp(0.8rem, 2vw, 1.6rem);
+  padding-top: 1.15rem;
+}
+
+.footer-brand,
+.footer-note {
+  white-space: nowrap;
+}
+
+.footer-note,
+.footer-dedication {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(0.58rem, 0.75vw, 0.68rem);
+  line-height: 1.45;
+}
+
+.footer-dedication {
+  color: var(--cream-soft);
+  white-space: nowrap;
+}
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.75rem;
+  white-space: nowrap;
+  text-align: left;
+}
+
+@media (max-width: 880px) {
+  .footer-inner {
+    grid-template-columns: 1fr auto;
+  }
+
+  .footer-note,
+  .footer-dedication {
+    grid-column: 1 / -1;
+  }
+
+  .footer-note {
+    grid-row: 2;
+    white-space: normal;
+  }
+
+  .footer-dedication {
+    grid-row: 3;
+    white-space: normal;
+  }
+
+  .footer-meta {
+    grid-column: 2;
+    grid-row: 1;
+  }
 }
