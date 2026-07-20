@@ -634,7 +634,6 @@ export function LandingPage() {
 
               <div className="opening-content">
                 <Reveal className="opening-welcome" delay={0.06}>
-                  <p className="eyebrow">WELCOME</p>
                   <h1 id="opening-title">
                     Bitachon <span>For Real</span>
                   </h1>
@@ -642,14 +641,9 @@ export function LandingPage() {
                 </Reveal>
 
                 <Reveal className="intro-motto" delay={0.1}>
-                  <p className="intro-kicker">A PRACTICE FOR TODAY</p>
                   <h2>
                     Disconnect from your emotional attachment to the outcome.
                   </h2>
-                  <p>
-                    Do your part with a steady heart, then let the result rest
-                    where it belongs.
-                  </p>
                 </Reveal>
               </div>
             </div>
