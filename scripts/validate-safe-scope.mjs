@@ -11,6 +11,7 @@ const allowed = [
   "app/opening-motto-reference.tsx",
   "data/site.ts",
   "public/motto-reference.png",
+  "public/motto-reference.webp",
   "scripts/validate-version.mjs",
   "scripts/validate-secrets.mjs",
   "scripts/validate-export.mjs",
