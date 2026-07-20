@@ -7,18 +7,19 @@ export function OpeningDensityPolish() {
       }
 
       .opening-shell {
-        grid-template-columns: minmax(19rem, 0.85fr) minmax(0, 1fr);
-        gap: clamp(2rem, 4vw, 4.5rem);
+        grid-template-columns: minmax(15rem, 0.78fr) minmax(0, 1.22fr);
+        gap: clamp(2.5rem, 5vw, 5.5rem);
       }
 
       .opening-image-wrap {
-        width: min(100%, 27rem);
+        width: min(100%, 26rem);
         justify-self: end;
       }
 
       .motto-card {
-        min-height: clamp(23rem, 34vw, 28rem);
-        padding: clamp(1.35rem, 2.6vw, 1.9rem);
+        min-height: 0;
+        aspect-ratio: 1044 / 858;
+        padding: clamp(0.55rem, 1.2vw, 0.8rem);
       }
 
       .opening-copy {
@@ -63,17 +64,16 @@ export function OpeningDensityPolish() {
         }
 
         .opening-shell {
+          grid-template-columns: minmax(0, 1fr);
           gap: 2rem;
         }
 
-        .opening-image-wrap {
-          width: min(100%, 25rem);
-          justify-self: center;
-        }
-
+        .opening-image-wrap,
         .opening-copy {
+          width: 100%;
           max-width: 38rem;
           justify-self: center;
+          min-width: 0;
         }
       }
 
@@ -87,15 +87,21 @@ export function OpeningDensityPolish() {
         }
 
         .motto-card {
-          min-height: min(82vw, 24rem);
+          width: min(100%, 27rem);
+          min-height: 0;
+          margin-inline: auto;
         }
 
         .opening-copy h1 {
-          font-size: clamp(3.1rem, 16vw, 4.6rem);
+          font-size: clamp(3.25rem, 15vw, 4.8rem);
         }
 
         .intro-motto {
           margin-top: 1.15rem;
+        }
+
+        .intro-motto h2 {
+          font-size: clamp(2rem, 10vw, 3rem);
         }
       }
     `}</style>
