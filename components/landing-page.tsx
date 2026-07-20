@@ -599,12 +599,7 @@ export function LandingPage() {
           </span>
           <span>Bitachon For Real</span>
         </a>
-        <nav className="nav-links" aria-label="Page sections">
-          <a href="#understand">Understand</a>
-          <a href="#levels">Seven Levels</a>
-          <a href="#resources">Resources</a>
-          <a href="#inspiration">Inspiration</a>
-        </nav>
+
         <a className="header-cta" href="#resources">
           Explore
           <ArrowDown size={15} aria-hidden="true" />
@@ -640,7 +635,7 @@ export function LandingPage() {
                   <p className="opening-body">{siteConfig.description}</p>
                 </Reveal>
 
-                <Reveal className="intro-motto" delay={0.1}>
+                <Reveal className="opening-statement" delay={0.1}>
                   <h2>
                     Disconnect from your emotional attachment to the outcome.
                   </h2>
@@ -649,6 +644,69 @@ export function LandingPage() {
             </div>
           </div>{" "}
         </section>{" "}
+        <section className="section resources" id="resources">
+          <div className="section-shell">
+            <SectionHeading
+              eyebrow="Resource hub"
+              title="A thoughtful place to begin."
+              body="Independent public resources for learning and listening. Every link opens on the original provider’s site."
+            />
+            <div className="resource-grid">
+              {resources.map((resource, index) => {
+                const Icon = iconMap[resource.icon];
+                return (
+                  <Reveal
+                    key={resource.id}
+                    className="resource-reveal"
+                    delay={index * 0.06}
+                  >
+                    <motion.a
+                      className="resource-card"
+                      href={resource.href}
+                      target="_blank"
+                      rel={
+                        resource.affiliate
+                          ? "noopener noreferrer external sponsored"
+                          : "noopener noreferrer external"
+                      }
+                      whileHover={reduceMotion ? undefined : { y: -6 }}
+                      transition={{ duration: 0.28, ease: "easeOut" }}
+                    >
+                      <div className="resource-card-top">
+                        <span className="resource-icon">
+                          <Icon
+                            size={21}
+                            strokeWidth={1.6}
+                            aria-hidden="true"
+                          />
+                        </span>
+                        <span className="resource-category">
+                          {resource.category}
+                        </span>
+                        <ArrowUpRight
+                          className="resource-arrow"
+                          size={18}
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div>
+                        <p className="resource-platform">{resource.platform}</p>
+                        <h3>{resource.title}</h3>
+                        <p className="resource-description">
+                          {resource.description}
+                        </p>
+                      </div>
+                      <span className="resource-link-label">
+                        Open resource
+                        {resource.affiliate && <small>Affiliate</small>}
+                      </span>
+                    </motion.a>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
         <section className="section understand" id="understand">
           <div className="section-shell">
             <SectionHeading
@@ -724,69 +782,6 @@ export function LandingPage() {
                   </article>
                 </Reveal>
               ))}
-            </div>
-          </div>
-        </section>
-        <section className="section resources" id="resources">
-          <div className="section-shell">
-            <SectionHeading
-              eyebrow="Resource hub"
-              title="A thoughtful place to begin."
-              body="Independent public resources for learning and listening. Every link opens on the original provider’s site."
-            />
-            <div className="resource-grid">
-              {resources.map((resource, index) => {
-                const Icon = iconMap[resource.icon];
-                return (
-                  <Reveal
-                    key={resource.id}
-                    className="resource-reveal"
-                    delay={index * 0.06}
-                  >
-                    <motion.a
-                      className="resource-card"
-                      href={resource.href}
-                      target="_blank"
-                      rel={
-                        resource.affiliate
-                          ? "noopener noreferrer external sponsored"
-                          : "noopener noreferrer external"
-                      }
-                      whileHover={reduceMotion ? undefined : { y: -6 }}
-                      transition={{ duration: 0.28, ease: "easeOut" }}
-                    >
-                      <div className="resource-card-top">
-                        <span className="resource-icon">
-                          <Icon
-                            size={21}
-                            strokeWidth={1.6}
-                            aria-hidden="true"
-                          />
-                        </span>
-                        <span className="resource-category">
-                          {resource.category}
-                        </span>
-                        <ArrowUpRight
-                          className="resource-arrow"
-                          size={18}
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <div>
-                        <p className="resource-platform">{resource.platform}</p>
-                        <h3>{resource.title}</h3>
-                        <p className="resource-description">
-                          {resource.description}
-                        </p>
-                      </div>
-                      <span className="resource-link-label">
-                        Open resource
-                        {resource.affiliate && <small>Affiliate</small>}
-                      </span>
-                    </motion.a>
-                  </Reveal>
-                );
-              })}
             </div>
           </div>
         </section>

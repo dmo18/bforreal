@@ -20,34 +20,7 @@ function replaceLinkLabel(link: HTMLAnchorElement | undefined, label: string) {
 export function DailyBitachonPolish() {
   useEffect(() => {
     const apply = () => {
-      document
-        .querySelector<HTMLElement>(".podcast-feature-note")
-        ?.remove();
-
-      const resources = document.querySelector<HTMLElement>(".resources");
-      const understand = document.querySelector<HTMLElement>(".understand");
-      if (
-        resources &&
-        understand &&
-        resources.parentElement === understand.parentElement &&
-        resources.compareDocumentPosition(understand) &
-          Node.DOCUMENT_POSITION_PRECEDING
-      ) {
-        understand.parentElement?.insertBefore(resources, understand);
-      }
-
-      const nav = document.querySelector<HTMLElement>(".nav-links");
-      const resourceNav = nav?.querySelector<HTMLAnchorElement>('a[href="#resources"]');
-      const understandNav = nav?.querySelector<HTMLAnchorElement>('a[href="#understand"]');
-      if (
-        nav &&
-        resourceNav &&
-        understandNav &&
-        resourceNav.compareDocumentPosition(understandNav) &
-          Node.DOCUMENT_POSITION_PRECEDING
-      ) {
-        nav.insertBefore(resourceNav, understandNav);
-      }
+      document.querySelector<HTMLElement>(".podcast-feature-note")?.remove();
 
       const feature = document.querySelector<HTMLElement>(
         ".daily-bitachon-feature",
@@ -208,9 +181,7 @@ export function DailyBitachonPolish() {
         portrait.decoding = "async";
       }
 
-      feature
-        .querySelector<HTMLElement>(".daily-bitachon-signature")
-        ?.remove();
+      feature.querySelector<HTMLElement>(".daily-bitachon-signature")?.remove();
 
       const links = Array.from(
         feature.querySelectorAll<HTMLAnchorElement>(
@@ -260,9 +231,7 @@ export function DailyBitachonPolish() {
       window.clearTimeout(timer);
       observer.disconnect();
       document
-        .querySelector<HTMLStyleElement>(
-          "style[data-daily-bitachon-photo]",
-        )
+        .querySelector<HTMLStyleElement>("style[data-daily-bitachon-photo]")
         ?.remove();
     };
   }, []);

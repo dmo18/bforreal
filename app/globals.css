@@ -1740,3 +1740,59 @@ button {
     max-width: 18ch;
   }
 }
+
+/* Final compact opening flow */
+.opening-intro {
+  min-height: 0 !important;
+  padding: clamp(6rem, 8vw, 7rem) 0 clamp(2.5rem, 4vw, 3.75rem) !important;
+}
+
+.opening-sequence {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.opening-layout {
+  min-height: 0;
+}
+
+.opening-welcome h1 span {
+  display: inline;
+  margin-top: 0;
+  margin-left: 0.14em;
+}
+
+.opening-statement {
+  width: 100%;
+  max-width: 42rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.opening-statement h2 {
+  max-width: 15ch;
+  margin: 0;
+  color: var(--cream);
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+@media (max-width: 760px) {
+  .opening-intro {
+    padding-top: 5.25rem !important;
+    padding-bottom: 2.75rem !important;
+  }
+
+  .opening-welcome h1 span {
+    margin-left: 0.1em;
+  }
+
+  .opening-statement h2 {
+    max-width: 18ch;
+    font-size: clamp(2.05rem, 10vw, 3.25rem);
+  }
+}

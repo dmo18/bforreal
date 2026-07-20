@@ -10,6 +10,7 @@ const allowed = [
   "app/version-sync.tsx",
   "app/layout.tsx",
   "app/globals.css",
+  "app/daily-bitachon-polish.tsx",
   "components/landing-page.tsx",
   "app/icon.png",
   "app/apple-icon.png",
