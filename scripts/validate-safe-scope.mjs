@@ -15,6 +15,7 @@ const allowed = [
   "scripts/validate-version.mjs",
   "scripts/validate-secrets.mjs",
   "scripts/validate-export.mjs",
+  "scripts/validate-motto-asset.mjs",
   "scripts/validate-safe-scope.mjs",
 ];
 
