@@ -183,6 +183,46 @@ export function LandingPage() {
     };
   }, [activeFoundationIndex, closeFoundationViewer, moveFoundationViewer]);
 
+  const levelTriggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const [activeLevelIndex, setActiveLevelIndex] = useState<number | null>(null);
+  const activeLevel =
+    activeLevelIndex === null ? null : levels[activeLevelIndex];
+
+  const moveLevelViewer = useCallback((direction: -1 | 1) => {
+    setActiveLevelIndex((current) => {
+      if (current === null) return current;
+      return (current + direction + levels.length) % levels.length;
+    });
+  }, []);
+
+  const closeLevelViewer = useCallback(() => {
+    const index = activeLevelIndex;
+    setActiveLevelIndex(null);
+    if (index !== null) {
+      window.requestAnimationFrame(() =>
+        levelTriggerRefs.current[index]?.focus(),
+      );
+    }
+  }, [activeLevelIndex]);
+
+  useEffect(() => {
+    if (activeLevelIndex === null) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeLevelViewer();
+      if (event.key === "ArrowLeft") moveLevelViewer(-1);
+      if (event.key === "ArrowRight") moveLevelViewer(1);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeLevelIndex, closeLevelViewer, moveLevelViewer]);
   function scrollLevels(direction: -1 | 1) {
     const container = levelsRef.current;
     if (!container) return;
@@ -835,9 +875,28 @@ export function LandingPage() {
                   className="level-reveal"
                   delay={index * 0.045}
                 >
-                  <article className="level-card">
-                    <div className="level-number" aria-hidden="true">
-                      {level.number}
+                  <button
+                    ref={(node) => {
+                      levelTriggerRefs.current[index] = node;
+                    }}
+                    type="button"
+                    className="level-card level-card-trigger"
+                    aria-haspopup="dialog"
+                    aria-label={`Enlarge level ${index + 1}: ${level.title}`}
+                    onClick={() => setActiveLevelIndex(index)}
+                  >
+                    <div className="level-sequence" aria-hidden="true">
+                      <span>Level {level.number}</span>
+                      <span>
+                        {index + 1} / {levels.length}
+                      </span>
+                    </div>
+                    <div className="level-progress" aria-hidden="true">
+                      <span
+                        style={{
+                          width: `${((index + 1) / levels.length) * 100}%`,
+                        }}
+                      />
                     </div>
                     <h3>{level.title}</h3>
                     <p>{level.description}</p>
@@ -845,7 +904,7 @@ export function LandingPage() {
                       <span>Practice</span>
                       <blockquote>“{level.practice}”</blockquote>
                     </div>
-                  </article>
+                  </button>
                 </Reveal>
               ))}
             </div>
@@ -902,6 +961,67 @@ export function LandingPage() {
             </div>
           </div>
         </section>
+        {activeLevel && activeLevelIndex !== null && (
+          <div
+            className="graphic-lightbox level-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Level ${activeLevelIndex + 1}: ${activeLevel.title}`}
+            onClick={(event) => {
+              if (event.target === event.currentTarget) closeLevelViewer();
+            }}
+          >
+            <button
+              className="graphic-lightbox-close"
+              type="button"
+              onClick={closeLevelViewer}
+            >
+              Close
+            </button>
+            <button
+              className="graphic-lightbox-arrow previous"
+              type="button"
+              aria-label="Previous level"
+              onClick={() => moveLevelViewer(-1)}
+            >
+              ←
+            </button>
+            <div className="level-lightbox-media">
+              <article className="level-card level-card-expanded">
+                <div className="level-sequence" aria-hidden="true">
+                  <span>Level {activeLevel.number}</span>
+                  <span>
+                    {activeLevelIndex + 1} / {levels.length}
+                  </span>
+                </div>
+                <div className="level-progress" aria-hidden="true">
+                  <span
+                    style={{
+                      width: `${((activeLevelIndex + 1) / levels.length) * 100}%`,
+                    }}
+                  />
+                </div>
+                <h3>{activeLevel.title}</h3>
+                <p>{activeLevel.description}</p>
+                <div className="practice">
+                  <span>Practice</span>
+                  <blockquote>“{activeLevel.practice}”</blockquote>
+                </div>
+              </article>
+            </div>
+            <button
+              className="graphic-lightbox-arrow next"
+              type="button"
+              aria-label="Next level"
+              onClick={() => moveLevelViewer(1)}
+            >
+              →
+            </button>
+            <p className="graphic-lightbox-caption">
+              {activeLevelIndex + 1} of {levels.length} · {activeLevel.title}
+            </p>
+          </div>
+        )}{" "}
         {activeFoundation && activeFoundationIndex !== null && (
           <div
             className="graphic-lightbox foundation-lightbox"
