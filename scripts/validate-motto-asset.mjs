@@ -21,4 +21,25 @@ for (const target of targets) {
   }
 }
 
-console.log("Validated source and exported motto JPEG assets.");
+const webpTargets = [
+  join(process.cwd(), "public", "motto-reference.webp"),
+  join(process.cwd(), "out", "motto-reference.webp"),
+];
+
+for (const target of webpTargets) {
+  const metadata = await stat(target);
+  if (metadata.size < 5_000) {
+    throw new Error(`${target} is unexpectedly small: ${metadata.size} bytes`);
+  }
+
+  const bytes = await readFile(target);
+  const isWebp =
+    bytes.subarray(0, 4).toString("ascii") === "RIFF" &&
+    bytes.subarray(8, 12).toString("ascii") === "WEBP";
+
+  if (!isWebp) {
+    throw new Error(`${target} is not a valid WebP file`);
+  }
+}
+
+console.log("Validated source and exported motto JPEG and WebP assets.");
