@@ -8,6 +8,7 @@ const allowed = [
   ".github/workflows/deploy-pages.yml",
   "package.json",
   "app/version-sync.tsx",
+  "app/opening-density-polish.tsx",
   "app/opening-motto-reference.tsx",
   "app/living-yosh-feature.tsx",
   "app/living-yosh-image-source.tsx",
