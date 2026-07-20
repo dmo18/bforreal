@@ -41,8 +41,14 @@ jobs:
           NEXT_PUBLIC_SITE_URL: https://www.bitachonforreal.com/
         run: pnpm build
 
-      - name: Add deployment marker
-        run: touch out/.nojekyll
+      - name: Add Cloudways deployment files
+        run: |
+          touch out/.nojekyll
+          cat > out/.htaccess <<'EOF'
+          RewriteEngine On
+          RewriteCond %{HTTP_HOST} ^bitachonforreal\.com$ [NC]
+          RewriteRule ^ https://www.bitachonforreal.com%{REQUEST_URI} [R=301,L]
+          EOF
 
       - name: Publish web-ready files to cloudways branch
         uses: peaceiris/actions-gh-pages@v4
