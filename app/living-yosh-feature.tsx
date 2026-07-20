@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-const BUILD_VERSION = "1.0.26";
+const BUILD_VERSION = "1.0.43";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -11,7 +11,7 @@ const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
 const websiteUrl = "https://livingyosh.com/";
 const storyUrl = "https://livingyosh.com/MyJourney";
 const exploreUrl = "https://livingyosh.com/Browse";
-const portrait = `${basePath}/living-yosh.jpg?v=${BUILD_VERSION}`;
+const portrait = `${basePath}/living-yosh.webp?v=${BUILD_VERSION}`;
 
 function GlobeIcon() {
   return (
