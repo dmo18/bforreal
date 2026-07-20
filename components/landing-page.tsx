@@ -20,7 +20,14 @@ import {
   Share2,
   type LucideIcon,
 } from "lucide-react";
-import { type PropsWithChildren, useRef } from "react";
+import {
+  type CSSProperties,
+  type PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   foundations,
   inspirationGraphics,
@@ -133,6 +140,48 @@ function SectionHeading({
 export function LandingPage() {
   const reduceMotion = useReducedMotion();
   const levelsRef = useRef<HTMLDivElement>(null);
+  const foundationTriggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const [activeFoundationIndex, setActiveFoundationIndex] = useState<
+    number | null
+  >(null);
+
+  const activeFoundation =
+    activeFoundationIndex === null ? null : foundations[activeFoundationIndex];
+
+  const moveFoundationViewer = useCallback((direction: -1 | 1) => {
+    setActiveFoundationIndex((current) => {
+      if (current === null) return current;
+      return (current + direction + foundations.length) % foundations.length;
+    });
+  }, []);
+
+  const closeFoundationViewer = useCallback(() => {
+    const index = activeFoundationIndex;
+    setActiveFoundationIndex(null);
+    if (index !== null) {
+      window.requestAnimationFrame(() =>
+        foundationTriggerRefs.current[index]?.focus(),
+      );
+    }
+  }, [activeFoundationIndex]);
+  useEffect(() => {
+    if (activeFoundationIndex === null) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeFoundationViewer();
+      if (event.key === "ArrowLeft") moveFoundationViewer(-1);
+      if (event.key === "ArrowRight") moveFoundationViewer(1);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeFoundationIndex, closeFoundationViewer, moveFoundationViewer]);
 
   function scrollLevels(direction: -1 | 1) {
     const container = levelsRef.current;
@@ -717,12 +766,29 @@ export function LandingPage() {
             <div className="foundation-grid">
               {foundations.map((foundation, index) => (
                 <Reveal key={foundation.title} delay={index * 0.08}>
-                  <article className="foundation-card">
+                  <button
+                    ref={(node) => {
+                      foundationTriggerRefs.current[index] = node;
+                    }}
+                    type="button"
+                    className="foundation-card foundation-card-trigger"
+                    aria-haspopup="dialog"
+                    aria-label={`Enlarge ${foundation.title}`}
+                    onClick={() => setActiveFoundationIndex(index)}
+                  >
                     <p className="card-index">{foundation.eyebrow}</p>
                     <h3>{foundation.title}</h3>
                     <p>{foundation.description}</p>
-                    <span className="card-orbit" aria-hidden="true" />
-                  </article>
+                    <span
+                      className="card-orbit"
+                      style={
+                        {
+                          "--card-progress": `${((index + 1) / foundations.length) * 100}%`,
+                        } as CSSProperties
+                      }
+                      aria-hidden="true"
+                    />
+                  </button>
                 </Reveal>
               ))}
             </div>
@@ -836,6 +902,61 @@ export function LandingPage() {
             </div>
           </div>
         </section>
+        {activeFoundation && activeFoundationIndex !== null && (
+          <div
+            className="graphic-lightbox foundation-lightbox"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${activeFoundation.title} enlarged card`}
+            onClick={(event) => {
+              if (event.target === event.currentTarget) closeFoundationViewer();
+            }}
+          >
+            <button
+              className="graphic-lightbox-close"
+              type="button"
+              onClick={closeFoundationViewer}
+            >
+              Close
+            </button>
+            <button
+              className="graphic-lightbox-arrow previous"
+              type="button"
+              aria-label="Previous card"
+              onClick={() => moveFoundationViewer(-1)}
+            >
+              ←
+            </button>
+            <div className="foundation-lightbox-media">
+              <article className="foundation-card foundation-card-expanded">
+                <p className="card-index">{activeFoundation.eyebrow}</p>
+                <h3>{activeFoundation.title}</h3>
+                <p>{activeFoundation.description}</p>
+                <span
+                  className="card-orbit"
+                  style={
+                    {
+                      "--card-progress": `${((activeFoundationIndex + 1) / foundations.length) * 100}%`,
+                    } as CSSProperties
+                  }
+                  aria-hidden="true"
+                />
+              </article>
+            </div>
+            <button
+              className="graphic-lightbox-arrow next"
+              type="button"
+              aria-label="Next card"
+              onClick={() => moveFoundationViewer(1)}
+            >
+              →
+            </button>
+            <p className="graphic-lightbox-caption">
+              {activeFoundationIndex + 1} of {foundations.length} ·{" "}
+              {activeFoundation.title}
+            </p>
+          </div>
+        )}
       </main>
       <footer className="site-footer">
         <div className="footer-inner">

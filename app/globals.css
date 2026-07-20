@@ -1906,3 +1906,106 @@ button {
     padding-top: 2.25rem !important;
   }
 }
+
+/* Equal foundation cards with progressive viewer interaction */
+.foundation-grid {
+  align-items: stretch;
+}
+
+.foundation-grid > div {
+  height: 100%;
+}
+
+.foundation-card-trigger {
+  width: 100%;
+  height: 100%;
+  min-height: 27rem;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: zoom-in;
+  appearance: none;
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.foundation-card-trigger:hover {
+  z-index: 2;
+  transform: scale(1.025);
+  border-color: rgba(225, 195, 132, 0.34);
+  box-shadow: 0 28px 76px rgba(0, 0, 0, 0.32);
+}
+
+.foundation-card-trigger:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 4px;
+}
+
+.card-orbit {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 0;
+  background: conic-gradient(
+    from -90deg,
+    var(--gold-bright) 0 var(--card-progress),
+    rgba(225, 195, 132, 0.14) var(--card-progress) 100%
+  );
+  box-shadow: 0 0 1.5rem rgba(225, 195, 132, 0.08);
+}
+
+.card-orbit::before {
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  background: linear-gradient(145deg, #142238, #0c1625);
+  content: "";
+}
+
+.card-orbit::after {
+  display: none;
+}
+
+.foundation-lightbox-media {
+  width: min(84vw, 34rem);
+}
+
+.foundation-card-expanded {
+  width: 100%;
+  min-height: min(70vh, 34rem);
+  transform: none;
+}
+
+.foundation-card-expanded h3 {
+  font-size: clamp(3rem, 7vw, 5rem);
+}
+
+.foundation-card-expanded > p:last-of-type {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+@media (max-width: 700px) {
+  .foundation-card-trigger {
+    min-height: 25rem;
+  }
+
+  .foundation-card-trigger:hover {
+    transform: scale(1.012);
+  }
+
+  .foundation-lightbox-media {
+    width: min(86vw, 30rem);
+  }
+
+  .foundation-card-expanded {
+    min-height: min(72vh, 30rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foundation-card-trigger:hover {
+    transform: none;
+  }
+}
