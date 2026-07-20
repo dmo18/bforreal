@@ -616,41 +616,39 @@ export function LandingPage() {
           id="top"
           aria-labelledby="opening-title"
         >
-          <div className="section-shell opening-shell">
-            <Reveal className="opening-image-wrap">
-              <div
-                className="motto-card"
-                role="img"
-                aria-label="Sing It. Laugh It. Cry It. All Day! Every day! Ein Od Milvado. There is nothing but Him."
-              >
-                <p className="motto-line">Sing It. Laugh It. Cry It.</p>
-                <p className="motto-line motto-everyday">All Day! Every day!</p>
-                <p className="motto-hebrew" lang="he" dir="rtl">
-                  אין עוד מלבדו!
-                </p>
-                <p className="motto-transliteration">Ein Od Milvado!</p>
-                <p className="motto-declaration">THERE IS NOTHING BUT HIM!</p>
+          <div className="section-shell opening-sequence">
+            <Reveal className="opening-motto-visual">
+              <div className="motto-card">
+                <Image
+                  src={`${siteConfig.basePath}/motto-reference.webp`}
+                  alt="Sing It. Laugh It. Cry It. All Day! Every day! Ein Od Milvado. There is nothing but Him."
+                  width={1044}
+                  height={858}
+                  priority
+                  sizes="(max-width: 640px) calc(100vw - 2rem), clamp(34rem, 62vw, 46rem)"
+                  className="motto-reference-image"
+                />
               </div>
             </Reveal>
 
-            <Reveal className="opening-copy" delay={0.08}>
+            <Reveal className="opening-welcome" delay={0.06}>
+              <p className="eyebrow">WELCOME</p>
               <h1 id="opening-title">
-                Bitachon
-                <span>For Real</span>
+                Bitachon <span>For Real</span>
               </h1>
               <p className="opening-body">{siteConfig.description}</p>
-              <div className="intro-motto">
-                <h2>
-                  Disconnect from your emotional attachment to the outcome.
-                </h2>
-                <p>
-                  Do your part with a steady heart, then let the result rest
-                  where it belongs.
-                </p>
-              </div>
+            </Reveal>
+
+            <Reveal className="intro-motto" delay={0.1}>
+              <p className="intro-kicker">A PRACTICE FOR TODAY</p>
+              <h2>Disconnect from your emotional attachment to the outcome.</h2>
+              <p>
+                Do your part with a steady heart, then let the result rest where
+                it belongs.
+              </p>
             </Reveal>
           </div>
-        </section>
+        </section>{" "}
         <section className="section understand" id="understand">
           <div className="section-shell">
             <SectionHeading
@@ -672,7 +670,6 @@ export function LandingPage() {
             </div>
           </div>
         </section>
-
         <section className="section levels" id="levels">
           <div className="section-shell">
             <div className="levels-heading-row">
@@ -730,7 +727,6 @@ export function LandingPage() {
             </div>
           </div>
         </section>
-
         <section className="section resources" id="resources">
           <div className="section-shell">
             <SectionHeading
@@ -794,7 +790,6 @@ export function LandingPage() {
             </div>
           </div>
         </section>
-
         <section className="section inspiration" id="inspiration">
           <div className="section-shell">
             <Reveal className="inspiration-gallery-heading">

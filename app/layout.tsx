@@ -10,8 +10,7 @@ import { GalleryEnhancements } from "./gallery-enhancements";
 import { HideLegacyResourceGrid } from "./hide-legacy-resource-grid";
 import { LivingYoshFeature } from "./living-yosh-feature";
 import { LivingYoshImageSource } from "./living-yosh-image-source";
-import { OpeningDensityPolish } from "./opening-density-polish";
-import { OpeningMottoReference } from "./opening-motto-reference";
+
 import { PodcastFeature } from "./podcast-feature";
 import { ResourceFeatureStabilizer } from "./resource-feature-stabilizer";
 import { VersionSync } from "./version-sync";
@@ -38,6 +37,23 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.title,
+  icons: {
+    icon: [
+      { url: `${siteConfig.basePath}/favicon.ico` },
+      {
+        url: `${siteConfig.basePath}/icon.png`,
+        type: "image/png",
+        sizes: "512x512",
+      },
+    ],
+    apple: [
+      {
+        url: `${siteConfig.basePath}/apple-icon.png`,
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
   alternates: {
     canonical: siteConfig.siteUrl,
   },
@@ -82,8 +98,7 @@ export default function RootLayout({
         <FeatureButtonPolish />
         <ResourceFeatureStabilizer />
         <HideLegacyResourceGrid />
-        <OpeningDensityPolish />
-        <OpeningMottoReference />
+
         <GalleryEnhancements />
         <VersionSync />
       </body>

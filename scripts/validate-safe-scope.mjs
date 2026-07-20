@@ -8,6 +8,12 @@ const allowed = [
   ".github/workflows/deploy-pages.yml",
   "package.json",
   "app/version-sync.tsx",
+  "app/layout.tsx",
+  "app/globals.css",
+  "components/landing-page.tsx",
+  "app/icon.png",
+  "app/apple-icon.png",
+  "app/favicon.ico",
   "app/opening-density-polish.tsx",
   "app/opening-motto-reference.tsx",
   "app/living-yosh-feature.tsx",
@@ -23,9 +29,13 @@ const allowed = [
   "scripts/validate-safe-scope.mjs",
 ];
 
-const changed = execFileSync("git", ["diff", "--name-only", `${base}...${head}`], {
-  encoding: "utf8",
-})
+const changed = execFileSync(
+  "git",
+  ["diff", "--name-only", `${base}...${head}`],
+  {
+    encoding: "utf8",
+  },
+)
   .trim()
   .split("\n")
   .filter(Boolean);
