@@ -1094,15 +1094,6 @@ export function LandingPage() {
             לרפואת יעקב בן דינה · לעילוי נשמת אהרן בן יהודה ואהרן בן יוסף
           </p>
           <div className="footer-meta">
-            <a
-              href={siteConfig.repository}
-              target="_blank"
-              rel="noopener noreferrer external"
-              aria-label="Open the GitHub repository"
-            >
-              Repository
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
             <span>Version {siteConfig.version}</span>
           </div>
         </div>
