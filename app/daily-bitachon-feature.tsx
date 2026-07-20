@@ -9,9 +9,10 @@ const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   "",
 );
 const portrait = `${basePath}/michael-safdie.svg?v=${BUILD_VERSION}`;
-const bookCover = `${basePath}/shaar-habitachon-jaffa.svg?v=${BUILD_VERSION}`;
-const bookUrl =
-  "https://www.amazon.com/Shaar-HaBitachon-Chovos-Halevavos-Family/dp/B09WTZPCR2";
+const bookCover = `${basePath}/shaar-habitachon-gate-of-trust.svg?v=${BUILD_VERSION}`;
+const bookUrl = "https://amzn.to/3R5Cjdr";
+const authorUrl =
+  "https://www.amazon.com/Rabbeinu-Bachya-Ibn-Pakudah/e/B0D62VPXML/ref=dp_byline_cont_book_1";
 const websiteUrl = "https://dailybitachon.com/";
 const whatsappUrl = "https://dailybitachon.com/whatsapp/";
 const phoneUrl = "tel:+17189571805";
@@ -334,13 +335,21 @@ export function DailyBitachonFeature() {
             in the language of decisions, pressure, uncertainty, responsibility,
             and getting through an ordinary day with more trust and less noise.
             His roughly fifteen-minute Daily Bitachon recordings draw from the
-            Jaffa Family Edition of{" "}
             <a
               href={bookUrl}
               target="_blank"
               rel="noopener noreferrer sponsored external"
             >
-              Shaar HaBitachon of Chovos Halevavos
+              Shaar HaBitachon With Commentary From Classical and Chassidic
+              Sources
+            </a>{" "}
+            by{" "}
+            <a
+              href={authorUrl}
+              target="_blank"
+              rel="noopener noreferrer external"
+            >
+              Rabbeinu Bachya Ibn Pakudah
             </a>
             , turning the text into direct, energetic, practical encouragement.
           </p>
@@ -381,13 +390,14 @@ export function DailyBitachonFeature() {
             <img
               className="daily-bitachon-book-cover"
               src={bookCover}
-              alt="Shaar HaBitachon of Chovos Halevavos, Jaffa Family Edition book cover"
+              alt="Shaar HaBitachon With Commentary From Classical and Chassidic Sources book cover"
               loading="lazy"
             />
             <div className="daily-bitachon-book-copy">
               <strong>The text behind the daily lessons</strong>
               <span>
-                Jaffa Family Edition, with English translation and commentary.
+                Commentary from classical and Chassidic sources by Rabbeinu
+                Bachya Ibn Pakudah.
               </span>
             </div>
             <a

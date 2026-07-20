@@ -6,10 +6,14 @@ import { createPortal } from "react-dom";
 const BUILD_VERSION = "1.0.10";
 const featureImage =
   "https://images.squarespace-cdn.com/content/v1/654e78f5a48aae5e62c92022/b5893395-d3b1-4406-ba6d-26162786312e/Gate%2Bof%2BTrust%2BPodcast%2BCovers.png";
-const bookUrl =
-  "https://www.amazon.com/Shaar-HaBitachon-Chovos-Halevavos-Family/dp/B09WTZPCR2";
-const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(/\/$/, "");
-const bookCover = `${basePath}/shaar-habitachon-jaffa.svg?v=${BUILD_VERSION}`;
+const bookUrl = "https://amzn.to/3R5Cjdr";
+const authorUrl =
+  "https://www.amazon.com/Rabbeinu-Bachya-Ibn-Pakudah/e/B0D62VPXML/ref=dp_byline_cont_book_1";
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
+  /\/$/,
+  "",
+);
+const bookCover = `${basePath}/shaar-habitachon-gate-of-trust.svg?v=${BUILD_VERSION}`;
 
 const topicHighlights = [
   "Hishtadlus, effort, and leaving the outcome to Hashem",
@@ -87,7 +91,10 @@ export function PodcastFeature() {
         document.querySelectorAll<HTMLElement>(".footer-meta span"),
       ).find((node) => node.textContent?.startsWith("Version "));
 
-      if (footerVersion && footerVersion.textContent !== `Version ${BUILD_VERSION}`) {
+      if (
+        footerVersion &&
+        footerVersion.textContent !== `Version ${BUILD_VERSION}`
+      ) {
         footerVersion.textContent = `Version ${BUILD_VERSION}`;
       }
     };
@@ -354,7 +361,10 @@ export function PodcastFeature() {
           }
         }
       `}</style>
-      <article className="podcast-feature" aria-labelledby="podcast-feature-title">
+      <article
+        className="podcast-feature"
+        aria-labelledby="podcast-feature-title"
+      >
         <div className="podcast-feature-media">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -364,17 +374,32 @@ export function PodcastFeature() {
           />
         </div>
         <div className="podcast-feature-copy">
-          <p className="podcast-feature-kicker">The podcast that inspired this site</p>
+          <p className="podcast-feature-kicker">
+            The podcast that inspired this site
+          </p>
           <h3 id="podcast-feature-title">Bitachon For Real</h3>
           <p className="podcast-feature-bio">
-            Reb Yirmi Ginsberg leads chaburos at Congregation Aish Kodesh and teaches
-            Bitachon as something to practice, not only study. The weekly series follows
-            Shaar HaBitachon in the Jaffa Family Edition of{" "}
-            <a href={bookUrl} target="_blank" rel="noopener noreferrer sponsored external">
-              Shaar HaBitachon of Chovos Halevavos
+            Reb Yirmi Ginsberg leads chaburos at Congregation Aish Kodesh and
+            teaches Bitachon as something to practice, not only study. The
+            weekly series follows the{" "}
+            <a
+              href={bookUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored external"
+            >
+              Shaar HaBitachon With Commentary From Classical and Chassidic
+              Sources
+            </a>{" "}
+            by{" "}
+            <a
+              href={authorUrl}
+              target="_blank"
+              rel="noopener noreferrer external"
+            >
+              Rabbeinu Bachya Ibn Pakudah
             </a>
-            , bringing classical sources and Chasidic insight into the choices, emotions,
-            and uncertainties of everyday life.
+            , bringing classical sources and Chasidic insight into the choices,
+            emotions, and uncertainties of everyday life.
           </p>
 
           <div className="podcast-feature-facts" aria-label="Podcast format">
@@ -384,7 +409,9 @@ export function PodcastFeature() {
             </div>
             <div className="podcast-feature-fact">
               <strong>Usually 35 to 50 minutes</strong>
-              <span>Long enough for depth, focused enough for a weekly rhythm.</span>
+              <span>
+                Long enough for depth, focused enough for a weekly rhythm.
+              </span>
             </div>
             <div className="podcast-feature-fact">
               <strong>170 plus episodes</strong>
@@ -392,7 +419,10 @@ export function PodcastFeature() {
             </div>
           </div>
 
-          <ul className="podcast-feature-topics" aria-label="Topics explored in the podcast">
+          <ul
+            className="podcast-feature-topics"
+            aria-label="Topics explored in the podcast"
+          >
             {topicHighlights.map((topic) => (
               <li key={topic}>{topic}</li>
             ))}
@@ -403,12 +433,15 @@ export function PodcastFeature() {
             <img
               className="podcast-book-cover"
               src={bookCover}
-              alt="Shaar HaBitachon of Chovos Halevavos, Jaffa Family Edition book cover"
+              alt="Shaar HaBitachon With Commentary From Classical and Chassidic Sources book cover"
               loading="lazy"
             />
             <div className="podcast-book-copy">
               <strong>The text used throughout the series</strong>
-              <span>Jaffa Family Edition, with English translation and commentary.</span>
+              <span>
+                Commentary from classical and Chassidic sources by Rabbeinu
+                Bachya Ibn Pakudah.
+              </span>
             </div>
             <a
               className="podcast-book-link"
@@ -422,18 +455,23 @@ export function PodcastFeature() {
           </div>
 
           <p className="podcast-feature-note">
-            This independent site was inspired by the podcast and is not an official
-            production of Reb Yirmi Ginsberg, Gate of Trust, or Aish Kodesh. The Amazon
-            book link is an affiliate link.
+            This independent site was inspired by the podcast and is not an
+            official production of Reb Yirmi Ginsberg, Gate of Trust, or Aish
+            Kodesh. The Amazon book link is an affiliate link.
           </p>
 
-          <div className="podcast-feature-links" aria-label="Listen to Bitachon For Real">
+          <div
+            className="podcast-feature-links"
+            aria-label="Listen to Bitachon For Real"
+          >
             <a
               href="https://podcasts.apple.com/us/podcast/bitachon-for-real/id1602319903"
               target="_blank"
               rel="noopener noreferrer external"
             >
-              <span className="apple-icon"><ApplePodcastsIcon /></span>
+              <span className="apple-icon">
+                <ApplePodcastsIcon />
+              </span>
               Apple Podcasts
             </a>
             <a
@@ -441,7 +479,9 @@ export function PodcastFeature() {
               target="_blank"
               rel="noopener noreferrer external"
             >
-              <span className="spotify-icon"><SpotifyIcon /></span>
+              <span className="spotify-icon">
+                <SpotifyIcon />
+              </span>
               Spotify
             </a>
             <a

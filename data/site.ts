@@ -41,7 +41,7 @@ export const siteConfig = {
   futureDomain: "bitachonforreal.com",
   repository: "https://github.com/dmo18/bforreal",
   whatsapp: "https://chat.whatsapp.com/CkrFDf12DwdHEoRhFxoyB7",
-  version: "1.0.53",
+  version: "1.0.54",
 };
 
 export const foundations = [
@@ -49,7 +49,7 @@ export const foundations = [
     eyebrow: "01 · Calm",
     title: "Inner calm",
     description:
-      "Bitachon means inner calm because I rely on Hashem—not on chance, people, money, or my own control.",
+      "Bitachon means inner calm because I rely on Hashem, not on chance, people, money, or my own control.",
   },
   {
     eyebrow: "02 · Action",
@@ -156,11 +156,13 @@ export const resources: Resource[] = [
   },
   {
     id: "shaar-habitachon-book",
-    title: "Shaar HaBitachon of Chovos Halevavos",
-    description: "View the Jaffa Family Edition on Amazon.",
+    title:
+      "Shaar HaBitachon With Commentary From Classical and Chassidic Sources",
+    description:
+      "By Rabbeinu Bachya Ibn Pakudah. View the Gate of Trust edition on Amazon.",
     category: "book",
     platform: "Amazon",
-    href: "https://www.amazon.com/Shaar-HaBitachon-Chovos-Halevavos-Family/dp/B09WTZPCR2",
+    href: "https://amzn.to/3R5Cjdr",
     icon: "book-open",
     affiliate: true,
   },

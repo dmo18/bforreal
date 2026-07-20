@@ -840,7 +840,7 @@ export function LandingPage() {
               <SectionHeading
                 eyebrow="A practical framework"
                 title="Seven Levels of Bitachon"
-                body="Seven ideas to return to—slowly, honestly, and one moment at a time."
+                body="Seven ideas to return to slowly, honestly, and one moment at a time."
               />
               <div
                 className="carousel-controls"
