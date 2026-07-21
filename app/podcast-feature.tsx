@@ -3,16 +3,15 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-const BUILD_VERSION = "1.0.10";
-const featureImage =
-  "https://images.squarespace-cdn.com/content/v1/654e78f5a48aae5e62c92022/b5893395-d3b1-4406-ba6d-26162786312e/Gate%2Bof%2BTrust%2BPodcast%2BCovers.png";
-const bookUrl = "https://amzn.to/3R5Cjdr";
-const authorUrl =
-  "https://www.amazon.com/Rabbeinu-Bachya-Ibn-Pakudah/e/B0D62VPXML/ref=dp_byline_cont_book_1";
+const BUILD_VERSION = "1.0.55";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
 );
+const featureImage = basePath + "/bitachon-for-real-podcast-cover.webp";
+const bookUrl = "https://amzn.to/3R5Cjdr";
+const authorUrl =
+  "https://www.amazon.com/Rabbeinu-Bachya-Ibn-Pakudah/e/B0D62VPXML/ref=dp_byline_cont_book_1";
 const bookCover = `${basePath}/shaar-habitachon-gate-of-trust.svg?v=${BUILD_VERSION}`;
 
 const topicHighlights = [
@@ -368,7 +367,7 @@ export function PodcastFeature() {
         <div className="podcast-feature-media">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={`${featureImage}?format=1500w`}
+            src={featureImage}
             alt="Reb Yirmi Ginsberg with Bitachon For Real podcast artwork"
             loading="lazy"
           />
@@ -414,8 +413,10 @@ export function PodcastFeature() {
               </span>
             </div>
             <div className="podcast-feature-fact">
-              <strong>170 plus episodes</strong>
-              <span>A substantial archive built from 2021 onward.</span>
+              <strong>170+ episodes</strong>
+              <span>
+                A substantial archive built from December 22, 2021 onward.
+              </span>
             </div>
           </div>
 

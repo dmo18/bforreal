@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-const BUILD_VERSION = "1.0.13";
+const BUILD_VERSION = "1.0.55";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
 );
-const portrait = `${basePath}/michael-safdie.svg?v=${BUILD_VERSION}`;
+const portrait = `${basePath}/michael-safdie-madison.webp?v=${BUILD_VERSION}`;
 const bookCover = `${basePath}/shaar-habitachon-gate-of-trust.svg?v=${BUILD_VERSION}`;
 const bookUrl = "https://amzn.to/3R5Cjdr";
 const authorUrl =

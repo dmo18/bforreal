@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const BUILD_VERSION = "1.0.20";
+const BUILD_VERSION = "1.0.55";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -176,7 +176,7 @@ export function DailyBitachonPolish() {
         'img[alt*="Michael Safdie"]',
       );
       if (portrait) {
-        portrait.src = `${basePath}/michael-safdie-madison.svg?v=${BUILD_VERSION}`;
+        portrait.src = `${basePath}/michael-safdie-madison.webp?v=${BUILD_VERSION}`;
         portrait.alt = "Mr. Michael Safdie outside Madison Time";
         portrait.decoding = "async";
       }

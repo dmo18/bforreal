@@ -15,6 +15,8 @@ const allowed = [
   "app/daily-bitachon-feature.tsx",
   "app/podcast-feature.tsx",
   "public/shaar-habitachon-gate-of-trust.svg",
+  "public/bitachon-for-real-podcast-cover.webp",
+  "public/michael-safdie-madison.webp",
   "public/shaar-habitachon-jaffa.svg",
   "app/feature-button-polish.tsx",
   "app/footer-overrides.css",
