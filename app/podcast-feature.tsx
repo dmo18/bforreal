@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { StickerCollection } from "@/components/stickers/sticker-collection";
 
-const BUILD_VERSION = "1.0.61";
+const BUILD_VERSION = "1.0.62";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -14,6 +14,7 @@ const bookUrl = "https://amzn.to/3R5Cjdr";
 const authorUrl =
   "https://www.amazon.com/Rabbeinu-Bachya-Ibn-Pakudah/e/B0D62VPXML/ref=dp_byline_cont_book_1";
 const bookCover = `${basePath}/shaar-habitachon-gate-of-trust.svg?v=${BUILD_VERSION}`;
+const gateIcon = `${basePath}/gate-of-trust-favicon.svg?v=${BUILD_VERSION}`;
 
 function ApplePodcastsIcon() {
   return (
@@ -455,7 +456,7 @@ export function PodcastFeature() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className="gate-icon"
-                src="https://www.gateoftrust.org/favicon.ico"
+                src={gateIcon}
                 alt=""
                 aria-hidden="true"
               />
