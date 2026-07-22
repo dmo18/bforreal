@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { StickerCollection } from "@/components/stickers/sticker-collection";
 
-const BUILD_VERSION = "1.0.59";
+const BUILD_VERSION = "1.0.60";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -286,9 +286,9 @@ export function LivingYoshFeature() {
               <ExploreIcon /> Explore
             </a>
           </div>
+          <StickerCollection collectionId="living-yosh" />
         </div>
       </article>
-      <StickerCollection collectionId="living-yosh" />
     </>,
     target,
   );

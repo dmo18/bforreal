@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const BUILD_VERSION = "1.0.59";
+const BUILD_VERSION = "1.0.60";
 
 type Graphic = {
   src: string;
