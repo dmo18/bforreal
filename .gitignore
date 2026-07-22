@@ -18,6 +18,10 @@
 /.vinext/
 /out/
 
+# build-generated sticker derivatives
+/public/stickers/
+/public/motto-reference.jpg
+
 # misc
 .DS_Store
 *.pem

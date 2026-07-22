@@ -1,0 +1,274 @@
+{
+  "collections": [
+    {
+      "id": "podcast",
+      "title": "Bitachon For Real stickers",
+      "description": "Ten reminders inspired by the shiur. Save one for WhatsApp or send it onward.",
+      "featureKicker": "The podcast that inspired this site",
+      "theme": "gold",
+      "downloadPrefix": "bitachon-for-real-sticker",
+      "stickers": [
+        {
+          "number": "01",
+          "sourcePng": "assets/bitachonforreal.com_yg-01.png",
+          "sourceWebp": "assets/bitachonforreal.com_yg_1.webp",
+          "publicPng": "stickers/podcast/01.png",
+          "publicWebp": "stickers/podcast/01.webp",
+          "alt": "Bitachon For Real sticker 01"
+        },
+        {
+          "number": "02",
+          "sourcePng": "assets/bitachonforreal.com_yg-02.png",
+          "sourceWebp": "assets/bitachonforreal.com_yg_2.webp",
+          "publicPng": "stickers/podcast/02.png",
+          "publicWebp": "stickers/podcast/02.webp",
+          "alt": "Bitachon For Real sticker 02"
+        },
+        {
+          "number": "03",
+          "sourcePng": "assets/bitachonforreal.com_yg-03.png",
+          "sourceWebp": "assets/bitachonforreal.com_yg_3.webp",
+          "publicPng": "stickers/podcast/03.png",
+          "publicWebp": "stickers/podcast/03.webp",
+          "alt": "Bitachon For Real sticker 03"
+        },
+        {
+          "number": "04",
+          "sourcePng": "assets/bitachonforreal.com_yg-04.png",
+          "sourceWebp": "assets/bitachonforreal.com_yg_4.webp",
+          "publicPng": "stickers/podcast/04.png",
+          "publicWebp": "stickers/podcast/04.webp",
+          "alt": "Bitachon For Real sticker 04"
+        },
+        {
+          "number": "05",
+          "sourcePng": "assets/bitachonforreal.com_yg-05.png",
+          "sourceWebp": "assets/bitachonforreal.com_yg_5.webp",
+          "publicPng": "stickers/podcast/05.png",
+          "publicWebp": "stickers/podcast/05.webp",
+          "alt": "Bitachon For Real sticker 05"
+        },
+        {
+          "number": "06",
+          "sourcePng": "assets/bitachonforreal.com_yg-06.png",
+          "sourceWebp": "assets/bitachonforreal.com_yg_6.webp",
+          "publicPng": "stickers/podcast/06.png",
+          "publicWebp": "stickers/podcast/06.webp",
+          "alt": "Bitachon For Real sticker 06"
+        },
+        {
+          "number": "07",
+          "sourcePng": "assets/bitachonforreal.com_yg-07.png",
+          "sourceWebp": "assets/bitachonforreal.com_yg_7.webp",
+          "publicPng": "stickers/podcast/07.png",
+          "publicWebp": "stickers/podcast/07.webp",
+          "alt": "Bitachon For Real sticker 07"
+        },
+        {
+          "number": "08",
+          "sourcePng": "assets/bitachonforreal.com_yg-08.png",
+          "sourceWebp": "assets/bitachonforreal.com_yg_8.webp",
+          "publicPng": "stickers/podcast/08.png",
+          "publicWebp": "stickers/podcast/08.webp",
+          "alt": "Bitachon For Real sticker 08"
+        },
+        {
+          "number": "09",
+          "sourcePng": "assets/bitachonforreal.com_yg-09.png",
+          "sourceWebp": "assets/bitachonforreal.com_yg_9.webp",
+          "publicPng": "stickers/podcast/09.png",
+          "publicWebp": "stickers/podcast/09.webp",
+          "alt": "Bitachon For Real sticker 09"
+        },
+        {
+          "number": "10",
+          "sourcePng": "assets/bitachonforreal.com_yg-10.png",
+          "sourceWebp": "assets/bitachonforreal.com_yg_10.webp",
+          "publicPng": "stickers/podcast/10.png",
+          "publicWebp": "stickers/podcast/10.webp",
+          "alt": "Bitachon For Real sticker 10"
+        }
+      ]
+    },
+    {
+      "id": "daily",
+      "title": "Daily Bitachon stickers",
+      "description": "Ten reminders for pressure, perspective, and real life. Save one for WhatsApp or send it onward.",
+      "featureKicker": "A daily voice note for real life",
+      "theme": "mint",
+      "downloadPrefix": "daily-bitachon-sticker",
+      "stickers": [
+        {
+          "number": "01",
+          "sourcePng": "assets/bitachonforreal.com_ms-01.png",
+          "sourceWebp": "assets/bitachonforreal.com_ms_1.webp",
+          "publicPng": "stickers/daily/01.png",
+          "publicWebp": "stickers/daily/01.webp",
+          "alt": "Daily Bitachon sticker 01"
+        },
+        {
+          "number": "02",
+          "sourcePng": "assets/bitachonforreal.com_ms-02.png",
+          "sourceWebp": "assets/bitachonforreal.com_ms_2.webp",
+          "publicPng": "stickers/daily/02.png",
+          "publicWebp": "stickers/daily/02.webp",
+          "alt": "Daily Bitachon sticker 02"
+        },
+        {
+          "number": "03",
+          "sourcePng": "assets/bitachonforreal.com_ms-03.png",
+          "sourceWebp": "assets/bitachonforreal.com_ms_3.webp",
+          "publicPng": "stickers/daily/03.png",
+          "publicWebp": "stickers/daily/03.webp",
+          "alt": "Daily Bitachon sticker 03"
+        },
+        {
+          "number": "04",
+          "sourcePng": "assets/bitachonforreal.com_ms-04.png",
+          "sourceWebp": "assets/bitachonforreal.com_ms_4.webp",
+          "publicPng": "stickers/daily/04.png",
+          "publicWebp": "stickers/daily/04.webp",
+          "alt": "Daily Bitachon sticker 04"
+        },
+        {
+          "number": "05",
+          "sourcePng": "assets/bitachonforreal.com_ms-05.png",
+          "sourceWebp": "assets/bitachonforreal.com_ms_5.webp",
+          "publicPng": "stickers/daily/05.png",
+          "publicWebp": "stickers/daily/05.webp",
+          "alt": "Daily Bitachon sticker 05"
+        },
+        {
+          "number": "06",
+          "sourcePng": "assets/bitachonforreal.com_ms-06.png",
+          "sourceWebp": "assets/bitachonforreal.com_ms_6.webp",
+          "publicPng": "stickers/daily/06.png",
+          "publicWebp": "stickers/daily/06.webp",
+          "alt": "Daily Bitachon sticker 06"
+        },
+        {
+          "number": "07",
+          "sourcePng": "assets/bitachonforreal.com_ms-07.png",
+          "sourceWebp": "assets/bitachonforreal.com_ms_7.webp",
+          "publicPng": "stickers/daily/07.png",
+          "publicWebp": "stickers/daily/07.webp",
+          "alt": "Daily Bitachon sticker 07"
+        },
+        {
+          "number": "08",
+          "sourcePng": "assets/bitachonforreal.com_ms-08.png",
+          "sourceWebp": "assets/bitachonforreal.com_ms_8.webp",
+          "publicPng": "stickers/daily/08.png",
+          "publicWebp": "stickers/daily/08.webp",
+          "alt": "Daily Bitachon sticker 08"
+        },
+        {
+          "number": "09",
+          "sourcePng": "assets/bitachonforreal.com_ms-09.png",
+          "sourceWebp": "assets/bitachonforreal.com_ms_9.webp",
+          "publicPng": "stickers/daily/09.png",
+          "publicWebp": "stickers/daily/09.webp",
+          "alt": "Daily Bitachon sticker 09"
+        },
+        {
+          "number": "10",
+          "sourcePng": "assets/bitachonforreal.com_ms-10.png",
+          "sourceWebp": "assets/bitachonforreal.com_ms_10.webp",
+          "publicPng": "stickers/daily/10.png",
+          "publicWebp": "stickers/daily/10.webp",
+          "alt": "Daily Bitachon sticker 10"
+        }
+      ]
+    },
+    {
+      "id": "living-yosh",
+      "title": "LivingYosh stickers",
+      "description": "Ten reminders of faith, resilience, and hope. Save one for WhatsApp or send it onward.",
+      "featureKicker": "Faith · Resilience · Hope",
+      "theme": "amber",
+      "downloadPrefix": "living-yosh-sticker",
+      "stickers": [
+        {
+          "number": "01",
+          "sourcePng": "assets/bitachonforreal.com_ly-01.png",
+          "sourceWebp": "assets/bitachonforreal.com_ly-01.webp",
+          "publicPng": "stickers/living-yosh/01.png",
+          "publicWebp": "stickers/living-yosh/01.webp",
+          "alt": "LivingYosh sticker 01"
+        },
+        {
+          "number": "02",
+          "sourcePng": "assets/bitachonforreal.com_ly-02.png",
+          "sourceWebp": "assets/bitachonforreal.com_ly-02.webp",
+          "publicPng": "stickers/living-yosh/02.png",
+          "publicWebp": "stickers/living-yosh/02.webp",
+          "alt": "LivingYosh sticker 02"
+        },
+        {
+          "number": "03",
+          "sourcePng": "assets/bitachonforreal.com_ly-03.png",
+          "sourceWebp": "assets/bitachonforreal.com_ly-03.webp",
+          "publicPng": "stickers/living-yosh/03.png",
+          "publicWebp": "stickers/living-yosh/03.webp",
+          "alt": "LivingYosh sticker 03"
+        },
+        {
+          "number": "04",
+          "sourcePng": "assets/bitachonforreal.com_ly-04.png",
+          "sourceWebp": "assets/bitachonforreal.com_ly-04.webp",
+          "publicPng": "stickers/living-yosh/04.png",
+          "publicWebp": "stickers/living-yosh/04.webp",
+          "alt": "LivingYosh sticker 04"
+        },
+        {
+          "number": "05",
+          "sourcePng": "assets/bitachonforreal.com_ly-05.png",
+          "sourceWebp": "assets/bitachonforreal.com_ly-05.webp",
+          "publicPng": "stickers/living-yosh/05.png",
+          "publicWebp": "stickers/living-yosh/05.webp",
+          "alt": "LivingYosh sticker 05"
+        },
+        {
+          "number": "06",
+          "sourcePng": "assets/bitachonforreal.com_ly-06.png",
+          "sourceWebp": "assets/bitachonforreal.com_ly-06.webp",
+          "publicPng": "stickers/living-yosh/06.png",
+          "publicWebp": "stickers/living-yosh/06.webp",
+          "alt": "LivingYosh sticker 06"
+        },
+        {
+          "number": "07",
+          "sourcePng": "assets/bitachonforreal.com_ly-07.png",
+          "sourceWebp": "assets/bitachonforreal.com_ly-07.webp",
+          "publicPng": "stickers/living-yosh/07.png",
+          "publicWebp": "stickers/living-yosh/07.webp",
+          "alt": "LivingYosh sticker 07"
+        },
+        {
+          "number": "08",
+          "sourcePng": "assets/bitachonforreal.com_ly-08.png",
+          "sourceWebp": "assets/bitachonforreal.com_ly-08.webp",
+          "publicPng": "stickers/living-yosh/08.png",
+          "publicWebp": "stickers/living-yosh/08.webp",
+          "alt": "LivingYosh sticker 08"
+        },
+        {
+          "number": "09",
+          "sourcePng": "assets/bitachonforreal.com_ly-09.png",
+          "sourceWebp": "assets/bitachonforreal.com_ly-09.webp",
+          "publicPng": "stickers/living-yosh/09.png",
+          "publicWebp": "stickers/living-yosh/09.webp",
+          "alt": "LivingYosh sticker 09"
+        },
+        {
+          "number": "10",
+          "sourcePng": "assets/bitachonforreal.com_ly-10.png",
+          "sourceWebp": "assets/bitachonforreal.com_ly-10.webp",
+          "publicPng": "stickers/living-yosh/10.png",
+          "publicWebp": "stickers/living-yosh/10.webp",
+          "alt": "LivingYosh sticker 10"
+        }
+      ]
+    }
+  ]
+}

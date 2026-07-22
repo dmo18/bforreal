@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { StickerCollection } from "@/components/stickers/sticker-collection";
 
-const BUILD_VERSION = "1.0.43";
+const BUILD_VERSION = "1.0.59";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -87,9 +88,12 @@ export function LivingYoshFeature() {
     const mount = document.createElement("div");
     mount.className = "living-yosh-feature-mount";
     resourceGrid.parentElement.insertBefore(mount, resourceGrid);
-    setTarget(mount);
+    const frame = window.requestAnimationFrame(() => setTarget(mount));
 
-    return () => mount.remove();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      mount.remove();
+    };
   }, []);
 
   if (!target) return null;
@@ -219,8 +223,12 @@ export function LivingYoshFeature() {
           }
         }
       `}</style>
-      <article className="living-yosh-feature" aria-labelledby="living-yosh-title">
+      <article
+        className="living-yosh-feature"
+        aria-labelledby="living-yosh-title"
+      >
         <div className="living-yosh-media">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={portrait}
             alt="Yosh Markell with his daughter"
@@ -232,29 +240,39 @@ export function LivingYoshFeature() {
           <p className="living-yosh-kicker">Faith · Resilience · Hope</p>
           <h3 id="living-yosh-title">LivingYosh</h3>
           <p className="living-yosh-bio">
-            Yosh Markell is the founder of <a href={websiteUrl}>LivingYosh</a>, a
-            platform shaped by his journey through false accusation, jail, house
-            arrest, financial pressure, and rebuilding through faith, family, and
-            perseverance.
+            Yosh Markell is the founder of <a href={websiteUrl}>LivingYosh</a>,
+            a platform shaped by his journey through false accusation, jail,
+            house arrest, financial pressure, and rebuilding through faith,
+            family, and perseverance.
           </p>
           <p className="living-yosh-bio">
-            LivingYosh shares authentic conversations about Torah, faith, personal
-            growth, resilience, current events, and overcoming life&apos;s challenges.
-            Its mission is to help people find strength in their own journeys and to
-            remind them that one person&apos;s story may be the hope someone else needs.
+            LivingYosh shares authentic conversations about Torah, faith,
+            personal growth, resilience, current events, and overcoming
+            life&apos;s challenges. Its mission is to help people find strength
+            in their own journeys and to remind them that one person&apos;s
+            story may be the hope someone else needs.
           </p>
-          <div className="living-yosh-highlights" aria-label="LivingYosh highlights">
+          <div
+            className="living-yosh-highlights"
+            aria-label="LivingYosh highlights"
+          >
             <div className="living-yosh-highlight">
               <strong>Real stories</strong>
-              <span>Interviews and personal journeys shaped by challenge and growth.</span>
+              <span>
+                Interviews and personal journeys shaped by challenge and growth.
+              </span>
             </div>
             <div className="living-yosh-highlight">
               <strong>Torah and faith</strong>
-              <span>Practical encouragement grounded in emunah, hope, and purpose.</span>
+              <span>
+                Practical encouragement grounded in emunah, hope, and purpose.
+              </span>
             </div>
             <div className="living-yosh-highlight">
               <strong>Community</strong>
-              <span>A place to listen, learn, share a story, and strengthen others.</span>
+              <span>
+                A place to listen, learn, share a story, and strengthen others.
+              </span>
             </div>
           </div>
           <div className="living-yosh-actions daily-bitachon-actions">
@@ -270,6 +288,7 @@ export function LivingYoshFeature() {
           </div>
         </div>
       </article>
+      <StickerCollection collectionId="living-yosh" />
     </>,
     target,
   );

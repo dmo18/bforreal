@@ -8,10 +8,18 @@ export function ResourceFeatureStabilizer() {
     let attempts = 0;
 
     const organize = () => {
-      const resourceSection = document.querySelector<HTMLElement>("section.resources");
-      const understandSection = document.querySelector<HTMLElement>("section.understand");
-      const resourceGrid = document.querySelector<HTMLElement>(".resource-grid");
-      const podcast = document.querySelector<HTMLElement>(".podcast-feature-mount");
+      const resourceSection =
+        document.querySelector<HTMLElement>("section.resources");
+      const understandSection =
+        document.querySelector<HTMLElement>("section.understand");
+      const resourceGrid =
+        document.querySelector<HTMLElement>(".resource-grid");
+      const podcast = document.querySelector<HTMLElement>(
+        ".podcast-feature-mount",
+      );
+      const living = document.querySelector<HTMLElement>(
+        ".living-yosh-feature-mount",
+      );
       const daily = document.querySelector<HTMLElement>(
         ".daily-bitachon-feature-mount",
       );
@@ -22,6 +30,7 @@ export function ResourceFeatureStabilizer() {
         !understandSection ||
         !resourceGrid ||
         !podcast ||
+        !living ||
         !daily ||
         !parent
       ) {
@@ -41,16 +50,25 @@ export function ResourceFeatureStabilizer() {
 
       const children = Array.from(parent.children);
       const podcastIndex = children.indexOf(podcast);
+      const livingIndex = children.indexOf(living);
       const dailyIndex = children.indexOf(daily);
       const gridIndex = children.indexOf(resourceGrid);
 
-      if (!(podcastIndex < dailyIndex && dailyIndex < gridIndex)) {
+      if (
+        !(
+          podcastIndex < dailyIndex &&
+          dailyIndex < livingIndex &&
+          livingIndex < gridIndex
+        )
+      ) {
         parent.insertBefore(podcast, resourceGrid);
         parent.insertBefore(daily, resourceGrid);
+        parent.insertBefore(living, resourceGrid);
       }
 
       podcast.style.marginTop = "clamp(2.4rem, 4vw, 3.6rem)";
       daily.style.marginTop = "clamp(1.25rem, 2.6vw, 2rem)";
+      living.style.marginTop = "clamp(1.25rem, 2.6vw, 2rem)";
     };
 
     frame = window.requestAnimationFrame(organize);
