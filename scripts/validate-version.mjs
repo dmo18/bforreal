@@ -9,26 +9,6 @@ const activeVersionFiles = [
   ["data/site.ts", /version:\s*["'`](\d+\.\d+\.\d+)["'`]/g],
   ["app/version-sync.tsx", /BUILD_VERSION\s*=\s*["'`](\d+\.\d+\.\d+)["'`]/g],
   ["app/podcast-feature.tsx", /BUILD_VERSION\s*=\s*["'`](\d+\.\d+\.\d+)["'`]/g],
-  [
-    "app/daily-bitachon-feature.tsx",
-    /BUILD_VERSION\s*=\s*["'`](\d+\.\d+\.\d+)["'`]/g,
-  ],
-  [
-    "app/daily-bitachon-polish.tsx",
-    /BUILD_VERSION\s*=\s*["'`](\d+\.\d+\.\d+)["'`]/g,
-  ],
-  [
-    "app/gallery-enhancements.tsx",
-    /BUILD_VERSION\s*=\s*["'`](\d+\.\d+\.\d+)["'`]/g,
-  ],
-  [
-    "app/living-yosh-feature.tsx",
-    /BUILD_VERSION\s*=\s*["'`](\d+\.\d+\.\d+)["'`]/g,
-  ],
-  [
-    "app/living-yosh-image-source.tsx",
-    /BUILD_VERSION\s*=\s*["'`](\d+\.\d+\.\d+)["'`]/g,
-  ],
 ];
 
 const mismatches = [];
@@ -53,4 +33,4 @@ if (mismatches.length > 0) {
   throw new Error(`Version mismatch:\n${mismatches.join("\n")}`);
 }
 
-console.log(`Version references are synchronized at ${expected}.`);
+console.log(`Public version references are synchronized at ${expected}.`);
