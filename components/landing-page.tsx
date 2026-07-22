@@ -126,13 +126,13 @@ function SectionHeading({
 }: {
   eyebrow: string;
   title: string;
-  body: string;
+  body?: string;
 }) {
   return (
     <Reveal className="section-heading">
       <p className="eyebrow">{eyebrow}</p>
       <h2>{title}</h2>
-      <p className="section-lede">{body}</p>
+      {body ? <p className="section-lede">{body}</p> : null}
     </Reveal>
   );
 }
@@ -738,7 +738,6 @@ export function LandingPage() {
             <SectionHeading
               eyebrow="Resource hub"
               title="A thoughtful place to begin."
-              body="Independent public resources for learning and listening. Every link opens on the original provider’s site."
             />
             <div className="resource-grid">
               {resources.map((resource, index) => {
@@ -1088,7 +1087,7 @@ export function LandingPage() {
           </a>
           <p className="footer-note">
             Independent directory; not affiliated with or endorsed by listed
-            resources. As an Amazon Associate I earn from qualifying purchases.
+            resources. As an Amazon Associate we earn from qualifying purchases.
           </p>
           <p className="footer-dedication" dir="rtl" lang="he">
             לרפואת יעקב בן דינה · לעילוי נשמת אהרן בן יהודה ואהרן בן יוסף

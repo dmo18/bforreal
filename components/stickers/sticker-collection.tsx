@@ -124,6 +124,7 @@ export function StickerCollection({
     closeCollection,
     undefined,
     activeIndex !== null || sequenceOpen || helpOpen,
+    collectionOpen,
   );
 
   const moveViewer = useCallback(

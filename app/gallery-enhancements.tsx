@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const BUILD_VERSION = "1.0.60";
+const BUILD_VERSION = "1.0.61";
 
 type Graphic = {
   src: string;
@@ -79,7 +79,6 @@ export function GalleryEnhancements() {
     const tools = document.createElement("div");
     tools.className = "inspiration-carousel-tools";
     tools.innerHTML = `
-      <p class="inspiration-carousel-hint">Swipe or use the arrows to explore</p>
       <div class="inspiration-carousel-actions">
         <button type="button" class="inspiration-carousel-arrow" data-direction="previous" aria-label="Previous graphics">&#8592;</button>
         <div class="inspiration-carousel-progress" aria-hidden="true"><span></span></div>
@@ -230,8 +229,7 @@ export function GalleryEnhancements() {
           gap: 1.25rem;
           margin-top: .7rem;
         }
-        .inspiration-carousel-hint { color: var(--muted); font-size: .75rem; letter-spacing: .04em; }
-        .inspiration-carousel-actions { display: flex; align-items: center; gap: .65rem; }
+        .inspiration-carousel-actions { display: flex; align-items: center; justify-content: flex-end; gap: .65rem; margin-left: auto; }
         .inspiration-carousel-arrow,
         .graphic-lightbox-arrow,
         .graphic-lightbox-close {
@@ -268,7 +266,7 @@ export function GalleryEnhancements() {
         .graphic-lightbox-caption { position: absolute; right: 1rem; bottom: max(.75rem,env(safe-area-inset-bottom)); left: 1rem; color: var(--cream-soft); font-size: clamp(.75rem,1.4vw,1rem); text-align: center; }
         @media (max-width: 700px) {
           .inspiration-gallery { grid-auto-columns: min(84vw,20rem) !important; gap: .9rem !important; margin-inline: -.35rem; padding-inline: .35rem !important; }
-          .inspiration-carousel-tools { align-items: flex-end; }
+          .inspiration-carousel-tools { justify-content: flex-end; }
           .inspiration-carousel-arrow { display: none; }
           .graphic-lightbox { padding: .5rem; }
           .graphic-lightbox-media { width: 96vw; height: 86vh; }

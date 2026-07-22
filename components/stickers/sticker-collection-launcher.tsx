@@ -23,13 +23,6 @@ export function StickerCollectionLauncher({
 }) {
   const collection = getStickerCollection(collectionId);
   const previews = collection.stickers.slice(0, 3);
-  const supportingCopy =
-    collectionId === "podcast"
-      ? "10 reminders to save and share."
-      : collectionId === "daily"
-        ? "10 reminders for pressure, perspective, and real life."
-        : "10 reminders of faith, resilience, and hope.";
-
   return (
     <section
       className={`sticker-launcher sticker-launcher--${collection.theme}`}
@@ -64,7 +57,6 @@ export function StickerCollectionLauncher({
           Stickers
         </p>
         <h4 className="sticker-launcher-title">{collection.title}</h4>
-        <p className="sticker-launcher-description">{supportingCopy}</p>
       </div>
       <div className="sticker-launcher-actions">
         <button

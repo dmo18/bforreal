@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { StickerCollection } from "@/components/stickers/sticker-collection";
 
-const BUILD_VERSION = "1.0.60";
+const BUILD_VERSION = "1.0.61";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -338,7 +338,7 @@ export function DailyBitachonFeature() {
             not from a rabbinic title. That perspective is the point: he speaks
             in the language of decisions, pressure, uncertainty, responsibility,
             and getting through an ordinary day with more trust and less noise.
-            His roughly fifteen-minute Daily Bitachon recordings draw from the
+            His roughly fifteen-minute Daily Bitachon recordings draw from the{" "}
             <a
               href={bookUrl}
               target="_blank"
