@@ -41,7 +41,7 @@ export const siteConfig = {
   futureDomain: "bitachonforreal.com",
   repository: "https://github.com/dmo18/bforreal",
   whatsapp: "https://chat.whatsapp.com/CkrFDf12DwdHEoRhFxoyB7",
-  version: "1.0.61",
+  version: "1.0.62",
 };
 
 export const foundations = [
