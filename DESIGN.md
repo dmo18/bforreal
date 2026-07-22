@@ -165,3 +165,21 @@ Do not merge a build with inconsistent active version references.
 3. Maintain reliable local image delivery on GitHub Pages.
 4. Consolidate temporary override components into source components over time.
 5. Preserve mobile readability and reduce unnecessary vertical scrolling.
+
+### Sticker presentation refactor (1.0.60)
+
+Accepted:
+
+- Compact sticker footer inside each parent resource card.
+- Three miniature previews using the first three canonical stickers.
+- Full sticker experience in a contained overlay.
+- Contained desktop dialog with internal scrolling.
+- Full-screen mobile sheet with safe-area spacing and one scrolling region.
+- Direct “How it works” access from the compact footer.
+
+Rejected:
+
+- Full inline sticker galleries beneath the resource features.
+- Inline gallery expansion that pushes later sections down.
+- Sticker sections as large as their parent resource.
+- Large mobile sticker walls.

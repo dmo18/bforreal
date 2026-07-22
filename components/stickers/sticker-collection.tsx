@@ -16,12 +16,14 @@ import {
   updateCurrentStickerQuery,
 } from "@/lib/sticker-links";
 import { StickerCard } from "./sticker-card";
+import { StickerCollectionLauncher } from "./sticker-collection-launcher";
 import { StickerHelpSheet } from "./sticker-help-sheet";
 import {
   getStickerProgressKey,
   StickerSaveSequence,
 } from "./sticker-save-sequence";
 import { StickerViewer } from "./sticker-viewer";
+import { useModalDialog } from "./use-modal-dialog";
 
 function clearStickerQuery() {
   const url = new URL(window.location.href);
@@ -42,6 +44,8 @@ export function StickerCollection({
 }) {
   const collection = getStickerCollection(collectionId);
   const galleryRef = useRef<HTMLDivElement>(null);
+  const collectionDialogRef = useRef<HTMLDialogElement>(null);
+  const exploreButtonRef = useRef<HTMLButtonElement>(null);
   const getAllButtonRef = useRef<HTMLButtonElement>(null);
   const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -50,6 +54,7 @@ export function StickerCollection({
   const [sequenceOpen, setSequenceOpen] = useState(false);
   const [sequenceStart, setSequenceStart] = useState(0);
   const [resumeIndex, setResumeIndex] = useState<number | null>(null);
+  const [collectionOpen, setCollectionOpen] = useState(false);
 
   const readProgress = useCallback(() => {
     try {
@@ -87,6 +92,7 @@ export function StickerCollection({
     setActiveIndex(stickerIndex >= 0 ? stickerIndex : null);
     const matchesSequence = query.getAll && query.collection === collection.id;
     setSequenceOpen(matchesSequence);
+    setCollectionOpen(stickerIndex >= 0 || matchesSequence);
     if (matchesSequence) {
       setSequenceStart(readProgress() ?? 0);
     }
@@ -103,6 +109,22 @@ export function StickerCollection({
       window.removeEventListener("popstate", syncFromQuery);
     };
   }, [readProgress, syncFromQuery]);
+
+  const closeCollection = useCallback(() => {
+    setCollectionOpen(false);
+    setActiveIndex(null);
+    setSequenceOpen(false);
+    setHelpOpen(false);
+    clearStickerQuery();
+    window.requestAnimationFrame(() => exploreButtonRef.current?.focus());
+  }, []);
+
+  useModalDialog(
+    collectionDialogRef,
+    closeCollection,
+    undefined,
+    activeIndex !== null || sequenceOpen || helpOpen,
+  );
 
   const moveViewer = useCallback(
     (direction: -1 | 1) => {
@@ -121,6 +143,7 @@ export function StickerCollection({
   );
 
   function openViewer(index: number) {
+    setCollectionOpen(true);
     setActiveIndex(index);
     updateCurrentStickerQuery(
       getStickerId(collection, collection.stickers[index]),
@@ -132,8 +155,15 @@ export function StickerCollection({
     setActiveIndex(null);
     clearStickerQuery();
     if (index !== null) {
-      window.requestAnimationFrame(() => triggerRefs.current[index]?.focus());
+      window.requestAnimationFrame(() =>
+        (triggerRefs.current[index] ?? exploreButtonRef.current)?.focus(),
+      );
     }
+  }
+
+  function openCollection() {
+    setCollectionOpen(true);
+    setActiveIndex(null);
   }
 
   function openSequence(start = resumeIndex ?? 0) {
@@ -194,81 +224,119 @@ export function StickerCollection({
         : buildStickerLink(collection, collection.stickers[0]);
 
   return (
-    <section
-      className={`sticker-collection sticker-collection--${collection.theme}`}
-      aria-labelledby={`${collection.id}-stickers-title`}
-    >
-      <div className="sticker-collection-heading">
-        <div>
-          <p className="sticker-collection-eyebrow">Share a reminder</p>
-          <h4 id={`${collection.id}-stickers-title`}>{collection.title}</h4>
-          <p>{collection.description}</p>
-        </div>
-        <div className="sticker-collection-actions">
-          <button
-            type="button"
-            className="sticker-help-trigger"
-            onClick={() => setHelpOpen(true)}
-          >
-            <HelpCircle /> How do I use these in WhatsApp?
-          </button>
-          <button
-            ref={getAllButtonRef}
-            type="button"
-            className="sticker-get-all"
-            onClick={() => openSequence()}
-          >
-            <Layers3 />{" "}
-            {resumeIndex === null
-              ? "Get all 10"
-              : `Resume at ${resumeIndex + 1} of 10`}
-          </button>
-        </div>
-      </div>
+    <>
+      <StickerCollectionLauncher
+        collectionId={collectionId}
+        exploreRef={exploreButtonRef}
+        onExplore={openCollection}
+        onHelp={() => setHelpOpen(true)}
+        onPreview={openViewer}
+      />
 
-      <div className="sticker-gallery-frame">
-        <div
-          ref={galleryRef}
-          className="sticker-gallery"
-          role="region"
-          aria-label={`${collection.title} gallery`}
-          tabIndex={0}
-          onScroll={updateMobileProgress}
+      {collectionOpen && (
+        <dialog
+          ref={collectionDialogRef}
+          className="sticker-dialog sticker-collection-dialog"
+          aria-labelledby={collection.id + "-stickers-dialog-title"}
         >
-          {collection.stickers.map((sticker, index) => (
-            <StickerCard
-              key={sticker.number}
-              sticker={sticker}
-              imageUrl={withStickerBasePath(sticker.publicWebp)}
-              onOpen={() => openViewer(index)}
-              triggerRef={(node) => {
-                triggerRefs.current[index] = node;
-              }}
-            />
-          ))}
-        </div>
-        <div className="sticker-gallery-controls">
-          <span aria-live="polite">
-            {mobileIndex + 1} of {collection.stickers.length}
-          </span>
-          <div>
-            <button
-              type="button"
-              aria-label="Previous stickers"
-              onClick={() => scrollGallery(-1)}
+          <div className="sticker-dialog-panel sticker-collection-dialog-panel">
+            <div className="sticker-dialog-topbar">
+              <span id={collection.id + "-stickers-dialog-title"}>
+                {collection.title}
+              </span>
+              <button
+                type="button"
+                className="sticker-dialog-close"
+                aria-label="Close sticker collection"
+                onClick={closeCollection}
+                data-autofocus
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <section
+              className={
+                "sticker-collection sticker-collection--" + collection.theme
+              }
+              aria-labelledby={collection.id + "-stickers-title"}
             >
-              <ChevronLeft />
-            </button>
-            <button
-              type="button"
-              aria-label="Next stickers"
-              onClick={() => scrollGallery(1)}
-            >
-              <ChevronRight />
-            </button>
+              <div className="sticker-collection-heading">
+                <div>
+                  <p className="sticker-collection-eyebrow">Share a reminder</p>
+                  <h4 id={collection.id + "-stickers-title"}>
+                    {collection.title}
+                  </h4>
+                  <p>{collection.description}</p>
+                </div>
+                <div className="sticker-collection-actions">
+                  <button
+                    type="button"
+                    className="sticker-help-trigger"
+                    onClick={() => setHelpOpen(true)}
+                  >
+                    <HelpCircle /> How do I use these in WhatsApp?
+                  </button>
+                  <button
+                    ref={getAllButtonRef}
+                    type="button"
+                    className="sticker-get-all"
+                    onClick={() => openSequence()}
+                  >
+                    <Layers3 />{" "}
+                    {resumeIndex === null
+                      ? "Get all 10"
+                      : "Resume at " + (resumeIndex + 1) + " of 10"}
+                  </button>
+                </div>
+              </div>
+
+              <div className="sticker-gallery-frame">
+                <div
+                  ref={galleryRef}
+                  className="sticker-gallery"
+                  role="region"
+                  aria-label={collection.title + " gallery"}
+                  tabIndex={0}
+                  onScroll={updateMobileProgress}
+                >
+                  {collection.stickers.map((sticker, index) => (
+                    <StickerCard
+                      key={sticker.number}
+                      sticker={sticker}
+                      imageUrl={withStickerBasePath(sticker.publicWebp)}
+                      onOpen={() => openViewer(index)}
+                      triggerRef={(node) => {
+                        triggerRefs.current[index] = node;
+                      }}
+                    />
+                  ))}
+                </div>
+                <div className="sticker-gallery-controls">
+                  <span aria-live="polite">
+                    {mobileIndex + 1} of {collection.stickers.length}
+                  </span>
+                  <div>
+                    <button
+                      type="button"
+                      aria-label="Previous stickers"
+                      onClick={() => scrollGallery(-1)}
+                    >
+                      <ChevronLeft />
+                    </button>
+                    <button
+                      type="button"
+                      aria-label="Next stickers"
+                      onClick={() => scrollGallery(1)}
+                    >
+                      <ChevronRight />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-        </div>
-      </div>
+        </dialog>
+      )}
 
       {activeIndex !== null && (
         <StickerViewer
@@ -282,7 +350,7 @@ export function StickerCollection({
       )}
       {sequenceOpen && (
         <StickerSaveSequence
-          key={`${collection.id}-${sequenceStart}`}
+          key={collection.id + "-" + sequenceStart}
           collection={collection}
           initialIndex={sequenceStart}
           inactive={helpOpen}
@@ -297,6 +365,6 @@ export function StickerCollection({
           onClose={() => setHelpOpen(false)}
         />
       )}
-    </section>
+    </>
   );
 }
