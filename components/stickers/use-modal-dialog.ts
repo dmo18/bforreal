@@ -16,6 +16,7 @@ export function useModalDialog(
   onClose: () => void,
   onMove?: (direction: -1 | 1) => void,
   inactive = false,
+  enabled = true,
 ) {
   const inactiveRef = useRef(inactive);
   useEffect(() => {
@@ -23,6 +24,7 @@ export function useModalDialog(
   }, [inactive]);
 
   useEffect(() => {
+    if (!enabled) return;
     const dialog = dialogRef.current;
     if (!dialog) return;
 
@@ -91,5 +93,5 @@ export function useModalDialog(
         window.requestAnimationFrame(() => previousFocus.focus());
       }
     };
-  }, [dialogRef, onClose, onMove]);
+  }, [dialogRef, onClose, onMove, enabled]);
 }

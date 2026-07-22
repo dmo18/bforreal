@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { StickerCollection } from "@/components/stickers/sticker-collection";
 
-const BUILD_VERSION = "1.0.60";
+const BUILD_VERSION = "1.0.61";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -14,13 +14,6 @@ const bookUrl = "https://amzn.to/3R5Cjdr";
 const authorUrl =
   "https://www.amazon.com/Rabbeinu-Bachya-Ibn-Pakudah/e/B0D62VPXML/ref=dp_byline_cont_book_1";
 const bookCover = `${basePath}/shaar-habitachon-gate-of-trust.svg?v=${BUILD_VERSION}`;
-
-const topicHighlights = [
-  "Hishtadlus, effort, and leaving the outcome to Hashem",
-  "Emotional tefillah without demanding certainty",
-  "Relationships, shidduchim, and ordinary life pressure",
-  "Releasing control and working through real situations",
-];
 
 function ApplePodcastsIcon() {
   return (
@@ -212,31 +205,6 @@ export function PodcastFeature() {
           font-size: .72rem;
           line-height: 1.45;
         }
-        .podcast-feature-topics {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: .55rem .9rem;
-          margin-top: 1.25rem;
-          padding: 0;
-          list-style: none;
-        }
-        .podcast-feature-topics li {
-          position: relative;
-          padding-left: 1rem;
-          color: var(--cream-soft);
-          font-size: .8rem;
-          line-height: 1.5;
-        }
-        .podcast-feature-topics li::before {
-          position: absolute;
-          top: .55em;
-          left: 0;
-          width: .35rem;
-          height: .35rem;
-          border-radius: 999px;
-          background: var(--gold-bright);
-          content: "";
-        }
         .podcast-book-callout {
           display: grid;
           grid-template-columns: auto minmax(0, 1fr) auto;
@@ -345,8 +313,7 @@ export function PodcastFeature() {
           .podcast-feature h3 {
             font-size: clamp(2.7rem, 14vw, 4.35rem);
           }
-          .podcast-feature-facts,
-          .podcast-feature-topics {
+          .podcast-feature-facts {
             grid-template-columns: 1fr;
           }
           .podcast-book-callout {
@@ -382,7 +349,7 @@ export function PodcastFeature() {
           </p>
           <h3 id="podcast-feature-title">Bitachon For Real</h3>
           <p className="podcast-feature-bio">
-            Reb Yirmi Ginsberg leads chaburos at Congregation Aish Kodesh and
+            Reb Yirmi Ginsberg leads chaburot at Congregation Aish Kodesh and
             teaches Bitachon as something to practice, not only study. The
             weekly series follows the{" "}
             <a
@@ -423,15 +390,6 @@ export function PodcastFeature() {
               </span>
             </div>
           </div>
-
-          <ul
-            className="podcast-feature-topics"
-            aria-label="Topics explored in the podcast"
-          >
-            {topicHighlights.map((topic) => (
-              <li key={topic}>{topic}</li>
-            ))}
-          </ul>
 
           <div className="podcast-book-callout">
             {/* eslint-disable-next-line @next/next/no-img-element */}
