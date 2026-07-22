@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 import "./footer-overrides.css";
+import "./stickers.css";
 import { DailyBitachonFeature } from "./daily-bitachon-feature";
 import { DailyBitachonPolish } from "./daily-bitachon-polish";
 import { FeatureButtonPolish } from "./feature-button-polish";

@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { StickerCollection } from "@/components/stickers/sticker-collection";
 
-const BUILD_VERSION = "1.0.58";
+const BUILD_VERSION = "1.0.59";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -79,9 +80,12 @@ export function PodcastFeature() {
     const mount = document.createElement("div");
     mount.className = "podcast-feature-mount";
     resourceGrid.parentElement.insertBefore(mount, resourceGrid);
-    setTarget(mount);
+    const frame = window.requestAnimationFrame(() => setTarget(mount));
 
-    return () => mount.remove();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      mount.remove();
+    };
   }, []);
 
   useEffect(() => {
@@ -502,6 +506,7 @@ export function PodcastFeature() {
           </div>
         </div>
       </article>
+      <StickerCollection collectionId="podcast" />
     </>,
     target,
   );

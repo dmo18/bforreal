@@ -63,6 +63,22 @@ The image should be integrated into the site's frame using:
 - Keep button styling consistent across all resource features.
 - Preserve a clear visual distinction between image, description, and actions.
 
+## Sticker Experience
+
+- Treat each gallery as a connected continuation of its featured resource.
+- Use the square 512 by 512 WebP as the canonical artwork for preview, save, sharing, and advanced download.
+- Generate the matching PNG at build time from that same decoded artwork.
+- Keep desktop galleries compact at five by two and use a horizontal, snap-based gallery on mobile.
+- Present transparent artwork on a softly illuminated dark tile without a technical checkerboard.
+- Keep WhatsApp instructions hidden until requested or contextually useful.
+- Use device-aware saving, local QR handoff, and a guided one-at-a-time “Get all 10” sequence.
+- Explain that sending shares an ordinary picture and does not automatically create a WhatsApp sticker.
+- Preserve generic alt text until exact image wording exists as repository data.
+
+The system deliberately distributes individual images. It cannot install a WhatsApp collection. ZIP downloads, companion applications, external QR services, and misleading “Add to WhatsApp” claims are outside the accepted product.
+
+The original YG and MS PNGs are preserved promotional artwork and are not sticker download sources. The original LY PNGs remain source masters. Only the ten oversized LY WebPs were replaced with approved 512 by 512 lossless derivatives from those masters.
+
 ## Typography
 
 - Editorial statements should use the site's serif family.
@@ -115,6 +131,14 @@ Do not merge a build with inconsistent active version references.
 - Three full Resource Hub feature sections with legacy duplicates hidden.
 - Unified cream and gold action-button styling.
 
+- Canonical 512 by 512 WebP sticker sources for all three collections.
+- Approved replacement of the ten oversized LY WebPs from untouched PNG masters.
+- Build-time matching PNG derivatives from canonical WebP artwork.
+- Device-aware saving with local QR handoff.
+- Hidden contextual WhatsApp help.
+- Guided one-at-a-time “Get all 10” saving with session-only progress.
+- Preservation of all original PNG files.
+
 ### Rejected
 
 - Recreating the motto reference with browser typography.
@@ -125,6 +149,14 @@ Do not merge a build with inconsistent active version references.
 - Duplicate legacy resource cards below the newer features.
 - Large client-side image data URIs assembled from JavaScript strings.
 - Claiming an image fix is complete without validating the deployed public URL.
+
+- Requiring unlike original PNG and WebP artwork to match.
+- Using tall YG or MS PNG files as sticker downloads.
+- Serving oversized LY WebPs.
+- ZIP downloads and ten simultaneous downloads.
+- Companion applications.
+- Misleading “Add to WhatsApp” claims.
+- External QR services.
 
 ## Current Priorities
 

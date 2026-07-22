@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const BUILD_VERSION = "1.0.7";
+const BUILD_VERSION = "1.0.59";
 
 type Graphic = {
   src: string;
@@ -72,7 +72,9 @@ export function GalleryEnhancements() {
       return [{ src, alt, trigger: link }];
     });
 
-    setGraphics(items);
+    const graphicsFrame = window.requestAnimationFrame(() =>
+      setGraphics(items),
+    );
 
     const tools = document.createElement("div");
     tools.className = "inspiration-carousel-tools";
@@ -168,6 +170,7 @@ export function GalleryEnhancements() {
       document.querySelectorAll(".footer-meta span"),
     ).find((node) => node.textContent?.startsWith("Version "));
     if (footerVersion) footerVersion.textContent = `Version ${BUILD_VERSION}`;
+    window.cancelAnimationFrame(graphicsFrame);
 
     return () => {
       previousButton?.removeEventListener("click", onPrevious);

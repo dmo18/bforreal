@@ -38,7 +38,7 @@ jobs:
       - name: Build static website for Cloudways
         env:
           PAGES_BASE_PATH: ""
-          NEXT_PUBLIC_SITE_URL: https://bitachonforreal.com/
+          NEXT_PUBLIC_SITE_URL: https://www.bitachonforreal.com/
         run: pnpm build
 
       - name: Add deployment marker
