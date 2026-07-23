@@ -15,7 +15,7 @@ let bodyScrollLockCount = 0;
 let previousBodyOverflow: string | null = null;
 let previousDocumentOverflow: string | null = null;
 
-function lockPageScroll() {
+export function lockPageScroll() {
   if (bodyScrollLockCount === 0) {
     previousBodyOverflow = document.body.style.overflow;
     previousDocumentOverflow = document.documentElement.style.overflow;

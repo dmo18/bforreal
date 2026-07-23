@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { lockPageScroll } from "@/components/stickers/use-modal-dialog";
 
-const BUILD_VERSION = "1.0.61";
+const BUILD_VERSION = "1.0.68";
 
 type Graphic = {
   src: string;
@@ -184,12 +185,12 @@ export function GalleryEnhancements() {
 
   useEffect(() => {
     if (activeIndex === null) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const unlockPageScroll = lockPageScroll();
+
     window.requestAnimationFrame(() => closeButtonRef.current?.focus());
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      unlockPageScroll();
       graphics[activeIndex]?.trigger.focus();
     };
   }, [activeIndex, graphics]);

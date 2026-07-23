@@ -37,6 +37,7 @@ import {
   type InspirationGraphic,
   type ResourceIcon,
 } from "@/data/site";
+import { lockPageScroll } from "@/components/stickers/use-modal-dialog";
 
 const iconMap: Record<ResourceIcon, LucideIcon> = {
   globe: Globe2,
@@ -167,8 +168,7 @@ export function LandingPage() {
   useEffect(() => {
     if (activeFoundationIndex === null) return;
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const unlockPageScroll = lockPageScroll();
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeFoundationViewer();
@@ -178,7 +178,7 @@ export function LandingPage() {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      unlockPageScroll();
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [activeFoundationIndex, closeFoundationViewer, moveFoundationViewer]);
@@ -208,8 +208,7 @@ export function LandingPage() {
   useEffect(() => {
     if (activeLevelIndex === null) return;
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const unlockPageScroll = lockPageScroll();
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeLevelViewer();
@@ -219,7 +218,7 @@ export function LandingPage() {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      unlockPageScroll();
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [activeLevelIndex, closeLevelViewer, moveLevelViewer]);
