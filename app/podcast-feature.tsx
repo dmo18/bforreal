@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { StickerCollection } from "@/components/stickers/sticker-collection";
 
-const BUILD_VERSION = "1.0.63";
+const BUILD_VERSION = "1.0.64";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
