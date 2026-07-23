@@ -47,8 +47,18 @@ const iconMap: Record<ResourceIcon, LucideIcon> = {
 
 function Experience({ children }: PropsWithChildren) {
   const reduceMotion = useReducedMotion();
+  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 
-  if (reduceMotion) {
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: none) and (pointer: coarse)");
+    const syncPointerMode = () => setIsCoarsePointer(mediaQuery.matches);
+
+    syncPointerMode();
+    mediaQuery.addEventListener("change", syncPointerMode);
+    return () => mediaQuery.removeEventListener("change", syncPointerMode);
+  }, []);
+
+  if (reduceMotion || isCoarsePointer) {
     return children;
   }
 
@@ -351,6 +361,32 @@ export function LandingPage() {
           background-image: radial-gradient(rgba(255,255,255,0.42) 0.45px, transparent 0.45px);
           background-size: 4px 4px;
           mix-blend-mode: soft-light;
+        }
+
+        @media (hover: none) and (pointer: coarse), (max-width: 700px) {
+          .parallax-layer {
+            will-change: auto;
+            transform: none !important;
+          }
+
+          .parallax-photo {
+            filter: none;
+          }
+
+          .parallax-sky,
+          .parallax-glow {
+            mix-blend-mode: normal;
+          }
+
+          .site-header,
+          .foundation-card,
+          .level-card,
+          .resource-card,
+          .inspiration-panel,
+          .intro-motto,
+          .inspiration-graphic-card {
+            backdrop-filter: none;
+          }
         }
 
         .site-header,
