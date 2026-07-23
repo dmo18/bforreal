@@ -38,6 +38,83 @@ export function lockPageScroll() {
   };
 }
 
+export function useModalFocus(
+  containerRef: RefObject<HTMLElement | null>,
+  onClose: () => void,
+  onMove?: (direction: -1 | 1) => void,
+  enabled = true,
+) {
+  const onCloseRef = useRef(onClose);
+  const onMoveRef = useRef(onMove);
+
+  useEffect(() => {
+    onCloseRef.current = onClose;
+    onMoveRef.current = onMove;
+  }, [onClose, onMove]);
+
+  useEffect(() => {
+    if (!enabled) return;
+    const container = containerRef.current;
+    if (!container) return;
+
+    const previousFocus =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+    const unlockPageScroll = lockPageScroll();
+    const focusTarget =
+      container.querySelector<HTMLElement>("[data-autofocus]") ??
+      container.querySelector<HTMLElement>(focusableSelector);
+    const focusFrame = window.requestAnimationFrame(() => focusTarget?.focus());
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onCloseRef.current();
+        return;
+      }
+      if (event.key === "ArrowLeft" && onMoveRef.current) {
+        event.preventDefault();
+        onMoveRef.current(-1);
+        return;
+      }
+      if (event.key === "ArrowRight" && onMoveRef.current) {
+        event.preventDefault();
+        onMoveRef.current(1);
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = Array.from(
+        container.querySelectorAll<HTMLElement>(focusableSelector),
+      ).filter((element) => !element.hasAttribute("disabled"));
+      if (focusable.length === 0) {
+        event.preventDefault();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    container.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      container.removeEventListener("keydown", handleKeyDown);
+      unlockPageScroll();
+      if (previousFocus?.isConnected) {
+        window.requestAnimationFrame(() => previousFocus.focus());
+      }
+    };
+  }, [containerRef, enabled]);
+}
+
 export function useModalDialog(
   dialogRef: RefObject<HTMLDialogElement | null>,
   onClose: () => void,

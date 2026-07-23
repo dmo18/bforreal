@@ -24,7 +24,6 @@ import {
   type CSSProperties,
   type PropsWithChildren,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -37,7 +36,7 @@ import {
   type InspirationGraphic,
   type ResourceIcon,
 } from "@/data/site";
-import { lockPageScroll } from "@/components/stickers/use-modal-dialog";
+import { useModalFocus } from "@/components/stickers/use-modal-dialog";
 
 const iconMap: Record<ResourceIcon, LucideIcon> = {
   globe: Globe2,
@@ -141,7 +140,9 @@ function SectionHeading({
 export function LandingPage() {
   const reduceMotion = useReducedMotion();
   const levelsRef = useRef<HTMLDivElement>(null);
+  const levelLightboxRef = useRef<HTMLDivElement>(null);
   const foundationTriggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const foundationLightboxRef = useRef<HTMLDivElement>(null);
   const [activeFoundationIndex, setActiveFoundationIndex] = useState<
     number | null
   >(null);
@@ -165,24 +166,6 @@ export function LandingPage() {
       );
     }
   }, [activeFoundationIndex]);
-  useEffect(() => {
-    if (activeFoundationIndex === null) return;
-
-    const unlockPageScroll = lockPageScroll();
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeFoundationViewer();
-      if (event.key === "ArrowLeft") moveFoundationViewer(-1);
-      if (event.key === "ArrowRight") moveFoundationViewer(1);
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      unlockPageScroll();
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [activeFoundationIndex, closeFoundationViewer, moveFoundationViewer]);
-
   const levelTriggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const [activeLevelIndex, setActiveLevelIndex] = useState<number | null>(null);
   const activeLevel =
@@ -205,23 +188,19 @@ export function LandingPage() {
     }
   }, [activeLevelIndex]);
 
-  useEffect(() => {
-    if (activeLevelIndex === null) return;
+  useModalFocus(
+    foundationLightboxRef,
+    closeFoundationViewer,
+    moveFoundationViewer,
+    activeFoundation !== null,
+  );
+  useModalFocus(
+    levelLightboxRef,
+    closeLevelViewer,
+    moveLevelViewer,
+    activeLevel !== null,
+  );
 
-    const unlockPageScroll = lockPageScroll();
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeLevelViewer();
-      if (event.key === "ArrowLeft") moveLevelViewer(-1);
-      if (event.key === "ArrowRight") moveLevelViewer(1);
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      unlockPageScroll();
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [activeLevelIndex, closeLevelViewer, moveLevelViewer]);
   function scrollLevels(direction: -1 | 1) {
     const container = levelsRef.current;
     if (!container) return;
@@ -987,6 +966,7 @@ export function LandingPage() {
         </section>
         {activeLevel && activeLevelIndex !== null && (
           <div
+            ref={levelLightboxRef}
             className="graphic-lightbox level-lightbox"
             role="dialog"
             aria-modal="true"
@@ -998,6 +978,7 @@ export function LandingPage() {
             <button
               className="graphic-lightbox-close"
               type="button"
+              data-autofocus
               onClick={closeLevelViewer}
             >
               Close
@@ -1048,6 +1029,7 @@ export function LandingPage() {
         )}{" "}
         {activeFoundation && activeFoundationIndex !== null && (
           <div
+            ref={foundationLightboxRef}
             className="graphic-lightbox foundation-lightbox"
             role="dialog"
             aria-modal="true"
@@ -1059,6 +1041,7 @@ export function LandingPage() {
             <button
               className="graphic-lightbox-close"
               type="button"
+              data-autofocus
               onClick={closeFoundationViewer}
             >
               Close
