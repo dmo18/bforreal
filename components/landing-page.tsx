@@ -47,18 +47,8 @@ const iconMap: Record<ResourceIcon, LucideIcon> = {
 
 function Experience({ children }: PropsWithChildren) {
   const reduceMotion = useReducedMotion();
-  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: none) and (pointer: coarse)");
-    const syncPointerMode = () => setIsCoarsePointer(mediaQuery.matches);
-
-    syncPointerMode();
-    mediaQuery.addEventListener("change", syncPointerMode);
-    return () => mediaQuery.removeEventListener("change", syncPointerMode);
-  }, []);
-
-  if (reduceMotion || isCoarsePointer) {
+  if (reduceMotion) {
     return children;
   }
 
