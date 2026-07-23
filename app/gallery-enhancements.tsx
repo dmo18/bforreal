@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useModalFocus } from "@/components/stickers/use-modal-dialog";
 
-const BUILD_VERSION = "1.0.69";
+const BUILD_VERSION = "1.0.70";
 
 type Graphic = {
   src: string;
@@ -242,7 +241,7 @@ export function GalleryEnhancements() {
           touch-action: pan-y;
         }
         .graphic-lightbox-media { position: relative; width: min(88vw,64rem); height: min(86vh,64rem); }
-        .graphic-lightbox-image { object-fit: contain; }
+        .graphic-lightbox-image { display: block; width: 100%; height: 100%; object-fit: contain; }
         .graphic-lightbox-close { position: absolute; z-index: 2; top: max(.75rem,env(safe-area-inset-top)); right: max(.75rem,env(safe-area-inset-right)); min-height: 2.75rem; padding: 0 1rem; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
         .graphic-lightbox-arrow { position: absolute; z-index: 2; top: 50%; width: 3.2rem; height: 3.2rem; transform: translateY(-50%); font-size: 1.35rem; }
         .graphic-lightbox-arrow.previous { left: max(1rem,env(safe-area-inset-left)); }
@@ -299,14 +298,12 @@ export function GalleryEnhancements() {
             ←
           </button>
           <div className="graphic-lightbox-media">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               className="graphic-lightbox-image"
               src={activeGraphic.src}
               alt={activeGraphic.alt}
-              fill
-              sizes="100vw"
-              priority
-              unoptimized
+              decoding="async"
             />
           </div>
           <button
