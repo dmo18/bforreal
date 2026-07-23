@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useModalFocus } from "@/components/stickers/use-modal-dialog";
 
-const BUILD_VERSION = "1.0.70";
+const BUILD_VERSION = "1.0.71";
 
 type Graphic = {
   src: string;
@@ -158,9 +158,8 @@ export function GalleryEnhancements() {
       document.querySelectorAll(".footer-meta span"),
     ).find((node) => node.textContent?.startsWith("Version "));
     if (footerVersion) footerVersion.textContent = `Version ${BUILD_VERSION}`;
-    window.cancelAnimationFrame(graphicsFrame);
-
     return () => {
+      window.cancelAnimationFrame(graphicsFrame);
       previousButton?.removeEventListener("click", onPrevious);
       nextButton?.removeEventListener("click", onNext);
       gallery.removeEventListener("scroll", updateControls);
