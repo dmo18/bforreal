@@ -11,6 +11,33 @@ const focusableSelector = [
   "[tabindex]:not([tabindex='-1'])",
 ].join(",");
 
+let bodyScrollLockCount = 0;
+let previousBodyOverflow: string | null = null;
+let previousDocumentOverflow: string | null = null;
+
+function lockPageScroll() {
+  if (bodyScrollLockCount === 0) {
+    previousBodyOverflow = document.body.style.overflow;
+    previousDocumentOverflow = document.documentElement.style.overflow;
+  }
+
+  bodyScrollLockCount += 1;
+  document.body.style.overflow = "hidden";
+  document.documentElement.style.overflow = "hidden";
+
+  return () => {
+    if (bodyScrollLockCount === 0) return;
+
+    bodyScrollLockCount -= 1;
+    if (bodyScrollLockCount > 0) return;
+
+    document.body.style.overflow = previousBodyOverflow ?? "";
+    document.documentElement.style.overflow = previousDocumentOverflow ?? "";
+    previousBodyOverflow = null;
+    previousDocumentOverflow = null;
+  };
+}
+
 export function useModalDialog(
   dialogRef: RefObject<HTMLDialogElement | null>,
   onClose: () => void,
@@ -33,8 +60,7 @@ export function useModalDialog(
         ? document.activeElement
         : null;
     if (!dialog.open) dialog.showModal();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const unlockPageScroll = lockPageScroll();
 
     const focusTarget = dialog.querySelector<HTMLElement>("[data-autofocus]");
     const focusFrame = window.requestAnimationFrame(() => focusTarget?.focus());
@@ -88,7 +114,7 @@ export function useModalDialog(
       dialog.removeEventListener("cancel", handleCancel);
       dialog.removeEventListener("keydown", handleKeyDown);
       if (dialog.open) dialog.close();
-      document.body.style.overflow = previousOverflow;
+      unlockPageScroll();
       if (previousFocus?.isConnected) {
         window.requestAnimationFrame(() => previousFocus.focus());
       }
