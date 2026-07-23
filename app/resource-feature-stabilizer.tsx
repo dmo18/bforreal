@@ -66,9 +66,15 @@ export function ResourceFeatureStabilizer() {
         parent.insertBefore(living, resourceGrid);
       }
 
-      podcast.style.marginTop = "clamp(2.4rem, 4vw, 3.6rem)";
-      daily.style.marginTop = "clamp(1.25rem, 2.6vw, 2rem)";
-      living.style.marginTop = "clamp(1.25rem, 2.6vw, 2rem)";
+      const setMarginTop = (element: HTMLElement, value: string) => {
+        if (element.style.marginTop !== value) {
+          element.style.marginTop = value;
+        }
+      };
+
+      setMarginTop(podcast, "clamp(2.4rem, 4vw, 3.6rem)");
+      setMarginTop(daily, "clamp(1.25rem, 2.6vw, 2rem)");
+      setMarginTop(living, "clamp(1.25rem, 2.6vw, 2rem)");
     };
 
     frame = window.requestAnimationFrame(organize);
