@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { StickerCollection } from "@/components/stickers/sticker-collection";
 
-const BUILD_VERSION = "1.0.68";
+const BUILD_VERSION = "1.0.69";
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/bforreal").replace(
   /\/$/,
   "",
@@ -68,17 +68,33 @@ export function PodcastFeature() {
   const [target, setTarget] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    const resourceGrid = document.querySelector<HTMLElement>(".resource-grid");
-    if (!resourceGrid?.parentElement) return;
+    let mount: HTMLElement | null = null;
+    let frame = 0;
+    let observer: MutationObserver | null = null;
 
-    const mount = document.createElement("div");
-    mount.className = "podcast-feature-mount";
-    resourceGrid.parentElement.insertBefore(mount, resourceGrid);
-    const frame = window.requestAnimationFrame(() => setTarget(mount));
+    const attach = () => {
+      if (mount) return;
+      const resourceGrid =
+        document.querySelector<HTMLElement>(".resource-grid");
+      if (!resourceGrid?.parentElement) return;
+
+      mount = document.createElement("div");
+      mount.className = "podcast-feature-mount";
+      resourceGrid.parentElement.insertBefore(mount, resourceGrid);
+      observer?.disconnect();
+      frame = window.requestAnimationFrame(() => setTarget(mount));
+    };
+
+    attach();
+    if (!mount) {
+      observer = new MutationObserver(attach);
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
 
     return () => {
       window.cancelAnimationFrame(frame);
-      mount.remove();
+      observer?.disconnect();
+      mount?.remove();
     };
   }, []);
 

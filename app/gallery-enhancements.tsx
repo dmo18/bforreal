@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { lockPageScroll } from "@/components/stickers/use-modal-dialog";
+import { useModalFocus } from "@/components/stickers/use-modal-dialog";
 
-const BUILD_VERSION = "1.0.68";
+const BUILD_VERSION = "1.0.69";
 
 type Graphic = {
   src: string;
@@ -21,6 +21,7 @@ function versioned(source: string) {
 export function GalleryEnhancements() {
   const [graphics, setGraphics] = useState<Graphic[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const touchStartX = useRef<number | null>(null);
 
@@ -144,18 +145,6 @@ export function GalleryEnhancements() {
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setActiveIndex(null);
-        return;
-      }
-      if (event.key === "ArrowLeft") {
-        moveLightbox(-1);
-        return;
-      }
-      if (event.key === "ArrowRight") {
-        moveLightbox(1);
-        return;
-      }
       if (event.key !== "Enter" && event.key !== " ") return;
       if (!(event.target instanceof Element)) return;
       if (!event.target.closest(".inspiration-image-link")) return;
@@ -183,19 +172,13 @@ export function GalleryEnhancements() {
     };
   }, [moveLightbox]);
 
-  useEffect(() => {
-    if (activeIndex === null) return;
-    const unlockPageScroll = lockPageScroll();
-
-    window.requestAnimationFrame(() => closeButtonRef.current?.focus());
-
-    return () => {
-      unlockPageScroll();
-      graphics[activeIndex]?.trigger.focus();
-    };
-  }, [activeIndex, graphics]);
-
   const activeGraphic = activeIndex === null ? null : graphics[activeIndex];
+  useModalFocus(
+    lightboxRef,
+    () => setActiveIndex(null),
+    moveLightbox,
+    activeGraphic !== null,
+  );
 
   return (
     <>
@@ -277,6 +260,7 @@ export function GalleryEnhancements() {
 
       {activeGraphic && (
         <div
+          ref={lightboxRef}
           className="graphic-lightbox"
           role="dialog"
           aria-modal="true"
@@ -301,6 +285,7 @@ export function GalleryEnhancements() {
             ref={closeButtonRef}
             className="graphic-lightbox-close"
             type="button"
+            data-autofocus
             onClick={() => setActiveIndex(null)}
           >
             Close
