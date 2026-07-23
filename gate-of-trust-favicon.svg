@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Gate of Trust favicon lookalike</title>
+  <desc id="desc">A local icon inspired by a gate opening into a warm sunrise.</desc>
+  <defs>
+    <linearGradient id="sky" x1="12" x2="52" y1="10" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff0c7"/>
+      <stop offset=".48" stop-color="#d7a84b"/>
+      <stop offset="1" stop-color="#8a5d1d"/>
+    </linearGradient>
+    <linearGradient id="gate" x1="15" x2="49" y1="18" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1f3f57"/>
+      <stop offset="1" stop-color="#102233"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0d1723"/>
+  <circle cx="32" cy="30" r="21" fill="url(#sky)"/>
+  <path fill="#f7d987" d="M18 32a14 14 0 0 1 28 0v6H18z" opacity=".95"/>
+  <path fill="url(#gate)" d="M13 25h7v30h-7zm31 0h7v30h-7z"/>
+  <path fill="url(#gate)" d="M17 22h30v7H17z"/>
+  <path fill="#0d1723" d="M23 35a9 9 0 0 1 18 0v20H23z"/>
+  <path fill="#f6e2a8" d="M30 15h4v7h-4zm-8 8 5-5 3 3-5 5zm20-5 5 5-3 3-5-5z" opacity=".82"/>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1044" height="1500" viewBox="0 0 1044 1500" role="img" aria-label="Shaar HaBitachon With Commentary From Classical and Chassidic Sources book cover">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfaf5" />
+      <stop offset="0.48" stop-color="#f1eee6" />
+      <stop offset="1" stop-color="#fffdf8" />
+    </linearGradient>
+    <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8b097" />
+      <stop offset="0.5" stop-color="#bd6846" />
+      <stop offset="1" stop-color="#f0c3ae" />
+    </linearGradient>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="8" result="noise" />
+      <feColorMatrix in="noise" type="saturate" values="0" />
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.08" />
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" mode="multiply" />
+    </filter>
+    <style>
+      .small { font: 700 30px Georgia, serif; letter-spacing: 14px; fill: #b77562; }
+      .hebrew-top { font: 700 48px Georgia, 'Times New Roman', serif; fill: #123a70; letter-spacing: 10px; }
+      .english { font: 700 112px Georgia, serif; fill: #1262bd; }
+      .hebrew-main { font: 800 156px Georgia, 'Times New Roman', serif; fill: #1262bd; }
+      .subtitle { font: italic 35px Georgia, serif; fill: #153a68; }
+      .author { font: 700 36px Georgia, serif; fill: #153a68; }
+      .line { stroke: url(#copper); stroke-width: 8; fill: none; stroke-linecap: square; }
+      .thin { stroke: url(#copper); stroke-width: 4; fill: none; }
+    </style>
+  </defs>
+  <rect width="1044" height="1500" fill="url(#paper)" filter="url(#paperNoise)" />
+  <rect x="18" y="18" width="1008" height="1464" rx="10" fill="none" stroke="#d8d0c5" stroke-width="3" />
+
+  <path class="thin" d="M290 54 H754 L784 84 L754 114 H290 L260 84 Z" />
+  <text class="small" x="522" y="94" text-anchor="middle">THE FEILLIG EDITION</text>
+  <text class="hebrew-top" x="522" y="202" text-anchor="middle" direction="rtl" unicode-bidi="bidi-override">תורת הלבבות</text>
+
+  <path class="line" d="M128 270 V455 M190 270 V455 M252 270 V455 M314 270 V455 M376 270 V455 M438 270 L522 390 L606 270 M668 270 V455 M730 270 V455 M792 270 V455 M854 270 V455 M916 270 V455" />
+  <path class="line" d="M128 1045 V1230 H376 V1045 M376 1045 L522 1265 L668 1045 M668 1045 V1230 H916 V1045" />
+  <path class="thin" d="M128 270 H438 M606 270 H916 M128 1230 H376 M668 1230 H916" />
+  <rect x="236" y="167" width="32" height="32" transform="rotate(45 252 183)" fill="url(#copper)" opacity="0.75" />
+  <rect x="776" y="167" width="32" height="32" transform="rotate(45 792 183)" fill="url(#copper)" opacity="0.82" />
+  <rect x="236" y="1175" width="32" height="32" transform="rotate(45 252 1191)" fill="url(#copper)" opacity="0.82" />
+  <rect x="776" y="1175" width="32" height="32" transform="rotate(45 792 1191)" fill="url(#copper)" opacity="0.75" />
+
+  <text class="english" x="132" y="585">Gate</text>
+  <text class="english" x="132" y="705">of Trust</text>
+  <text class="hebrew-main" x="902" y="610" text-anchor="end" direction="rtl" unicode-bidi="bidi-override">שער</text>
+  <text class="hebrew-main" x="902" y="790" text-anchor="end" direction="rtl" unicode-bidi="bidi-override">הבטחון</text>
+  <text class="subtitle" x="522" y="895" text-anchor="middle">With commentary from classical and Chassidic sources</text>
+  <text class="author" x="522" y="1412" text-anchor="middle">Rabbeinu Bachya ibn Pekuda</text>
+</svg>
